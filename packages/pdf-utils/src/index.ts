@@ -1,7 +1,8 @@
 import JSZip from "jszip";
 // @ts-ignore
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-
+// @ts-ignore
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 
 let workerInitialized = false;
 
@@ -11,7 +12,7 @@ let workerInitialized = false;
  * @param workerSrc - URL to the PDF.js worker file
  */
 export function initPdfWorker() {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/pdf.worker.min.mjs";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
   workerInitialized = true;
 }
 
@@ -38,16 +39,13 @@ export type ImageResult = {
   url: string;
 };
 
-export async function pdfToImagesBrowser(
-  file: File,
-  options: PdfToImageOptions = {}
-): Promise<ImageResult[]> {
+export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions = {}): Promise<ImageResult[]> {
   const {
     format = "image/png",
     scale = 2,
     startPage = 1,
     endPage,
-    quality = 0.92, // default JPEG quality
+    quality = 0.92 // default JPEG quality
   } = options;
   const baseName = getBaseName(file);
 
@@ -71,11 +69,7 @@ export async function pdfToImagesBrowser(
 
     // PNG ignores quality param, JPEG uses it
     const blob: Blob = await new Promise((resolve) =>
-      canvas.toBlob(
-        (b) => resolve(b!),
-        format,
-        format === "image/jpeg" ? quality : undefined
-      )
+      canvas.toBlob((b) => resolve(b!), format, format === "image/jpeg" ? quality : undefined)
     );
 
     // Create an object URL for preview/download
@@ -85,13 +79,11 @@ export async function pdfToImagesBrowser(
     results.push({
       page: pageNum,
       blob,
-      filename: `${baseName}-page-${pageNum}.${
-        format === "image/png" ? "png" : "jpg"
-      }`,
+      filename: `${baseName}-page-${pageNum}.${format === "image/png" ? "png" : "jpg"}`,
       baseName,
       width: canvas.width,
       height: canvas.height,
-      url,
+      url
     });
   }
 
@@ -148,6 +140,6 @@ export async function getFileInfo(file: File): Promise<FileInfo> {
     name,
     size,
     pages,
-    file,
+    file
   };
 }

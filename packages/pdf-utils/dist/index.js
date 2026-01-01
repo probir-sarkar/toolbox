@@ -1,9 +1,10 @@
 // src/index.ts
 import JSZip from "jszip";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 var workerInitialized = false;
 function initPdfWorker() {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/pdf.worker.min.mjs";
+  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
   workerInitialized = true;
 }
 function getBaseName(file) {
@@ -33,11 +34,7 @@ async function pdfToImagesBrowser(file, options = {}) {
     canvas.height = viewport.height;
     await page.render({ canvasContext: context, viewport }).promise;
     const blob = await new Promise(
-      (resolve) => canvas.toBlob(
-        (b) => resolve(b),
-        format,
-        format === "image/jpeg" ? quality : void 0
-      )
+      (resolve) => canvas.toBlob((b) => resolve(b), format, format === "image/jpeg" ? quality : void 0)
     );
     const url = URL.createObjectURL(blob);
     results.push({
