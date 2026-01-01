@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   sourcemap: true,
-  external: ["jszip"]
+  external: ["pdfjs-dist", "jszip"],
 });

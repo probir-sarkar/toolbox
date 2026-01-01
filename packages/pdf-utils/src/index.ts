@@ -1,9 +1,9 @@
 import JSZip from "jszip";
 // @ts-ignore
-import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/pdf.min.mjs";
+import * as pdfjsLib from "pdfjs-dist/build/pdf";
 // @ts-ignore
-// import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
-const workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/pdf.worker.mjs";
+import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+
 let workerInitialized = false;
 
 /**
