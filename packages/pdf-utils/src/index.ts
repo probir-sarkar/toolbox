@@ -1,10 +1,18 @@
 import JSZip from "jszip";
 // @ts-ignore
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker?url";
 
-// Setup worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+let workerInitialized = false;
+
+/**
+ * Initialize PDF.js worker with custom worker source.
+ * This should be called before using any PDF functions.
+ * @param workerSrc - URL to the PDF.js worker file
+ */
+export function initPdfWorker(workerSrc: string) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+  workerInitialized = true;
+}
 
 function getBaseName(file: File): string {
   const name = file.name.replace(/\.[^/.]+$/, ""); // remove extension
@@ -122,6 +130,7 @@ export interface FileInfo {
   pages: number;
   file: File;
 }
+
 export async function getFileInfo(file: File): Promise<FileInfo> {
   const name = file.name;
   const size = `${(file.size / 1024 / 1024).toFixed(2)} MB`;

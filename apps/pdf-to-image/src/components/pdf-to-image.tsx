@@ -19,7 +19,7 @@ import {
   triggerDownload,
   type FileInfo,
   type ImageResult,
-} from "@/lib/pdfToImage";
+} from "@toolbox/pdf-utils";
 import { FileCard } from "./file-card";
 
 export default function PdfToImage() {
