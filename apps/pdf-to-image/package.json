@@ -29,7 +29,6 @@
     "clsx": "^2.1.1",
     "geist": "^1.4.2",
     "lucide-react": "^0.542.0",
-    "pdfjs-dist": "^5.4.54",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwind-merge": "^3.3.1",

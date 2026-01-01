@@ -2,8 +2,8 @@
 import JSZip from "jszip";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 var workerInitialized = false;
-function initPdfWorker(workerSrc) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+function initPdfWorker() {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.530/build/pdf.worker.min.mjs";
   workerInitialized = true;
 }
 function getBaseName(file) {

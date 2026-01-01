@@ -3,7 +3,7 @@
  * This should be called before using any PDF functions.
  * @param workerSrc - URL to the PDF.js worker file
  */
-declare function initPdfWorker(workerSrc: string): void;
+declare function initPdfWorker(): void;
 interface PdfToImageOptions {
     format?: "image/png" | "image/jpeg";
     scale?: number;
