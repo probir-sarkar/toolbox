@@ -26,6 +26,7 @@ export type ImageConverterState = {
   autoOptimize: boolean;
   removeMetadata: boolean;
   files: ConverterFile[];
+  isProcessing: boolean;
 };
 
 type ImageConverterActions = {
@@ -41,6 +42,7 @@ type ImageConverterActions = {
     status: FileStatus,
     progress?: number
   ) => void;
+  setIsProcessing: (processing: boolean) => void;
 };
 
 export type ImageConverterStore = ImageConverterState & ImageConverterActions;
@@ -52,6 +54,7 @@ export const useImageConverterStore = create<ImageConverterStore>()(
     autoOptimize: true,
     removeMetadata: true,
     files: [],
+    isProcessing: false,
     setFormat: (format) =>
       set((state) => {
         state.selectedFormat = format;
@@ -96,6 +99,10 @@ export const useImageConverterStore = create<ImageConverterStore>()(
             file.progress = progress;
           }
         }
+      }),
+    setIsProcessing: (processing) =>
+      set((state) => {
+        state.isProcessing = processing;
       })
   }))
 );
