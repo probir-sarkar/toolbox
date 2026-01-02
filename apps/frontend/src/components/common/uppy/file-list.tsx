@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 import type { Body, Meta, UppyEventMap, UppyFile } from "@uppy/core";
 import { clsx } from "clsx";
 import { Fragment, useContext, useEffect, useState } from "react";

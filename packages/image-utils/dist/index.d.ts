@@ -2,13 +2,12 @@ type ImageFormat = "jpeg" | "png" | "webp";
 interface ConvertOptions {
     quality?: number;
 }
-declare class PhotonImageConverter {
-    private readonly image;
-    private destroyed;
+declare class ImageConverter {
+    private bitmap;
     private constructor();
-    static fromBlob(blob: Blob): Promise<PhotonImageConverter>;
-    convertToFormat(format: ImageFormat, options?: ConvertOptions): Uint8Array;
+    static fromBlob(blob: Blob): Promise<ImageConverter>;
+    convert(format: ImageFormat, options?: ConvertOptions): Promise<Uint8Array>;
     destroy(): void;
 }
 
-export { type ConvertOptions, type ImageFormat, PhotonImageConverter };
+export { type ConvertOptions, ImageConverter, type ImageFormat };

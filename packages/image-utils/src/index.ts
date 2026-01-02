@@ -1,1 +1,1 @@
-export * from "./photon-image-converter";
+export * from "./image-converter";
