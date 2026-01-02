@@ -6,6 +6,8 @@ import FilesList from "@/components/common/uppy/file-list";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UppyContextProvider } from "@uppy/react";
 import Uppy from "@uppy/core";
+import { PhotonImageConverter } from "@toolbox/image-utils";
+
 
 function ImageConverterContent() {
   return (
