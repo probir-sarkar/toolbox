@@ -3,20 +3,24 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { useImageConverterContext } from "./image-converter.context";
 import { FORMATS, ImageFormat } from "./image-converter.reducer";
+import { useImageConverterStore } from "./image-converter.store";
 
 export function ImageConversionSettings() {
-  const { state, dispatch } = useImageConverterContext();
+  const quality = useImageConverterStore((state) => state.quality);
+  const selectedFormat = useImageConverterStore((state) => state.selectedFormat);
+  const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
+  const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
+  const setQuality = useImageConverterStore((state) => state.setQuality);
+  const setFormat = useImageConverterStore((state) => state.setFormat);
+  const setAutoOptimize = useImageConverterStore((state) => state.setAutoOptimize);
+  const setRemoveMetadata = useImageConverterStore((state) => state.setRemoveMetadata);
   return (
     <Card className="p-6 bg-white/50 backdrop-blur-sm border border-slate-200 space-y-6">
       {/* Format Selection */}
       <div>
         <Label className="text-slate-900 font-semibold mb-4 block">Output Format</Label>
-        <RadioGroup
-          value={state.selectedFormat}
-          onValueChange={(format) => dispatch({ type: "setFormat", format: format as ImageFormat })}
-        >
+        <RadioGroup value={selectedFormat} onValueChange={(format) => setFormat(format as ImageFormat)}>
           <div className="space-y-3">
             {FORMATS.map((format) => (
               <div
@@ -38,11 +42,11 @@ export function ImageConversionSettings() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <Label className="text-slate-900 font-semibold">Quality</Label>
-          <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">{state.quality}%</span>
+          <span className="text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">{quality}%</span>
         </div>
         <Slider
-          value={[state.quality]}
-          onValueChange={(val) => dispatch({ type: "setQuality", quality: Array.isArray(val) ? val[0] : val })}
+          value={[quality]}
+          onValueChange={(val) => setQuality(Array.isArray(val) ? val[0] : val)}
           max={100}
           min={1}
           step={1}
@@ -55,11 +59,21 @@ export function ImageConversionSettings() {
       <div className="pt-6 border-t border-slate-200">
         <div className="space-y-3">
           <label className="flex items-center p-3 rounded-lg border border-slate-200 cursor-pointer hover:bg-blue-50 transition-colors">
-            <input type="checkbox" defaultChecked className="rounded border-slate-300" />
+            <input
+              type="checkbox"
+              checked={autoOptimize}
+              onChange={(e) => setAutoOptimize(e.target.checked)}
+              className="rounded border-slate-300"
+            />
             <span className="ml-3 text-sm font-medium text-slate-900">Auto-optimize</span>
           </label>
           <label className="flex items-center p-3 rounded-lg border border-slate-200 cursor-pointer hover:bg-blue-50 transition-colors">
-            <input type="checkbox" defaultChecked className="rounded border-slate-300" />
+            <input
+              type="checkbox"
+              checked={removeMetadata}
+              onChange={(e) => setRemoveMetadata(e.target.checked)}
+              className="rounded border-slate-300"
+            />
             <span className="ml-3 text-sm font-medium text-slate-900">Remove metadata</span>
           </label>
         </div>
