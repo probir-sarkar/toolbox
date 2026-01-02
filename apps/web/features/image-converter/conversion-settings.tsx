@@ -3,8 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { FORMATS, ImageFormat } from "./image-converter.reducer";
-import { useImageConverterStore } from "./image-converter.store";
+import { FORMATS, ImageFormat, useImageConverterStore } from "./image-converter.store";
 
 export function ImageConversionSettings() {
   const quality = useImageConverterStore((state) => state.quality);
