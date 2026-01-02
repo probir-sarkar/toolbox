@@ -1,12 +1,13 @@
 "use client";
 
-import { Dropzone } from "@/components/common/uppy/file-uploader";
-import ImageFilesList from "@/features/image-converter/image-file-list";
-import { ImageConverterProvider } from "@/features/image-converter/image-converter.context";
 import { ImageConversionSettings } from "@/features/image-converter/conversion-settings";
 import { DragDropZone } from "@/components/common/drag-drop-zone";
+import { FileList } from "@/features/image-converter/file-list";
+import { useImageConverterStore } from "@/features/image-converter/image-converter.store";
 
-function ImageConverterContent() {
+function ImageConverterPage() {
+  const addFiles = useImageConverterStore((state) => state.addFiles);
+
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
@@ -22,8 +23,8 @@ function ImageConverterContent() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Upload & Settings */}
           <div className="lg:col-span-2 space-y-6">
-            <DragDropZone onFilesAdded={(files) => console.log(files)} />
-            <ImageFilesList />
+            <DragDropZone onFilesAdded={addFiles} />
+            <FileList />
           </div>
 
           {/* Right Column - Conversion Settings */}
@@ -62,13 +63,5 @@ function ImageConverterContent() {
     </main>
   );
 }
-
-const ImageConverterPage = () => {
-  return (
-    <ImageConverterProvider>
-      <ImageConverterContent />
-    </ImageConverterProvider>
-  );
-};
 
 export default ImageConverterPage;

@@ -65,7 +65,7 @@ export function DragDropZone({ onFilesAdded, accept = "image/*", className, ...p
       <Upload className="w-12 h-12 text-blue-600 mb-4 opacity-70" />
       <h3 className="text-lg font-semibold text-slate-900 mb-2">Drop images here or click to select</h3>
       <p className="text-sm text-slate-500 mb-6">Supports JPG, PNG, GIF, WebP, SVG and more</p>
-      <Button onClick={() => inputRef.current?.click()}>Select Images</Button>
+      <Button variant="outline">Select Images</Button>
     </div>
   );
 }

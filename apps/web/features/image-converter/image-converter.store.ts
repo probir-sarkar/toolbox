@@ -10,11 +10,22 @@ export const FORMATS = [
 
 export type ImageFormat = (typeof FORMATS)[number]["value"];
 
+export type FileStatus = "pending" | "processing" | "completed" | "error";
+
+export interface ConverterFile {
+  id: string;
+  file: File;
+  preview?: string;
+  status: FileStatus;
+  progress?: number;
+}
+
 export type ImageConverterState = {
   selectedFormat: ImageFormat;
   quality: number;
   autoOptimize: boolean;
   removeMetadata: boolean;
+  files: ConverterFile[];
 };
 
 type ImageConverterActions = {
@@ -22,6 +33,14 @@ type ImageConverterActions = {
   setQuality: (quality: number) => void;
   setAutoOptimize: (enabled: boolean) => void;
   setRemoveMetadata: (enabled: boolean) => void;
+  addFiles: (files: File[]) => void;
+  removeFile: (id: string) => void;
+  clearFiles: () => void;
+  updateFileStatus: (
+    id: string,
+    status: FileStatus,
+    progress?: number
+  ) => void;
 };
 
 export type ImageConverterStore = ImageConverterState & ImageConverterActions;
@@ -32,6 +51,7 @@ export const useImageConverterStore = create<ImageConverterStore>()(
     quality: 85,
     autoOptimize: true,
     removeMetadata: true,
+    files: [],
     setFormat: (format) =>
       set((state) => {
         state.selectedFormat = format;
@@ -47,6 +67,35 @@ export const useImageConverterStore = create<ImageConverterStore>()(
     setRemoveMetadata: (enabled) =>
       set((state) => {
         state.removeMetadata = enabled;
+      }),
+    addFiles: (files) =>
+      set((state) => {
+        const newFiles = files.map((file) => ({
+          id: crypto.randomUUID(),
+          file,
+          preview: undefined,
+          status: "pending" as FileStatus,
+          progress: 0
+        }));
+        state.files.push(...newFiles);
+      }),
+    removeFile: (id) =>
+      set((state) => {
+        state.files = state.files.filter((f) => f.id !== id);
+      }),
+    clearFiles: () =>
+      set((state) => {
+        state.files = [];
+      }),
+    updateFileStatus: (id, status, progress) =>
+      set((state) => {
+        const file = state.files.find((f) => f.id === id);
+        if (file) {
+          file.status = status;
+          if (progress !== undefined) {
+            file.progress = progress;
+          }
+        }
       })
   }))
 );
