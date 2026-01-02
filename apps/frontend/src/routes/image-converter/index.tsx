@@ -2,13 +2,12 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState, useContext } from 'react'
 import Uppy from '@uppy/core'
 import { UppyContext, UppyContextProvider } from '@uppy/react'
-
 import { Dropzone } from '@/components/common/uppy/file-uploader'
-import FilesList from '@/components/common/uppy/file-list'
 import ImageFilesList from '@/features/image-converter/image-file-list'
 
 export const Route = createFileRoute('/image-converter/')({
   component: RouteComponent,
+  ssr: false,
 })
 
 function ImageConverterView() {
