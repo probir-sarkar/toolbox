@@ -5,6 +5,7 @@ import { UppyContext, UppyContextProvider } from '@uppy/react'
 
 import { Dropzone } from '@/components/common/uppy/file-uploader'
 import FilesList from '@/components/common/uppy/file-list'
+import ImageFilesList from '@/features/image-converter/image-file-list'
 
 export const Route = createFileRoute('/image-converter/')({
   component: RouteComponent,
@@ -16,7 +17,7 @@ function ImageConverterView() {
   return (
     <div className="space-y-4 p-6">
       <Dropzone note="Images only" />
-      <FilesList />
+      <ImageFilesList />
     </div>
   )
 }

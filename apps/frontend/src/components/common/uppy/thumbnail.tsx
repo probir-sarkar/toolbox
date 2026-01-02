@@ -1,6 +1,5 @@
-'use client'
 import type { Body, Meta, UppyFile } from '@uppy/core'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 
 export type ThumbnailProps = {
   file: UppyFile<Meta, Body>
@@ -28,26 +27,23 @@ export default function Thumbnail(props: ThumbnailProps) {
     ].includes(fileTypeSpecific)
   const isPDF = fileTypeGeneral === 'application' && fileTypeSpecific === 'pdf'
 
-  const objectUrl = useMemo(() => {
-    if (!props.images) {
-      return ''
-    }
+  const [objectUrl, setObjectUrl] = useState<string>('')
+
+  useEffect(() => {
+    if (!props.images) return
+
     if (props.file.isRemote) {
-      return props.file.preview
+      return setObjectUrl(props.file.preview || '')
     }
     if (props.file.data == null) throw new Error('File data is empty')
-    return URL.createObjectURL(props.file.data)
+    const url = URL.createObjectURL(props.file.data)
+    setObjectUrl(url)
+    return () => {
+      URL.revokeObjectURL(url)
+    }
   }, [props.file.data, props.images, props.file.isRemote, props.file.preview])
 
   const showThumbnail = props.images && isImage && objectUrl
-
-  useEffect(() => {
-    return () => {
-      if (objectUrl) {
-        URL.revokeObjectURL(objectUrl)
-      }
-    }
-  }, [objectUrl])
 
   return (
     <div
