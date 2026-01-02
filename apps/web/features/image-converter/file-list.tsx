@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { X, Download, ArrowDown } from "lucide-react";
+import { X, Download, ArrowDown, Trash2 } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 import { useImageConverterStore } from "./image-converter.store";
 import { FileThumbnail } from "./utils/file-thumbnail";
@@ -12,6 +12,8 @@ import { downloadFile } from "./utils/image-converter";
 export function FileList() {
   const files = useImageConverterStore((state) => state.files);
   const removeFile = useImageConverterStore((state) => state.removeFile);
+  const clearFiles = useImageConverterStore((state) => state.clearFiles);
+  const isProcessing = useImageConverterStore((state) => state.isProcessing);
 
   if (files.length === 0) {
     return null;
@@ -19,6 +21,21 @@ export function FileList() {
 
   return (
     <div className="space-y-3">
+      <div className="flex items-center justify-between px-1">
+        <h3 className="text-sm font-semibold text-slate-700">
+          {files.length} {files.length === 1 ? "file" : "files"}
+        </h3>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={clearFiles}
+          disabled={isProcessing}
+          className="text-slate-600 hover:text-slate-900 h-8"
+        >
+          <Trash2 className="h-4 w-4 mr-1" />
+          Clear All
+        </Button>
+      </div>
       {files.map((file) => (
         <Card key={file.id} size="sm">
           <div className="flex items-center gap-3 p-3">

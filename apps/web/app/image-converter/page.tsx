@@ -7,8 +7,14 @@ import { useImageConverterStore } from "@/features/image-converter/image-convert
 import { ImageProcessingPanel } from "@/features/image-converter/image-processing-panel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Download } from "lucide-react";
-import { convertImages, downloadFile, type ConversionOptions } from "@/features/image-converter/utils/image-converter";
+import { Download, Package } from "lucide-react";
+import {
+  convertImages,
+  downloadFile,
+  createZipArchive,
+  type ConversionOptions
+} from "@/features/image-converter/utils/image-converter";
+import { useState } from "react";
 
 function ImageConverterPage() {
   const addFiles = useImageConverterStore((state) => state.addFiles);
@@ -21,6 +27,7 @@ function ImageConverterPage() {
   const quality = useImageConverterStore((state) => state.quality);
   const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
   const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
+  const [isDownloadingZip, setIsDownloadingZip] = useState(false);
 
   const handleConvert = async () => {
     if (files.length === 0) return;
@@ -45,20 +52,13 @@ function ImageConverterPage() {
         updateFileStatus(fileData.id, "processing", 0);
 
         try {
-          const result = await convertImages(
-            [fileData.file],
-            options,
-            (_fileIndex, progress) => {
-              updateFileStatus(fileData.id, "processing", progress);
-            }
-          );
+          const result = await convertImages([fileData.file], options, (_fileIndex, progress) => {
+            updateFileStatus(fileData.id, "processing", progress);
+          });
 
           if (result[0]) {
             updateFileResult(fileData.id, result[0]);
             updateFileStatus(fileData.id, "completed", 100);
-
-            // Auto-download the converted file
-            downloadFile(result[0].compressedFile, fileData.file.name);
           }
         } catch (error) {
           console.error(`Error converting ${fileData.file.name}:`, error);
@@ -67,6 +67,29 @@ function ImageConverterPage() {
       }
     } finally {
       setIsProcessing(false);
+    }
+  };
+
+  const handleDownloadZip = async () => {
+    const completedFiles = files.filter((f) => f.status === "completed" && f.result);
+    if (completedFiles.length === 0) return;
+
+    setIsDownloadingZip(true);
+    try {
+      await createZipArchive(
+        completedFiles.map((f) => ({
+          originalFile: f.file,
+          compressedFile: f.result!.compressedFile,
+          originalSize: f.result!.originalSize,
+          compressedSize: f.result!.compressedSize,
+          savings: f.result!.savings,
+          savingsPercent: f.result!.savingsPercent
+        }))
+      );
+    } catch (error) {
+      console.error("Error creating ZIP:", error);
+    } finally {
+      setIsDownloadingZip(false);
     }
   };
 
@@ -104,6 +127,19 @@ function ImageConverterPage() {
                   <Download className="w-4 h-4 mr-2" />
                   Convert All Images
                 </Button>
+
+                {files.filter((f) => f.status === "completed").length > 0 && (
+                  <Button
+                    onClick={handleDownloadZip}
+                    disabled={isDownloadingZip}
+                    variant="outline"
+                    className="w-full bg-transparent text-white border-white hover:bg-white/10 font-semibold h-12 mb-3 transition-all"
+                  >
+                    <Package className="w-4 h-4 mr-2" />
+                    {isDownloadingZip ? "Creating ZIP..." : "Download All as ZIP"}
+                  </Button>
+                )}
+
                 <p className="text-xs text-blue-100 text-center">
                   {files.length === 0
                     ? "Add images to get started"

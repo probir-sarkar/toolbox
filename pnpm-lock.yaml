@@ -113,6 +113,9 @@ importers:
       '@hugeicons/react':
         specifier: ^1.1.4
         version: 1.1.4(react@19.2.3)
+      '@toolbox/image-utils':
+        specifier: workspace:*
+        version: link:../../packages/image-utils
       browser-image-compression:
         specifier: ^2.0.2
         version: 2.0.2
@@ -183,6 +186,9 @@ importers:
       '@silvia-odwyer/photon':
         specifier: ^0.3.3
         version: 0.3.3
+      jszip:
+        specifier: ^3.10.1
+        version: 3.10.1
     devDependencies:
       tsup:
         specifier: ^8.3.5

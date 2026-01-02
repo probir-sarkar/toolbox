@@ -1,4 +1,5 @@
 import imageCompression from "browser-image-compression";
+import { filesToZipEntries, createAndDownloadZip, type ZipOptions } from "@toolbox/image-utils";
 
 export interface ConversionOptions {
   format: "webp" | "jpg" | "png" | "avif";
@@ -140,11 +141,15 @@ export function downloadFiles(results: ConversionResult[]): void {
 }
 
 /**
- * Creates a ZIP file with all converted images (optional enhancement)
- * This would require a library like JSZip
+ * Creates a ZIP file with all converted images and triggers download
  */
-export async function createZipArchive(results: ConversionResult[]): Promise<Blob> {
-  // This is a placeholder for ZIP functionality
-  // You can implement this later if needed using JSZip or similar
-  throw new Error("ZIP functionality not implemented yet");
+export async function createZipArchive(
+  results: ConversionResult[],
+  options?: ZipOptions
+): Promise<void> {
+  const files = results.map((r) => r.compressedFile);
+  await createAndDownloadZip(filesToZipEntries(files), {
+    filename: "converted-images",
+    ...options
+  });
 }
