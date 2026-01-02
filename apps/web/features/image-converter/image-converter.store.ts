@@ -12,12 +12,21 @@ export type ImageFormat = (typeof FORMATS)[number]["value"];
 
 export type FileStatus = "pending" | "processing" | "completed" | "error";
 
+export interface ConversionResult {
+  compressedFile: File;
+  originalSize: number;
+  compressedSize: number;
+  savings: number;
+  savingsPercent: string;
+}
+
 export interface ConverterFile {
   id: string;
   file: File;
   preview?: string;
   status: FileStatus;
   progress?: number;
+  result?: ConversionResult;
 }
 
 export type ImageConverterState = {
@@ -42,6 +51,7 @@ type ImageConverterActions = {
     status: FileStatus,
     progress?: number
   ) => void;
+  updateFileResult: (id: string, result: ConversionResult) => void;
   setIsProcessing: (processing: boolean) => void;
 };
 
@@ -98,6 +108,13 @@ export const useImageConverterStore = create<ImageConverterStore>()(
           if (progress !== undefined) {
             file.progress = progress;
           }
+        }
+      }),
+    updateFileResult: (id, result) =>
+      set((state) => {
+        const file = state.files.find((f) => f.id === id);
+        if (file) {
+          file.result = result;
         }
       }),
     setIsProcessing: (processing) =>

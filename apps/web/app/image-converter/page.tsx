@@ -8,14 +8,66 @@ import { ImageProcessingPanel } from "@/features/image-converter/image-processin
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Download } from "lucide-react";
+import { convertImages, downloadFile, type ConversionOptions } from "@/features/image-converter/utils/image-converter";
 
 function ImageConverterPage() {
   const addFiles = useImageConverterStore((state) => state.addFiles);
   const files = useImageConverterStore((state) => state.files);
   const isProcessing = useImageConverterStore((state) => state.isProcessing);
+  const setIsProcessing = useImageConverterStore((state) => state.setIsProcessing);
+  const updateFileStatus = useImageConverterStore((state) => state.updateFileStatus);
+  const updateFileResult = useImageConverterStore((state) => state.updateFileResult);
+  const selectedFormat = useImageConverterStore((state) => state.selectedFormat);
+  const quality = useImageConverterStore((state) => state.quality);
+  const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
+  const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
 
-  const handleConvert = () => {
-    // TODO: Implement conversion logic
+  const handleConvert = async () => {
+    if (files.length === 0) return;
+
+    setIsProcessing(true);
+
+    const options: ConversionOptions = {
+      format: selectedFormat,
+      quality,
+      autoOptimize,
+      removeMetadata
+    };
+
+    try {
+      // Process each file
+      for (let i = 0; i < files.length; i++) {
+        const fileData = files[i];
+
+        // Skip already completed files
+        if (fileData.status === "completed") continue;
+
+        updateFileStatus(fileData.id, "processing", 0);
+
+        try {
+          const result = await convertImages(
+            [fileData.file],
+            options,
+            (_fileIndex, progress) => {
+              updateFileStatus(fileData.id, "processing", progress);
+            }
+          );
+
+          if (result[0]) {
+            updateFileResult(fileData.id, result[0]);
+            updateFileStatus(fileData.id, "completed", 100);
+
+            // Auto-download the converted file
+            downloadFile(result[0].compressedFile, fileData.file.name);
+          }
+        } catch (error) {
+          console.error(`Error converting ${fileData.file.name}:`, error);
+          updateFileStatus(fileData.id, "error");
+        }
+      }
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (

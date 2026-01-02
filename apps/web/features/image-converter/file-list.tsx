@@ -3,10 +3,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { X } from "lucide-react";
+import { X, Download, ArrowDown } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 import { useImageConverterStore } from "./image-converter.store";
 import { FileThumbnail } from "./utils/file-thumbnail";
+import { downloadFile } from "./utils/image-converter";
 
 export function FileList() {
   const files = useImageConverterStore((state) => state.files);
@@ -29,7 +30,18 @@ export function FileList() {
                 <Badge variant="secondary" className="text-xs">
                   {prettyBytes(file.file.size)}
                 </Badge>
-                {file.status === "completed" && (
+                {file.status === "completed" && file.result && (
+                  <>
+                    <div className="flex items-center gap-1 text-xs text-slate-600">
+                      <ArrowDown className="h-3 w-3 text-green-600" />
+                      <span>{prettyBytes(file.result.compressedSize)}</span>
+                    </div>
+                    <Badge variant="default" className="text-xs bg-green-500 hover:bg-green-600">
+                      {file.result.savingsPercent}
+                    </Badge>
+                  </>
+                )}
+                {file.status === "completed" && !file.result && (
                   <Badge variant="default" className="text-xs bg-green-500 hover:bg-green-600">
                     Converted
                   </Badge>
@@ -47,6 +59,17 @@ export function FileList() {
               </div>
             </div>
 
+            {file.status === "completed" && file.result && (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => downloadFile(file.result!.compressedFile, file.file.name)}
+                className="shrink-0"
+                title="Download converted file"
+              >
+                <Download className="h-4 w-4" />
+              </Button>
+            )}
             <Button variant="ghost" size="icon-sm" onClick={() => removeFile(file.id)} className="shrink-0">
               <X className="h-4 w-4" />
             </Button>
