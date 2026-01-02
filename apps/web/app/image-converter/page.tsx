@@ -1,37 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Dropzone } from "@/components/common/uppy/file-uploader";
-import { UppyContextProvider } from "@uppy/react";
-import Uppy from "@uppy/core";
 import ImageFilesList from "@/features/image-converter/image-file-list";
 import { ImageConverterProvider } from "@/features/image-converter/image-converter.context";
-import { Card } from "@/components/ui/card";
 import { ImageConversionSettings } from "@/features/image-converter/conversion-settings";
+import { DragDropZone } from "@/components/common/drag-drop-zone";
 
 function ImageConverterContent() {
-  const [files, setFiles] = useState<File[]>([]);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedFormat, setSelectedFormat] = useState("webp");
-  const [quality, setQuality] = useState(85);
-
-  const handleFilesAdded = (newFiles: File[]) => {
-    setFiles((prev) => [...prev, ...newFiles]);
-  };
-
-  const handleRemoveFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleClearAll = () => {
-    setFiles([]);
-  };
-
-  const handleConvert = () => {
-    setIsProcessing(true);
-    // Conversion logic would be added here
-    setTimeout(() => setIsProcessing(false), 3000);
-  };
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
@@ -47,18 +22,13 @@ function ImageConverterContent() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Upload & Settings */}
           <div className="lg:col-span-2 space-y-6">
-            <Dropzone note="Images only" />
+            <DragDropZone onFilesAdded={(files) => console.log(files)} />
             <ImageFilesList />
           </div>
 
           {/* Right Column - Conversion Settings */}
           <div className="space-y-6">
-            <ImageConversionSettings
-              selectedFormat={selectedFormat}
-              onFormatChange={setSelectedFormat}
-              quality={quality}
-              onQualityChange={setQuality}
-            />
+            <ImageConversionSettings />
           </div>
         </div>
 
