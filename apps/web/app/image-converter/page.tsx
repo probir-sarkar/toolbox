@@ -1,184 +1,52 @@
 "use client";
 
 import { ImageConversionSettings } from "@/features/image-converter/conversion-settings";
-import { DragDropZone } from "@/components/common/drag-drop-zone";
+import { ImageDropZone } from "@/features/image-converter/image-drop-zone";
 import { FileList } from "@/features/image-converter/file-list";
-import { useImageConverterStore } from "@/features/image-converter/image-converter.store";
-import { ImageProcessingPanel } from "@/features/image-converter/image-processing-panel";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Download, Package } from "lucide-react";
-import {
-  convertImages,
-  downloadFile,
-  createZipArchive,
-  type ConversionOptions
-} from "@/features/image-converter/utils/image-converter";
-import { useState } from "react";
+import { ActionCard } from "@/features/image-converter/action-card";
+import { FAQ } from "@/features/image-converter/faq";
+import { HowItWorks } from "@/features/image-converter/how-it-works";
+import { TrustBar } from "@/components/common/trust-bar";
 
-function ImageConverterPage() {
-  const addFiles = useImageConverterStore((state) => state.addFiles);
-  const files = useImageConverterStore((state) => state.files);
-  const isProcessing = useImageConverterStore((state) => state.isProcessing);
-  const setIsProcessing = useImageConverterStore((state) => state.setIsProcessing);
-  const updateFileStatus = useImageConverterStore((state) => state.updateFileStatus);
-  const updateFileResult = useImageConverterStore((state) => state.updateFileResult);
-  const selectedFormat = useImageConverterStore((state) => state.selectedFormat);
-  const quality = useImageConverterStore((state) => state.quality);
-  const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
-  const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
-  const [isDownloadingZip, setIsDownloadingZip] = useState(false);
-
-  const handleConvert = async () => {
-    if (files.length === 0) return;
-
-    setIsProcessing(true);
-
-    const options: ConversionOptions = {
-      format: selectedFormat,
-      quality,
-      autoOptimize,
-      removeMetadata
-    };
-
-    try {
-      // Process each file
-      for (let i = 0; i < files.length; i++) {
-        const fileData = files[i];
-
-        // Skip already completed files
-        if (fileData.status === "completed") continue;
-
-        updateFileStatus(fileData.id, "processing", 0);
-
-        try {
-          const result = await convertImages([fileData.file], options, (_fileIndex, progress) => {
-            updateFileStatus(fileData.id, "processing", progress);
-          });
-
-          if (result[0]) {
-            updateFileResult(fileData.id, result[0]);
-            updateFileStatus(fileData.id, "completed", 100);
-          }
-        } catch (error) {
-          console.error(`Error converting ${fileData.file.name}:`, error);
-          updateFileStatus(fileData.id, "error");
-        }
-      }
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
-  const handleDownloadZip = async () => {
-    const completedFiles = files.filter((f) => f.status === "completed" && f.result);
-    if (completedFiles.length === 0) return;
-
-    setIsDownloadingZip(true);
-    try {
-      await createZipArchive(
-        completedFiles.map((f) => ({
-          originalFile: f.file,
-          compressedFile: f.result!.compressedFile,
-          originalSize: f.result!.originalSize,
-          compressedSize: f.result!.compressedSize,
-          savings: f.result!.savings,
-          savingsPercent: f.result!.savingsPercent
-        }))
-      );
-    } catch (error) {
-      console.error("Error creating ZIP:", error);
-    } finally {
-      setIsDownloadingZip(false);
-    }
-  };
-
+export default function ImageConverterPage() {
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">Image Converter</h1>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Convert and optimize multiple images instantly. Drag, drop, and transform your images in bulk with powerful
-            settings.
-          </p>
+        <div className="mb-12 text-center space-y-6">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight text-balance">
+              Image Converter & Optimizer
+            </h1>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto text-balance">
+              Convert, resize, and compress images in bulk. 100% free, private, and runs entirely in your browser.
+            </p>
+          </div>
+          <TrustBar />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Upload & Settings */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+          {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <DragDropZone onFilesAdded={addFiles} />
+            <ImageDropZone />
             <FileList />
           </div>
 
-          {/* Right Column - Conversion Settings */}
+          {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
             <ImageConversionSettings />
-
-            {isProcessing && <ImageProcessingPanel />}
-            {!isProcessing && (
-              <Card className="p-6 bg-linear-to-br from-blue-600 to-blue-700 border-0 sticky top-8">
-                <Button
-                  onClick={handleConvert}
-                  disabled={files.length === 0}
-                  className="w-full bg-white text-blue-600 hover:bg-blue-50 font-semibold h-12 mb-3 transition-all"
-                >
-                  <Download className="w-4 h-4 mr-2" />
-                  Convert All Images
-                </Button>
-
-                {files.filter((f) => f.status === "completed").length > 0 && (
-                  <Button
-                    onClick={handleDownloadZip}
-                    disabled={isDownloadingZip}
-                    variant="outline"
-                    className="w-full bg-transparent text-white border-white hover:bg-white/10 font-semibold h-12 mb-3 transition-all"
-                  >
-                    <Package className="w-4 h-4 mr-2" />
-                    {isDownloadingZip ? "Creating ZIP..." : "Download All as ZIP"}
-                  </Button>
-                )}
-
-                <p className="text-xs text-blue-100 text-center">
-                  {files.length === 0
-                    ? "Add images to get started"
-                    : `Ready to convert ${files.length} image${files.length !== 1 ? "s" : ""}`}
-                </p>
-              </Card>
-            )}
+            <ActionCard />
           </div>
         </div>
 
-        {/* Footer Info */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              icon: "⚡",
-              title: "Super Fast",
-              desc: "Process multiple images simultaneously in seconds"
-            },
-            {
-              icon: "🔒",
-              title: "Secure",
-              desc: "All conversions happen locally in your browser"
-            },
-            {
-              icon: "✨",
-              title: "High Quality",
-              desc: "Preserve image quality while reducing file size"
-            }
-          ].map((item, i) => (
-            <div key={i} className="text-center">
-              <div className="text-4xl mb-3 opacity-70">{item.icon}</div>
-              <h4 className="font-semibold text-slate-900 mb-2">{item.title}</h4>
-              <p className="text-sm text-slate-600">{item.desc}</p>
-            </div>
-          ))}
-        </div>
+        <section className="mb-24">
+          <HowItWorks />
+        </section>
+
+        <section className="max-w-3xl mx-auto mb-12">
+          <FAQ />
+        </section>
       </div>
     </main>
   );
 }
 
-export default ImageConverterPage;
