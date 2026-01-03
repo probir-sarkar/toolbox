@@ -1,196 +1,200 @@
 "use client";
-
-import * as React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger
 } from "@/components/ui/navigation-menu";
 import { Layers, Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { TOOLS_CONFIG } from "@/config/tools";
+import { SITE_CONFIG } from "@/config/site";
 import { ModeToggle } from "@/components/theme-toggler";
+import { useState } from "react";
 
 export function Navbar() {
-    const pathname = usePathname();
-    const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    return (
-        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-            <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-                {/* Logo */}
-                <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-primary mr-8">
-                    <Layers className="w-6 h-6" />
-                    <span className="text-foreground">Toolbox.</span>
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md upports-backdrop-filter:bg-background/60">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-primary mr-8">
+          <Layers className="w-6 h-6" />
+          <span className="text-foreground">{SITE_CONFIG.name}</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex flex-1 ml-8">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-base font-medium bg-transparent hover:bg-muted/50 data-[state=open]:bg-muted/50">
+                  Tools
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="w-[600px] p-6 lg:w-[700px]">
+                    <div className="grid grid-cols-2 gap-8">
+                      {TOOLS_CONFIG.map((category) => (
+                        <div key={category.title} className="space-y-4">
+                          <div className="flex items-center gap-2 pb-2 border-b border-border">
+                            <category.icon className="w-5 h-5 text-primary" />
+                            <h4 className="font-semibold text-foreground">{category.title}</h4>
+                          </div>
+                          <ul className="space-y-2">
+                            {category.items.map((item) => (
+                              <li key={item.title}>
+                                {item.disabled ? (
+                                  <div className="flex items-center justify-between px-2 py-1.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-md">
+                                    <span>{item.title}</span>
+                                    <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">
+                                      Soon
+                                    </span>
+                                  </div>
+                                ) : (
+                                  <NavigationMenuLink>
+                                    <Link
+                                      href={item.href}
+                                      className="block px-2 py-1.5 text-sm text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
+                                    >
+                                      {item.title}
+                                    </Link>
+                                  </NavigationMenuLink>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 pt-6 border-t border-border bg-muted/20 -mx-6 -mb-6 p-6">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h5 className="font-medium text-foreground">Need more tools?</h5>
+                          <p className="text-sm text-muted-foreground">We are constantly adding new features.</p>
+                        </div>
+                        <Link
+                          href={SITE_CONFIG.links.issues}
+                          target="_blank"
+                          className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+                        >
+                          Request a Feature
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+              {/* Placeholders for future links */}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        {/* Action Button */}
+        <div className="hidden md:flex items-center gap-2">
+          <ModeToggle />
+
+          <Button
+            variant="ghost"
+            render={
+              <Link href={SITE_CONFIG.links.github} target="_blank">
+                Star on GitHub
+              </Link>
+            }
+          />
+          <Button
+            variant="default"
+            render={
+              <Link href={SITE_CONFIG.links.sponsor} target="_blank">
+                Support Project
+              </Link>
+            }
+          />
+        </div>
+
+        {/* Mobile Menu */}
+        <div className="md:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6 text-foreground" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0 gap-0 flex flex-col h-full">
+              <div className="p-6 pb-2 shrink-0">
+                <SheetTitle className="text-left flex items-center gap-2 font-bold text-xl">
+                  <Layers className="w-5 h-5 text-primary" /> {SITE_CONFIG.name}
+                </SheetTitle>
+              </div>
+
+              <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-6 min-h-0">
+                <Link
+                  href="/"
+                  onClick={() => setIsOpen(false)}
+                  className={cn("text-lg font-medium transition-colors hover:text-primary text-muted-foreground")}
+                >
+                  Home
                 </Link>
 
-                {/* Desktop Navigation */}
-                <div className="hidden md:flex flex-1 ml-8">
-                    <NavigationMenu>
-                        <NavigationMenuList>
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger className="text-base font-medium bg-transparent hover:bg-muted/50 data-[state=open]:bg-muted/50">Tools</NavigationMenuTrigger>
-                                <NavigationMenuContent>
-                                    <div className="w-[600px] p-6 lg:w-[700px]">
-                                        <div className="grid grid-cols-2 gap-8">
-                                            {TOOLS_CONFIG.map((category) => (
-                                                <div key={category.title} className="space-y-4">
-                                                    <div className="flex items-center gap-2 pb-2 border-b border-border">
-                                                        <category.icon className="w-5 h-5 text-primary" />
-                                                        <h4 className="font-semibold text-foreground">{category.title}</h4>
-                                                    </div>
-                                                    <ul className="space-y-2">
-                                                        {category.items.map((item) => (
-                                                            <li key={item.title}>
-                                                                {item.disabled ? (
-                                                                    <div className="flex items-center justify-between px-2 py-1.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-md">
-                                                                        <span>{item.title}</span>
-                                                                        <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">Soon</span>
-                                                                    </div>
-                                                                ) : (
-                                                                    <NavigationMenuLink asChild>
-                                                                        <Link
-                                                                            href={item.href}
-                                                                            className="block px-2 py-1.5 text-sm text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
-                                                                        >
-                                                                            {item.title}
-                                                                        </Link>
-                                                                    </NavigationMenuLink>
-                                                                )}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            ))}
-                                        </div>
-
-                                        <div className="mt-6 pt-6 border-t border-border bg-muted/20 -mx-6 -mb-6 p-6">
-                                            <div className="flex justify-between items-center">
-                                                <div>
-                                                    <h5 className="font-medium text-foreground">Need more tools?</h5>
-                                                    <p className="text-sm text-muted-foreground">We are constantly adding new features.</p>
-                                                </div>
-                                                <Link
-                                                    href="https://github.com/probir-sarkar/toolbox/issues"
-                                                    target="_blank"
-                                                    className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-                                                >
-                                                    Request a Feature
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </NavigationMenuContent>
-                            </NavigationMenuItem>
-
-                            {/* Placeholders for future links */}
-                        </NavigationMenuList>
-                    </NavigationMenu>
-                </div>
-
-                {/* Action Button */}
-                <div className="hidden md:flex items-center gap-2">
-                    <ModeToggle />
-                    <Link
-                        href="https://github.com/probir-sarkar/toolbox"
-                        target="_blank"
-                        className={cn(buttonVariants({ variant: "ghost" }), "text-muted-foreground hover:text-foreground")}
-                    >
-                        Star on GitHub
-                    </Link>
-                    <Link
-                        href="https://github.com/sponsors/probir-sarkar"
-                        target="_blank"
-                        className={cn(buttonVariants({ variant: "default" }), "rounded-full px-6")}
-                    >
-                        Support Project
-                    </Link>
-                </div>
-
-                {/* Mobile Menu */}
-                <div className="md:hidden">
-                    <Sheet open={isOpen} onOpenChange={setIsOpen}>
-                        <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <Menu className="h-6 w-6 text-foreground" />
-                            </Button>
-                        </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0 gap-0 flex flex-col h-full">
-                            <div className="p-6 pb-2 shrink-0">
-                                <SheetTitle className="text-left flex items-center gap-2 font-bold text-xl">
-                                    <Layers className="w-5 h-5 text-primary" /> Toolbox.
-                                </SheetTitle>
+                <div className="space-y-6">
+                  <h4 className="font-medium text-foreground border-b border-border pb-2">Tools</h4>
+                  {TOOLS_CONFIG.map((tool) => (
+                    <div key={tool.title} className="space-y-3 pl-2">
+                      <Link
+                        href={tool.href}
+                        onClick={() => setIsOpen(false)}
+                        className="flex items-center gap-2 font-medium text-foreground hover:text-primary transition-colors"
+                      >
+                        <tool.icon className="w-4 h-4" />
+                        {tool.title}
+                      </Link>
+                      <div className="pl-6 space-y-3 border-l-2 border-border ml-1.5">
+                        {tool.items.map((item) =>
+                          item.disabled ? (
+                            <div
+                              key={item.title}
+                              className="flex justify-between items-center text-sm text-muted-foreground cursor-not-allowed px-2"
+                            >
+                              <span>{item.title}</span>
+                              <span className="text-[10px] uppercase font-bold tracking-wider bg-muted px-1.5 py-0.5 rounded-sm">
+                                Soon
+                              </span>
                             </div>
-
-                            <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-6 min-h-0">
-                                <Link
-                                    href="/"
-                                    onClick={() => setIsOpen(false)}
-                                    className={cn("text-lg font-medium transition-colors hover:text-primary", pathname === "/" ? "text-primary" : "text-muted-foreground")}
-                                >
-                                    Home
-                                </Link>
-
-                                <div className="space-y-6">
-                                    <h4 className="font-medium text-foreground border-b border-border pb-2">Tools</h4>
-                                    {TOOLS_CONFIG.map(tool => (
-                                        <div key={tool.title} className="space-y-3 pl-2">
-                                            <Link
-                                                href={tool.href}
-                                                onClick={() => setIsOpen(false)}
-                                                className="flex items-center gap-2 font-medium text-foreground hover:text-primary transition-colors"
-                                            >
-                                                <tool.icon className="w-4 h-4" />
-                                                {tool.title}
-                                            </Link>
-                                            <div className="pl-6 space-y-3 border-l-2 border-border ml-1.5">
-                                                {tool.items.map(item => (
-                                                    item.disabled ? (
-                                                        <div key={item.title} className="flex justify-between items-center text-sm text-muted-foreground cursor-not-allowed px-2">
-                                                            <span>{item.title}</span>
-                                                            <span className="text-[10px] uppercase font-bold tracking-wider bg-muted px-1.5 py-0.5 rounded-sm">Soon</span>
-                                                        </div>
-                                                    ) : (
-                                                        <Link
-                                                            key={item.title}
-                                                            href={item.href}
-                                                            onClick={() => setIsOpen(false)}
-                                                            className="block text-sm text-muted-foreground hover:text-primary px-2 transition-colors"
-                                                        >
-                                                            {item.title}
-                                                        </Link>
-                                                    )
-                                                ))}
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="p-6 border-t border-border mt-auto flex flex-col gap-4 bg-background shrink-0">
-                                <div className="flex items-center justify-between">
-                                    <span className="font-medium text-foreground">Theme</span>
-                                    <ModeToggle />
-                                </div>
-                                <Link
-                                    href="https://github.com/sponsors/probir-sarkar"
-                                    target="_blank"
-                                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-center")}
-                                >
-                                    Support Project
-                                </Link>
-                            </div>
-                        </SheetContent>
-                    </Sheet>
+                          ) : (
+                            <Link
+                              key={item.title}
+                              href={item.href}
+                              onClick={() => setIsOpen(false)}
+                              className="block text-sm text-muted-foreground hover:text-primary px-2 transition-colors"
+                            >
+                              {item.title}
+                            </Link>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-            </div>
-        </header >
-    );
+              </div>
+
+              <div className="p-6 border-t border-border mt-auto flex flex-col gap-4 bg-background shrink-0">
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-foreground">Theme</span>
+                  <ModeToggle />
+                </div>
+                <Button render={<Link href={SITE_CONFIG.links.sponsor} target="_blank" />}>Support Project</Button>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </header>
+  );
 }
