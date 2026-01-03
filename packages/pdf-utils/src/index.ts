@@ -2,16 +2,13 @@ import JSZip from "jszip";
 // @ts-ignore
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
 
-let workerInitialized = false;
 
 /**
  * Initialize PDF.js worker with custom worker source.
  * This should be called before using any PDF functions.
- * @param workerSrc - URL to the PDF.js worker file
  */
-export function initPdfWorker(workerSrc: string) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-  workerInitialized = true;
+export function initPdfWorker() {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/build/pdf.worker.min.mjs";
 }
 
 function getBaseName(file: File): string {

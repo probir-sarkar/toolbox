@@ -1,10 +1,8 @@
 // src/index.ts
 import JSZip from "jszip";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-var workerInitialized = false;
-function initPdfWorker(workerSrc) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
-  workerInitialized = true;
+function initPdfWorker() {
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/build/pdf.worker.min.mjs";
 }
 function getBaseName(file) {
   const name = file.name.replace(/\.[^/.]+$/, "");

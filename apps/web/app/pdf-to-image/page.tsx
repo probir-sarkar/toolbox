@@ -6,19 +6,14 @@ import { FAQ } from "@/components/features/pdf-to-image/faq";
 import { HowItWorks } from "@/components/features/pdf-to-image/how-it-works";
 import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone";
 import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list";
-import { usePdfToImageStore } from "@/components/features/pdf-to-image/store";
 import { TrustBar } from "@/components/features/pdf-to-image/trust-bar";
 import { useEffect } from "react";
 import { initPdfWorker } from "@toolbox/pdf-utils";
 
 export default function PdfToImagePage() {
-  const addFile = usePdfToImageStore((state) => state.setFile);
 
   useEffect(() => {
-    // Initialize PDF.js worker using a CDN or local file
-    // Using unpkg/cdnjs is common for Next.js to avoid localized worker compilation issues with pdfjs-dist
-    const pdfjsVersion = "4.10.38";
-    initPdfWorker(`https://unpkg.com/pdfjs-dist@${pdfjsVersion}/build/pdf.worker.min.mjs`);
+    initPdfWorker();
   }, []);
 
   return (

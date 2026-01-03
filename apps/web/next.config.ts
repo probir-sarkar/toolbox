@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
   output: "export",
   images: {
     unoptimized: true
-  }
+  },
+  allowedDevOrigins: ["https://cdn.jsdelivr.net"],
 };
 
 export default nextConfig;
