@@ -38,15 +38,15 @@ export function Navbar() {
                   Tools
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[600px] p-6 lg:w-[700px]">
-                    <div className="grid grid-cols-2 gap-8">
+                  <div className="w-[500px] p-4 lg:w-[600px]">
+                    <div className="grid grid-cols-2 gap-4">
                       {TOOLS_CONFIG.map((category) => (
-                        <div key={category.title} className="space-y-4">
+                        <div key={category.title} className="space-y-3">
                           <div className="flex items-center gap-2 pb-2 border-b border-border">
                             <category.icon className="w-5 h-5 text-primary" />
                             <h4 className="font-semibold text-foreground">{category.title}</h4>
                           </div>
-                          <ul className="space-y-2">
+                          <ul className="space-y-1">
                             {category.items.map((item) => (
                               <li key={item.title}>
                                 {item.disabled ? (
