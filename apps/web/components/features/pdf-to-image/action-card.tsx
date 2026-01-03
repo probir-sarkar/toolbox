@@ -1,11 +1,8 @@
 "use client";
 
-import { Download, Package, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
 import { usePdfToImageStore } from "./store";
 import { pdfToImagesBrowser, downloadAll } from "@toolbox/pdf-utils";
-import { Progress } from "@/components/ui/progress";
 
 export function ActionCard() {
   const file = usePdfToImageStore((state) => state.file);
@@ -14,7 +11,7 @@ export function ActionCard() {
   const scale = usePdfToImageStore((state) => state.scale);
   const startPage = usePdfToImageStore((state) => state.startPage);
   const endPage = usePdfToImageStore((state) => state.endPage);
-  
+
   const isConverting = usePdfToImageStore((state) => state.isConverting);
   const setIsConverting = usePdfToImageStore((state) => state.setIsConverting);
   const setImages = usePdfToImageStore((state) => state.setImages);
@@ -40,7 +37,7 @@ export function ActionCard() {
         endPage,
         quality,
       });
-      
+
       setImages(result);
       setProgress(100);
     } catch (error) {
@@ -58,50 +55,31 @@ export function ActionCard() {
   if (!file && images.length === 0) return null;
 
   return (
-    <Card className="p-6 bg-linear-to-br from-red-600 to-rose-700 border-0 sticky top-8 text-white">
-      {!isConverting && images.length === 0 && (
-        <Button
-          onClick={handleConvert}
-          disabled={!file}
-          className="w-full bg-white text-red-600 hover:bg-rose-50 font-semibold h-12 mb-3 shadow-none border-0"
-        >
-          <Loader2 className="w-4 h-4 mr-2 animate-spin hidden" />
-          Convert to Images
-        </Button>
-      )}
-
-      {isConverting && (
-        <div className="space-y-4 mb-4">
-          <div className="flex justify-between text-sm font-medium">
-            <span>Converting...</span>
-            <span>{progress}%</span>
-          </div>
-          <Progress value={progress} className="h-2 bg-red-800" />
-        </div>
-      )}
-
-      {images.length > 0 && (
-        <>
-          <div className="text-center mb-4 text-rose-100 text-sm">
-            Converted {images.length} pages successfully.
-          </div>
-          <Button
-            onClick={handleDownload}
-            className="w-full bg-white text-red-600 hover:bg-rose-50 font-semibold h-12 mb-3 shadow-none border-0"
-          >
-            <Package className="w-4 h-4 mr-2" />
-            Download ZIP
-          </Button>
-        </>
-      )}
-
-      <p className="text-xs text-rose-100 text-center opacity-80">
-        {images.length > 0
-          ? "Ready to download"
+    <ReusableActionCard
+      isProcessing={isConverting}
+      progress={progress}
+      onConvert={handleConvert}
+      onDownload={handleDownload}
+      canConvert={!!file}
+      canDownload={images.length > 0}
+      convertLabel="Convert to Images"
+      downloadLabel="Download ZIP"
+      statusMessage={
+        images.length > 0
+          ? (
+            <>
+              <span className="block mb-1 opacity-90">Converted {images.length} pages successfully.</span>
+              Ready to download
+            </>
+          )
           : file
-          ? "Ready to convert PDF"
-          : "Add a PDF to start"}
-      </p>
-    </Card>
+            ? "Ready to convert PDF"
+            : "Add a PDF to start"
+      }
+      className="bg-linear-to-br from-red-600 to-rose-700"
+      buttonClassName="text-red-600 hover:bg-rose-50"
+      progressClassName="bg-red-800"
+      statusTextClassName="text-rose-100"
+    />
   );
 }

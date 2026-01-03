@@ -1,9 +1,7 @@
 "use client";
 
-import { Download, Package, Loader2, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
+import { Sparkles } from "lucide-react";
 import { useImageConverterStore } from "./image-converter.store";
 import { convertImages, type ConversionOptions, createZipArchive } from "./utils/image-converter";
 import { useState } from "react";
@@ -96,52 +94,26 @@ export function ActionCard() {
     if (files.length === 0) return null;
 
     return (
-        <Card className="p-6 bg-linear-to-br from-blue-600 to-cyan-700 border-0 sticky top-8 text-white">
-            {!isProcessing && hasPending && (
-                <Button
-                    onClick={handleConvert}
-                    className="w-full bg-white text-blue-600 hover:bg-blue-50 font-semibold h-12 mb-3 shadow-none border-0"
-                >
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Convert Images
-                </Button>
-            )}
-
-            {isProcessing && (
-                <div className="space-y-4 mb-4">
-                    <div className="flex justify-between text-sm font-medium">
-                        <span>Converting...</span>
-                        <span>{overallProgress}%</span>
-                    </div>
-                    <Progress value={overallProgress} className="h-2 bg-blue-800" />
-                </div>
-            )}
-
-            {hasCompleted && !isProcessing && (
-                <>
-                    {!hasPending && (
-                        <div className="text-center mb-4 text-blue-100 text-sm">
-                            All conversions complete!
-                        </div>
-                    )}
-                    <Button
-                        onClick={handleDownloadZip}
-                        disabled={isDownloadingZip}
-                        className="w-full bg-white text-blue-600 hover:bg-blue-50 font-semibold h-12 mb-3 shadow-none border-0"
-                    >
-                        {isDownloadingZip ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Package className="w-4 h-4 mr-2" />}
-                        Download All (ZIP)
-                    </Button>
-                </>
-            )}
-
-            <p className="text-xs text-blue-100 text-center opacity-80">
-                {hasCompleted && !hasPending
+        <ReusableActionCard
+            isProcessing={isProcessing}
+            progress={overallProgress}
+            onConvert={handleConvert}
+            onDownload={handleDownloadZip}
+            canConvert={!isProcessing && hasPending}
+            canDownload={hasCompleted && !isProcessing}
+            isDownloading={isDownloadingZip}
+            convertLabel="Convert Images"
+            downloadLabel="Download All (ZIP)"
+            statusMessage={
+                hasCompleted && !hasPending
                     ? "Ready to download"
-                    : files.length > 0
-                        ? "Ready to convert"
-                        : "Add images to start"}
-            </p>
-        </Card>
+                    : "Ready to convert"
+            }
+            className="bg-linear-to-br from-blue-600 to-cyan-700"
+            buttonClassName="text-blue-600 hover:bg-blue-50"
+            progressClassName="bg-blue-800"
+            statusTextClassName="text-blue-100"
+            ConvertIcon={Sparkles}
+        />
     );
 }
