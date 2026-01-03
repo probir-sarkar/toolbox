@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { Search, FileText, Image as ImageIcon, Hammer, Palette, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
+
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -75,31 +75,30 @@ export function ToolsSection() {
   }, [searchQuery, activeFilter]);
 
   return (
-    <section className="container mx-auto px-6 pb-24">
+    <section className="container mx-auto px-6 pb-24 relative z-10">
       {/* Controls */}
-      <div className="flex flex-col md:flex-row gap-6 mb-10 items-center justify-between">
-        {/* Search */}
-        <div className="relative w-full md:w-96">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder="Search tools..."
-            className="pl-9 bg-muted/50 border-input/50 focus:bg-background transition-colors"
+      <div className="max-w-2xl mx-auto mb-8">
+        <div className="relative flex items-center bg-muted/40 border border-border/50 rounded-full px-5 h-12 shadow-sm ring-offset-background focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all">
+          <Search className="h-5 w-5 text-muted-foreground mr-3" />
+          <input
+            type="text"
+            placeholder="Search for tools..."
+            className="flex-1 bg-transparent border-none outline-none text-base text-foreground placeholder:text-muted-foreground/70"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-2 justify-center md:justify-end">
+        <div className="flex flex-wrap items-center justify-center gap-2 mt-4">
           {FILTERS.map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={cn(
-                "px-3 py-1.5 rounded-full text-sm font-medium transition-all",
+                "px-3 py-1.5 rounded-full text-xs font-medium transition-colors border",
                 activeFilter === filter
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                  : "bg-background text-muted-foreground border-border/50 hover:bg-muted"
               )}
             >
               {filter}
