@@ -55,7 +55,7 @@ export function SortableImageItem({ image, index, onRemove }: SortableImageItemP
       </div>
 
       {/* Thumbnail */}
-      <div className="aspect-[3/4] w-full bg-muted">
+      <div className="aspect-3/4 w-full bg-muted">
         <img src={image.previewUrl} alt={image.file.name} className="h-full w-full object-contain p-2" />
       </div>
 

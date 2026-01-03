@@ -38,53 +38,45 @@ export function Navbar() {
                   Tools
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[500px] p-4 lg:w-[600px]">
-                    <div className="grid grid-cols-2 gap-4">
+                  <div className="w-[420px] p-3 lg:w-[500px]">
+                    <div className="grid grid-cols-2 gap-3">
                       {TOOLS_CONFIG.map((category) => (
-                        <div key={category.title} className="space-y-3">
-                          <div className="flex items-center gap-2 pb-2 border-b border-border">
-                            <category.icon className="w-5 h-5 text-primary" />
-                            <h4 className="font-semibold text-foreground">{category.title}</h4>
+                        <div key={category.title} className="space-y-2">
+                          <div className="flex items-center gap-1.5 pb-1 border-b border-border">
+                            <category.icon className="w-4 h-4 text-primary" />
+                            <h4 className="font-semibold text-sm text-foreground">{category.title}</h4>
                           </div>
-                          <ul className="space-y-1">
-                            {category.items.map((item) => (
-                              <li key={item.title}>
-                                {item.disabled ? (
-                                  <div className="flex items-center justify-between px-2 py-1.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-md">
-                                    <span>{item.title}</span>
-                                    <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">
-                                      Soon
-                                    </span>
-                                  </div>
-                                ) : (
+                          <ul className="space-y-0.5">
+                            {category.items
+                              .filter((item) => !item.disabled)
+                              .map((item) => (
+                                <li key={item.title}>
                                   <NavigationMenuLink>
                                     <Link
                                       href={item.href}
-                                      className="block px-2 py-1.5 text-sm text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
+                                      className="block px-2 py-1 text-xs text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
                                     >
                                       {item.title}
                                     </Link>
                                   </NavigationMenuLink>
-                                )}
-                              </li>
-                            ))}
+                                </li>
+                              ))}
                           </ul>
                         </div>
                       ))}
                     </div>
 
-                    <div className="mt-6 pt-6 border-t border-border bg-muted/20 -mx-6 -mb-6 p-6">
+                    <div className="mt-3 pt-3 border-t border-border bg-muted/20 -mx-3 -mb-3 p-3">
                       <div className="flex justify-between items-center">
                         <div>
-                          <h5 className="font-medium text-foreground">Need more tools?</h5>
-                          <p className="text-sm text-muted-foreground">We are constantly adding new features.</p>
+                          <h5 className="font-medium text-sm text-foreground">Need more tools?</h5>
                         </div>
                         <Link
                           href={SITE_CONFIG.links.issues}
                           target="_blank"
-                          className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+                          className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-7 text-xs px-2")}
                         >
-                          Request a Feature
+                          Request Feature
                         </Link>
                       </div>
                     </div>
@@ -156,18 +148,9 @@ export function Navbar() {
                         {tool.title}
                       </Link>
                       <div className="pl-6 space-y-3 border-l-2 border-border ml-1.5">
-                        {tool.items.map((item) =>
-                          item.disabled ? (
-                            <div
-                              key={item.title}
-                              className="flex justify-between items-center text-sm text-muted-foreground cursor-not-allowed px-2"
-                            >
-                              <span>{item.title}</span>
-                              <span className="text-[10px] uppercase font-bold tracking-wider bg-muted px-1.5 py-0.5 rounded-sm">
-                                Soon
-                              </span>
-                            </div>
-                          ) : (
+                        {tool.items
+                          .filter((item) => !item.disabled)
+                          .map((item) => (
                             <Link
                               key={item.title}
                               href={item.href}
@@ -176,8 +159,7 @@ export function Navbar() {
                             >
                               {item.title}
                             </Link>
-                          )
-                        )}
+                          ))}
                       </div>
                     </div>
                   ))}
