@@ -2,7 +2,7 @@
  * Initialize PDF.js worker with custom worker source.
  * This should be called before using any PDF functions.
  */
-declare function initPdfWorker(): void;
+declare function initPdfWorker(): Promise<void>;
 interface PdfToImageOptions {
     format?: "image/png" | "image/jpeg";
     scale?: number;

@@ -1,8 +1,15 @@
 // src/index.ts
 import JSZip from "jszip";
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-function initPdfWorker() {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/build/pdf.worker.min.mjs";
+var pdfjsLib = null;
+var getPdfjs = async () => {
+  if (!pdfjsLib) {
+    pdfjsLib = await import("pdfjs-dist/build/pdf");
+  }
+  return pdfjsLib;
+};
+async function initPdfWorker() {
+  const lib = await getPdfjs();
+  lib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@5.4.54/build/pdf.worker.min.mjs";
 }
 function getBaseName(file) {
   const name = file.name.replace(/\.[^/.]+$/, "");
@@ -19,7 +26,8 @@ async function pdfToImagesBrowser(file, options = {}) {
   } = options;
   const baseName = getBaseName(file);
   const fileData = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: fileData }).promise;
+  const lib = await getPdfjs();
+  const pdf = await lib.getDocument({ data: fileData }).promise;
   const results = [];
   const lastPage = endPage && endPage <= pdf.numPages ? endPage : pdf.numPages;
   for (let pageNum = startPage; pageNum <= lastPage; pageNum++) {
@@ -75,7 +83,8 @@ async function getFileInfo(file) {
   let pages = 0;
   if (file.type === "application/pdf") {
     const arrayBuffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    const lib = await getPdfjs();
+    const pdf = await lib.getDocument({ data: arrayBuffer }).promise;
     pages = pdf.numPages;
   }
   return {
