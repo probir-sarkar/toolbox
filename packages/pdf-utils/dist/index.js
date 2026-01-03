@@ -79,7 +79,7 @@ async function downloadAll(images) {
 }
 async function getFileInfo(file) {
   const name = file.name;
-  const size = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+  const size = file.size;
   let pages = 0;
   if (file.type === "application/pdf") {
     const arrayBuffer = await file.arrayBuffer();

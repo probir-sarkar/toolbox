@@ -1,5 +1,6 @@
 "use client";
 
+import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -21,7 +22,7 @@ export function PdfFileList() {
         <div className="flex-1 min-w-0">
           <p className="truncate font-medium text-slate-900">{file.name}</p>
           <p className="text-sm text-slate-500">
-            {formatBytes(Number(file.size))} • {file.pages} pages
+            {prettyBytes(file.size)} • {file.pages} pages
           </p>
         </div>
         <Button
@@ -35,12 +36,4 @@ export function PdfFileList() {
       </Card>
     </div>
   );
-}
-
-function formatBytes(bytes: number) {
-  if (bytes === 0) return "0 Bytes";
-  const k = 1024;
-  const sizes = ["Bytes", "KB", "MB", "GB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
 }

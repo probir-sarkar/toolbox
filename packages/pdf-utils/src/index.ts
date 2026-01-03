@@ -123,14 +123,14 @@ export async function downloadAll(images: ImageResult[]) {
 
 export interface FileInfo {
   name: string;
-  size: string;
+  size: number;
   pages: number;
   file: File;
 }
 
 export async function getFileInfo(file: File): Promise<FileInfo> {
   const name = file.name;
-  const size = `${(file.size / 1024 / 1024).toFixed(2)} MB`;
+  const size = file.size; // raw bytes
 
   let pages = 0;
 

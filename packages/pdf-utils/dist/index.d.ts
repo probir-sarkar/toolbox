@@ -24,7 +24,7 @@ declare function triggerDownload(blob: Blob, filename: string): void;
 declare function downloadAll(images: ImageResult[]): Promise<void>;
 interface FileInfo {
     name: string;
-    size: string;
+    size: number;
     pages: number;
     file: File;
 }
