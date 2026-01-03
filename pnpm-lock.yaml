@@ -116,6 +116,9 @@ importers:
       '@toolbox/image-utils':
         specifier: workspace:*
         version: link:../../packages/image-utils
+      '@toolbox/pdf-utils':
+        specifier: workspace:*
+        version: link:../../packages/pdf-utils
       browser-image-compression:
         specifier: ^2.0.2
         version: 2.0.2

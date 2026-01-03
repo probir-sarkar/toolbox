@@ -1,9 +1,8 @@
 // src/index.ts
 import JSZip from "jszip";
 import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import workerSrc from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 var workerInitialized = false;
-function initPdfWorker() {
+function initPdfWorker(workerSrc) {
   pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
   workerInitialized = true;
 }
