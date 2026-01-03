@@ -11,99 +11,105 @@ import {
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Layers, Image as ImageIcon, FileText, Menu, X, Hammer, Palette } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Layers, Menu } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-
-const tools = [
-    {
-        title: "PDF Tools",
-        href: "/pdf-tools",
-        icon: Hammer,
-        description: "Merge, split, compress, and edit PDF documents.",
-        items: [
-            { title: "PDF to Image", href: "/pdf-to-image", description: "Convert PDF pages to images." },
-            { title: "Merge PDF", href: "/pdf-tools", description: "Combine multiple PDFs into one." },
-        ]
-    },
-    {
-        title: "Image Tools",
-        href: "/image-tools",
-        icon: Palette,
-        description: "Convert, resize, and optimize your images.",
-        items: [
-            { title: "Image Converter", href: "/image-converter", description: "Batch convert image formats." },
-            { title: "Resize Image", href: "/image-tools", description: "Change image dimensions." },
-        ]
-    },
-];
+import { TOOLS_CONFIG } from "@/config/tools";
 
 export function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-slate-900 mr-8">
-                    <Layers className="w-6 h-6 text-rose-600" />
-                    <span>Toolbox.</span>
+                <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-primary mr-8">
+                    <Layers className="w-6 h-6" />
+                    <span className="text-foreground">Toolbox.</span>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex flex-1">
+                <div className="hidden md:flex flex-1 ml-8">
                     <NavigationMenu>
                         <NavigationMenuList>
                             <NavigationMenuItem>
-                                <Link href="/" legacyBehavior passHref>
-                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                        Home
-                                    </NavigationMenuLink>
-                                </Link>
-                            </NavigationMenuItem>
-
-                            <NavigationMenuItem>
-                                <NavigationMenuTrigger>Tools</NavigationMenuTrigger>
+                                <NavigationMenuTrigger className="text-base font-medium bg-transparent hover:bg-muted/50 data-[state=open]:bg-muted/50">Tools</NavigationMenuTrigger>
                                 <NavigationMenuContent>
-                                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                                        {tools.map((tool) => (
-                                            <li key={tool.title} className="row-span-3">
-                                                <NavigationMenuLink asChild>
-                                                    <a
-                                                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-slate-50 to-muted p-6 no-underline outline-hidden focus:shadow-md"
-                                                        href={tool.href}
-                                                    >
-                                                        <tool.icon className="h-6 w-6 text-rose-600 mb-4" />
-                                                        <div className="mb-2 mt-4 text-lg font-medium text-slate-900">
-                                                            {tool.title}
-                                                        </div>
-                                                        <p className="text-sm leading-tight text-slate-600">
-                                                            {tool.description}
-                                                        </p>
-                                                    </a>
-                                                </NavigationMenuLink>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="w-[600px] p-6 lg:w-[700px]">
+                                        <div className="grid grid-cols-2 gap-8">
+                                            {TOOLS_CONFIG.map((category) => (
+                                                <div key={category.title} className="space-y-4">
+                                                    <div className="flex items-center gap-2 pb-2 border-b border-border">
+                                                        <category.icon className="w-5 h-5 text-primary" />
+                                                        <h4 className="font-semibold text-foreground">{category.title}</h4>
+                                                    </div>
+                                                    <ul className="space-y-2">
+                                                        {category.items.map((item) => (
+                                                            <li key={item.title}>
+                                                                {item.disabled ? (
+                                                                    <div className="flex items-center justify-between px-2 py-1.5 text-sm text-muted-foreground cursor-not-allowed bg-muted/50 rounded-md">
+                                                                        <span>{item.title}</span>
+                                                                        <span className="text-[10px] uppercase font-bold tracking-wider text-muted-foreground bg-muted px-1.5 py-0.5 rounded-sm">Soon</span>
+                                                                    </div>
+                                                                ) : (
+                                                                    <NavigationMenuLink asChild>
+                                                                        <Link
+                                                                            href={item.href}
+                                                                            className="block px-2 py-1.5 text-sm text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
+                                                                        >
+                                                                            {item.title}
+                                                                        </Link>
+                                                                    </NavigationMenuLink>
+                                                                )}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="mt-6 pt-6 border-t border-border bg-muted/20 -mx-6 -mb-6 p-6">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <h5 className="font-medium text-foreground">Need more tools?</h5>
+                                                    <p className="text-sm text-muted-foreground">We are constantly adding new features.</p>
+                                                </div>
+                                                <Link
+                                                    href="https://github.com/probir-sarkar/toolbox/issues"
+                                                    target="_blank"
+                                                    className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
+                                                >
+                                                    Request a Feature
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
+
+                            {/* Placeholders for future links */}
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
 
                 {/* Action Button */}
-                <div className="hidden md:flex items-center gap-4">
-                    <Button asChild variant="ghost" size="sm" className="text-slate-600">
-                        <Link href="https://github.com/probir-sarkar/toolbox" target="_blank">
-                            GitHub
-                        </Link>
-                    </Button>
-                    <Button size="sm" className="bg-slate-900 text-white hover:bg-slate-800">
+                <div className="hidden md:flex items-center gap-2">
+                    <Link
+                        href="https://github.com/probir-sarkar/toolbox"
+                        target="_blank"
+                        className={cn(buttonVariants({ variant: "ghost" }), "text-muted-foreground hover:text-foreground")}
+                    >
+                        Star on GitHub
+                    </Link>
+                    <Link
+                        href="https://github.com/sponsors/probir-sarkar"
+                        target="_blank"
+                        className={cn(buttonVariants({ variant: "default" }), "rounded-full px-6")}
+                    >
                         Support Project
-                    </Button>
+                    </Link>
                 </div>
 
                 {/* Mobile Menu */}
@@ -111,51 +117,65 @@ export function Navbar() {
                     <Sheet open={isOpen} onOpenChange={setIsOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon">
-                                <Menu className="h-6 w-6 text-slate-900" />
+                                <Menu className="h-6 w-6 text-foreground" />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side="right" className="w-[300px] sm:w-[400px]">
                             <SheetTitle className="text-left flex items-center gap-2 font-bold text-xl mb-6">
-                                <Layers className="w-5 h-5 text-rose-600" /> Toolbox.
+                                <Layers className="w-5 h-5 text-primary" /> Toolbox.
                             </SheetTitle>
                             <div className="flex flex-col gap-6">
                                 <Link
                                     href="/"
                                     onClick={() => setIsOpen(false)}
-                                    className={cn("text-lg font-medium transition-colors hover:text-rose-600", pathname === "/" ? "text-rose-600" : "text-slate-600")}
+                                    className={cn("text-lg font-medium transition-colors hover:text-primary", pathname === "/" ? "text-primary" : "text-muted-foreground")}
                                 >
                                     Home
                                 </Link>
 
-                                <div className="space-y-4">
-                                    <h4 className="font-medium text-slate-900 border-b pb-2">Tools</h4>
-                                    {tools.map(tool => (
+                                <div className="space-y-6">
+                                    <h4 className="font-medium text-foreground border-b border-border pb-2">Tools</h4>
+                                    {TOOLS_CONFIG.map(tool => (
                                         <div key={tool.title} className="space-y-3 pl-2">
                                             <Link
                                                 href={tool.href}
                                                 onClick={() => setIsOpen(false)}
-                                                className="block font-medium text-slate-800 hover:text-rose-600"
+                                                className="flex items-center gap-2 font-medium text-foreground hover:text-primary transition-colors"
                                             >
+                                                <tool.icon className="w-4 h-4" />
                                                 {tool.title}
                                             </Link>
-                                            <div className="pl-4 space-y-2 border-l-2 border-slate-100">
+                                            <div className="pl-6 space-y-3 border-l-2 border-border ml-1.5">
                                                 {tool.items.map(item => (
-                                                    <Link
-                                                        key={item.title}
-                                                        href={item.href}
-                                                        onClick={() => setIsOpen(false)}
-                                                        className="block text-sm text-slate-500 hover:text-rose-600"
-                                                    >
-                                                        {item.title}
-                                                    </Link>
+                                                    item.disabled ? (
+                                                        <div key={item.title} className="flex justify-between items-center text-sm text-muted-foreground cursor-not-allowed px-2">
+                                                            <span>{item.title}</span>
+                                                            <span className="text-[10px] uppercase font-bold tracking-wider bg-muted px-1.5 py-0.5 rounded-sm">Soon</span>
+                                                        </div>
+                                                    ) : (
+                                                        <Link
+                                                            key={item.title}
+                                                            href={item.href}
+                                                            onClick={() => setIsOpen(false)}
+                                                            className="block text-sm text-muted-foreground hover:text-primary px-2 transition-colors"
+                                                        >
+                                                            {item.title}
+                                                        </Link>
+                                                    )
                                                 ))}
                                             </div>
                                         </div>
                                     ))}
                                 </div>
 
-                                <div className="pt-6 border-t border-slate-100">
-                                    <Button className="w-full bg-slate-900 text-white mb-2">Support Project</Button>
+                                <div className="pt-6 border-t border-border mt-auto">
+                                    <Link
+                                        href="https://github.com/sponsors/probir-sarkar"
+                                        target="_blank"
+                                        className={cn(buttonVariants({ variant: "default" }), "w-full justify-center")}
+                                    >
+                                        Support Project
+                                    </Link>
                                 </div>
                             </div>
                         </SheetContent>
@@ -165,29 +185,3 @@ export function Navbar() {
         </header>
     );
 }
-
-const ListItem = React.forwardRef<
-    React.ElementRef<"a">,
-    React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-    return (
-        <li>
-            <NavigationMenuLink asChild>
-                <a
-                    ref={ref}
-                    className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-hidden transition-colors hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-100 focus:text-slate-900",
-                        className
-                    )}
-                    {...props}
-                >
-                    <div className="text-sm font-medium leading-none">{title}</div>
-                    <p className="line-clamp-2 text-sm leading-snug text-slate-500">
-                        {children}
-                    </p>
-                </a>
-            </NavigationMenuLink>
-        </li>
-    );
-});
-ListItem.displayName = "ListItem";
