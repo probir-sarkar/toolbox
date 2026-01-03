@@ -22,7 +22,7 @@ export function FileList() {
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between px-1">
-        <h3 className="text-sm font-semibold text-slate-700">
+        <h3 className="text-sm font-semibold text-muted-foreground">
           {files.length} {files.length === 1 ? "file" : "files"}
         </h3>
         <Button
@@ -30,7 +30,7 @@ export function FileList() {
           size="sm"
           onClick={clearFiles}
           disabled={isProcessing}
-          className="text-slate-600 hover:text-slate-900 h-8"
+          className="text-muted-foreground hover:text-foreground h-8"
         >
           <Trash2 className="h-4 w-4 mr-1" />
           Clear All
@@ -42,14 +42,14 @@ export function FileList() {
             <FileThumbnail file={file} />
 
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-slate-900 truncate">{file.file.name}</p>
+              <p className="text-sm font-medium text-foreground truncate">{file.file.name}</p>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant="secondary" className="text-xs">
                   {prettyBytes(file.file.size)}
                 </Badge>
                 {file.status === "completed" && file.result && (
                   <>
-                    <div className="flex items-center gap-1 text-xs text-slate-600">
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
                       <ArrowDown className="h-3 w-3 text-green-600" />
                       <span>{prettyBytes(file.result.compressedSize)}</span>
                     </div>
@@ -97,7 +97,7 @@ export function FileList() {
               <progress
                 value={file.progress}
                 max="100"
-                className="w-full h-1 appearance-none bg-slate-100 rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-slate-100 [&::-webkit-progress-value]:bg-blue-500 [&::-moz-progress-bar]:bg-blue-500"
+                className="w-full h-1 appearance-none bg-muted rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-muted [&::-webkit-progress-value]:bg-blue-500 [&::-moz-progress-bar]:bg-blue-500"
               />
             </div>
           )}

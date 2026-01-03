@@ -5,7 +5,7 @@ import { ImageDropZone } from "@/features/image-converter/image-drop-zone";
 import { FileList } from "@/features/image-converter/file-list";
 import { ActionCard } from "@/features/image-converter/action-card";
 import { FAQ } from "@/features/image-converter/faq";
-import { HowItWorks } from "@/features/image-converter/how-it-works";
+import { HowItWorks } from "@/components/common/how-it-works";
 import { TrustBar } from "@/components/common/trust-bar";
 
 export default function ImageConverterPage() {
@@ -14,10 +14,10 @@ export default function ImageConverterPage() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-12 text-center space-y-6">
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight text-balance">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
               Image Converter & Optimizer
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto text-balance">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
               Convert, resize, and compress images in bulk. 100% free, private, and runs entirely in your browser.
             </p>
           </div>
@@ -39,7 +39,23 @@ export default function ImageConverterPage() {
         </div>
 
         <section className="mb-24">
-          <HowItWorks />
+          <HowItWorks
+            steps={[
+              {
+                title: "Add your Images",
+                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more."
+              },
+              {
+                title: "Choose Settings",
+                description: "Select your target format, quality, and optimization preferences."
+              },
+              {
+                title: "Convert & Save",
+                description: "Images are processed locally. Download them individually or as a ZIP."
+              }
+            ]}
+            description="Optimize and transform your images in three simple steps. Fast, secure, and purely client-side."
+          />
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">

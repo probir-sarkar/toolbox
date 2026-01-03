@@ -3,7 +3,7 @@
 import { ActionCard } from "@/components/features/pdf-to-image/action-card";
 import { ConversionSettings } from "@/components/features/pdf-to-image/conversion-settings";
 import { FAQ } from "@/components/features/pdf-to-image/faq";
-import { HowItWorks } from "@/components/features/pdf-to-image/how-it-works";
+import { HowItWorks } from "@/components/common/how-it-works";
 import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone";
 import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list";
 import { TrustBar } from "@/components/common/trust-bar";
@@ -21,10 +21,10 @@ export default function PdfToImagePage() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-12 text-center space-y-6">
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight text-balance">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
               Convert PDF to Image
             </h1>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto text-balance">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
               Convert PDF pages to high-quality images with no uploads. Works offline, fast, and secure.
             </p>
           </div>
@@ -46,7 +46,23 @@ export default function PdfToImagePage() {
         </div>
 
         <section className="mb-24">
-          <HowItWorks />
+          <HowItWorks
+            steps={[
+              {
+                title: "Add your PDF",
+                description: "Choose any PDF from your device. Files never leave your browser."
+              },
+              {
+                title: "Render pages",
+                description: "We process each page locally using safe, standards-based rendering."
+              },
+              {
+                title: "Save images",
+                description: "Export pages individually or all at once. Great for sharing or archives."
+              }
+            ]}
+            description="Simple, predictable steps anyone can follow. No accounts, no uploads, no learning curve."
+          />
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">

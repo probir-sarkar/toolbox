@@ -54,10 +54,10 @@ export function ImageDropZone() {
             />
 
             <Upload className="w-12 h-12 text-blue-600 mb-4 opacity-70" />
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">
+            <h3 className="text-lg font-semibold text-foreground mb-2">
                 Drop images here or click to select
             </h3>
-            <p className="text-sm text-slate-500 mb-6">
+            <p className="text-sm text-muted-foreground mb-6">
                 Supports JPG, PNG, WebP, AVIF, and more
             </p>
             <Button variant="outline">Select Images</Button>

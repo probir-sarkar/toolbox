@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export function FAQ() {
     return (
         <div>
-            <h3 className="text-balance text-2xl font-bold tracking-tight text-slate-900 mb-6">Frequently asked questions</h3>
+            <h3 className="text-balance text-2xl font-bold tracking-tight text-muted-foreground mb-6">Frequently asked questions</h3>
             <Accordion className="w-full">
                 <AccordionItem value="item-1">
                     <AccordionTrigger>Is it really offline?</AccordionTrigger>
