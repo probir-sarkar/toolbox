@@ -16,6 +16,7 @@ import { Layers, Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { TOOLS_CONFIG } from "@/config/tools";
+import { ModeToggle } from "@/components/theme-toggler";
 
 export function Navbar() {
     const pathname = usePathname();
@@ -96,6 +97,7 @@ export function Navbar() {
 
                 {/* Action Button */}
                 <div className="hidden md:flex items-center gap-2">
+                    <ModeToggle />
                     <Link
                         href="https://github.com/probir-sarkar/toolbox"
                         target="_blank"
@@ -120,11 +122,14 @@ export function Navbar() {
                                 <Menu className="h-6 w-6 text-foreground" />
                             </Button>
                         </SheetTrigger>
-                        <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                            <SheetTitle className="text-left flex items-center gap-2 font-bold text-xl mb-6">
-                                <Layers className="w-5 h-5 text-primary" /> Toolbox.
-                            </SheetTitle>
-                            <div className="flex flex-col gap-6">
+                        <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0 gap-0 flex flex-col h-full">
+                            <div className="p-6 pb-2 shrink-0">
+                                <SheetTitle className="text-left flex items-center gap-2 font-bold text-xl">
+                                    <Layers className="w-5 h-5 text-primary" /> Toolbox.
+                                </SheetTitle>
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-6 min-h-0">
                                 <Link
                                     href="/"
                                     onClick={() => setIsOpen(false)}
@@ -167,21 +172,25 @@ export function Navbar() {
                                         </div>
                                     ))}
                                 </div>
+                            </div>
 
-                                <div className="pt-6 border-t border-border mt-auto">
-                                    <Link
-                                        href="https://github.com/sponsors/probir-sarkar"
-                                        target="_blank"
-                                        className={cn(buttonVariants({ variant: "default" }), "w-full justify-center")}
-                                    >
-                                        Support Project
-                                    </Link>
+                            <div className="p-6 border-t border-border mt-auto flex flex-col gap-4 bg-background shrink-0">
+                                <div className="flex items-center justify-between">
+                                    <span className="font-medium text-foreground">Theme</span>
+                                    <ModeToggle />
                                 </div>
+                                <Link
+                                    href="https://github.com/sponsors/probir-sarkar"
+                                    target="_blank"
+                                    className={cn(buttonVariants({ variant: "default" }), "w-full justify-center")}
+                                >
+                                    Support Project
+                                </Link>
                             </div>
                         </SheetContent>
                     </Sheet>
                 </div>
             </div>
-        </header>
+        </header >
     );
 }
