@@ -1,60 +1,20 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, FileText, Image as ImageIcon, Hammer, Palette, ArrowRight } from "lucide-react";
+import { Search, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { TOOLS_CONFIG } from "@/config/tools";
 
-const ALL_TOOLS = [
-  {
-    title: "PDF to Image",
-    description: "Convert PDF pages to high-quality images.",
-    icon: FileText,
-    href: "/pdf-to-image",
-    color: "bg-orange-500/10 text-orange-600",
-    tags: ["PDF", "Image", "Popular"],
-    active: true
-  },
-  {
-    title: "Image to PDF",
-    description: "Convert images to a single PDF document.",
-    icon: FileText,
-    href: "/image-to-pdf",
-    color: "bg-red-500/10 text-red-600",
-    tags: ["Image", "PDF", "Top"],
-    active: true
-  },
-  {
-    title: "Image Converter",
-    description: "Batch convert image formats freely.",
-    icon: ImageIcon,
-    href: "/image-converter",
-    color: "bg-blue-500/10 text-blue-600",
-    tags: ["Image", "Optimization", "New"],
-    active: true
-  },
-  {
-    title: "PDF Suite",
-    description: "Merge, split, and edit PDF documents.",
-    icon: Hammer,
-    href: "/pdf-tools",
-    color: "bg-slate-500/10 text-slate-600",
-    tags: ["PDF", "Utils"],
-    active: false
-  },
-  {
-    title: "Image Studio",
-    description: "Advanced image manipulation tools.",
-    icon: Palette,
-    href: "/image-tools",
-    color: "bg-purple-500/10 text-purple-600",
-    tags: ["Image", "AI", "Editor"],
-    active: false
-  }
-];
+const ALL_TOOLS = TOOLS_CONFIG.flatMap((category) =>
+  category.items.map((item) => ({
+    ...item,
+    active: !item.disabled
+  }))
+);
 
 const FILTERS = ["All", "PDF", "Image", "Popular", "New"];
 
