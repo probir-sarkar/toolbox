@@ -1,26 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useEffectEvent, useState, useCallback } from "react";
 import { Copy, RefreshCw, Check, ShieldCheck, ShieldAlert, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { generatePassword, calculateStrength, PasswordOptions } from "../utils/password-logic";
-import { useCallback } from "react";
+import { generatePassword, calculateStrength, PasswordOptions, PASSWORD_CHAR_OPTIONS } from "../utils/password-logic";
+import { useImmer } from "use-immer";
 
 export function PasswordGenerator() {
   const [password, setPassword] = useState("");
   const [copied, setCopied] = useState(false);
   const [strength, setStrength] = useState(0);
 
-  const [options, setOptions] = useState<PasswordOptions>({
+  const [options, setOptions] = useImmer<PasswordOptions>({
     length: 16,
-    hasUppercase: true,
-    hasLowercase: true,
-    hasNumbers: true,
-    hasSymbols: true
+    selected: ["uppercase", "lowercase", "numbers"]
   });
 
   const handleGenerate = useCallback(() => {
@@ -30,9 +27,13 @@ export function PasswordGenerator() {
     setCopied(false);
   }, [options]);
 
-  useEffect(() => {
+  const updatePassword = useEffectEvent(() => {
     handleGenerate();
-  }, [handleGenerate]);
+  });
+
+  useEffect(() => {
+    updatePassword();
+  }, [options]);
 
   const copyToClipboard = async () => {
     if (!password) return;
@@ -132,7 +133,9 @@ export function PasswordGenerator() {
               step={1}
               onValueChange={(vals: number | readonly number[]) => {
                 const value = Array.isArray(vals) ? vals[0] : vals;
-                setOptions({ ...options, length: value });
+                setOptions((draft) => {
+                  draft.length = value;
+                });
               }}
               className="py-4"
             />
@@ -141,96 +144,53 @@ export function PasswordGenerator() {
           <div className="space-y-3">
             <Label className="text-base font-medium">Characters</Label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <OptionToggle
-                label="Uppercase"
-                example="ABC"
-                checked={options.hasUppercase}
-                onChange={(v) =>
-                  setOptions((prev) => {
-                    const next = { ...prev, hasUppercase: v };
-                    if (!next.hasUppercase && !next.hasLowercase && !next.hasNumbers && !next.hasSymbols) return prev;
-                    return next;
-                  })
-                }
-              />
-              <OptionToggle
-                label="Lowercase"
-                example="abc"
-                checked={options.hasLowercase}
-                onChange={(v) =>
-                  setOptions((prev) => {
-                    const next = { ...prev, hasLowercase: v };
-                    if (!next.hasUppercase && !next.hasLowercase && !next.hasNumbers && !next.hasSymbols) return prev;
-                    return next;
-                  })
-                }
-              />
-              <OptionToggle
-                label="Numbers"
-                example="123"
-                checked={options.hasNumbers}
-                onChange={(v) =>
-                  setOptions((prev) => {
-                    const next = { ...prev, hasNumbers: v };
-                    if (!next.hasUppercase && !next.hasLowercase && !next.hasNumbers && !next.hasSymbols) return prev;
-                    return next;
-                  })
-                }
-              />
-              <OptionToggle
-                label="Symbols"
-                example="!@#"
-                checked={options.hasSymbols}
-                onChange={(v) =>
-                  setOptions((prev) => {
-                    const next = { ...prev, hasSymbols: v };
-                    if (!next.hasUppercase && !next.hasLowercase && !next.hasNumbers && !next.hasSymbols) return prev;
-                    return next;
-                  })
-                }
-              />
+              {PASSWORD_CHAR_OPTIONS.map((opt) => {
+                const isChecked = options.selected.includes(opt.id);
+                return (
+                  <button
+                    key={opt.id}
+                    onClick={() =>
+                      setOptions((draft) => {
+                        if (isChecked) {
+                          // If trying to uncheck, ensure it's not the last one
+                          if (draft.selected.length > 1) {
+                            draft.selected = draft.selected.filter((id) => id !== opt.id);
+                          }
+                        } else {
+                          draft.selected.push(opt.id);
+                        }
+                      })
+                    }
+                    className={cn(
+                      "flex items-center justify-between p-3 rounded-lg border-2 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
+                      isChecked
+                        ? "border-primary bg-primary/5 text-primary"
+                        : "border-muted bg-transparent text-muted-foreground hover:bg-muted/50 hover:border-muted-foreground/50"
+                    )}
+                    type="button"
+                  >
+                    <div className="flex items-center gap-3">
+                      {opt.icon && <opt.icon className="w-5 h-5 opacity-70" />}
+                      <div className="flex flex-col items-start gap-0.5">
+                        <span className="font-medium text-sm leading-none">{opt.label}</span>
+                        <span className="text-xs opacity-70">{opt.example}</span>
+                      </div>
+                    </div>
+                    <div
+                      className={cn(
+                        "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
+                        isChecked ? "bg-primary border-primary" : "border-muted-foreground/30 bg-transparent"
+                      )}
+                    >
+                      {isChecked && <Check className="w-3.5 h-3.5 text-primary-foreground" />}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
-}
-
-function OptionToggle({
-  label,
-  example,
-  checked,
-  onChange
-}: {
-  label: string;
-  example: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-}) {
-  return (
-    <button
-      onClick={() => onChange(!checked)}
-      className={cn(
-        "flex items-center justify-between p-3 rounded-lg border-2 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50",
-        checked
-          ? "border-primary bg-primary/5 text-primary"
-          : "border-muted bg-transparent text-muted-foreground hover:bg-muted/50 hover:border-muted-foreground/50"
-      )}
-      type="button"
-    >
-      <div className="flex flex-col items-start gap-0.5">
-        <span className="font-medium text-sm leading-none">{label}</span>
-        <span className="text-xs opacity-70">{example}</span>
-      </div>
-      <div
-        className={cn(
-          "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
-          checked ? "bg-primary border-primary" : "border-muted-foreground/30 bg-transparent"
-        )}
-      >
-        {checked && <Check className="w-3.5 h-3.5 text-primary-foreground" />}
-      </div>
-    </button>
   );
 }

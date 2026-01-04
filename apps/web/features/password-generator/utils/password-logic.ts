@@ -1,33 +1,59 @@
+import { CaseLower, CaseUpper, Fingerprint, Hash } from "lucide-react";
+
+export const PASSWORD_CHAR_OPTIONS = [
+  {
+    id: "uppercase",
+    label: "Uppercase",
+    value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    example: "ABC",
+    icon: CaseUpper
+  },
+  {
+    id: "lowercase",
+    label: "Lowercase",
+    value: "abcdefghijklmnopqrstuvwxyz",
+    example: "abc",
+    icon: CaseLower
+  },
+  {
+    id: "numbers",
+    label: "Numbers",
+    value: "0123456789",
+    example: "123",
+    icon: Hash
+  },
+  {
+    id: "symbols",
+    label: "Symbols",
+    value: "!@#$%^&*()_+~`|}{[]:;?><,./-=",
+    example: "!@#",
+    icon: Fingerprint
+  }
+] as const;
+
+export type PasswordCharOption = (typeof PASSWORD_CHAR_OPTIONS)[number]["id"];
+
 export interface PasswordOptions {
   length: number;
-  hasUppercase: boolean;
-  hasLowercase: boolean;
-  hasNumbers: boolean;
-  hasSymbols: boolean;
+  selected: PasswordCharOption[];
 }
 
 export const generatePassword = (options: PasswordOptions): string => {
-  const { length, hasUppercase, hasLowercase, hasNumbers, hasSymbols } = options;
-
-  const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const lower = "abcdefghijklmnopqrstuvwxyz";
-  const numbers = "0123456789";
-  const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+  const { length, selected } = options;
 
   let allChars = "";
-  if (hasUppercase) allChars += upper;
-  if (hasLowercase) allChars += lower;
-  if (hasNumbers) allChars += numbers;
-  if (hasSymbols) allChars += symbols;
+  for (const option of PASSWORD_CHAR_OPTIONS) {
+    if (selected.includes(option.id)) {
+      allChars += option.value;
+    }
+  }
 
   if (allChars === "") return "";
 
   let password = "";
 
-  // Helper for secure random index
   const getSecureRandomIndex = (max: number) => {
     if (typeof window === "undefined" || !window.crypto) {
-      // Fallback for SSR or envs without crypto (though this is client-side tool)
       return Math.floor(Math.random() * max);
     }
     const array = new Uint32Array(1);
@@ -35,17 +61,21 @@ export const generatePassword = (options: PasswordOptions): string => {
     return array[0] % max;
   };
 
-  // Ensure at least one character from each selected set is included
-  if (hasUppercase) password += upper[getSecureRandomIndex(upper.length)];
-  if (hasLowercase) password += lower[getSecureRandomIndex(lower.length)];
-  if (hasNumbers) password += numbers[getSecureRandomIndex(numbers.length)];
-  if (hasSymbols) password += symbols[getSecureRandomIndex(symbols.length)];
+  const ensureChar = (id: PasswordCharOption) => {
+    const charset = PASSWORD_CHAR_OPTIONS.find((o) => o.id === id)?.value || "";
+    if (charset) password += charset[getSecureRandomIndex(charset.length)];
+  };
+
+  for (const option of PASSWORD_CHAR_OPTIONS) {
+    if (selected.includes(option.id)) {
+      ensureChar(option.id);
+    }
+  }
 
   while (password.length < length) {
     password += allChars[getSecureRandomIndex(allChars.length)];
   }
 
-  // Shuffle the password safely
   return password
     .split("")
     .sort(() => 0.5 - Math.random())

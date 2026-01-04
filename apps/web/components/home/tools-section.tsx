@@ -7,14 +7,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { TOOLS_CONFIG } from "@/config/tools";
-
-const ALL_TOOLS = TOOLS_CONFIG.flatMap((category) =>
-  category.items.map((item) => ({
-    ...item,
-    active: !item.disabled
-  }))
-);
+import { ALL_TOOLS } from "@/config/tools";
 
 const FILTERS = ["All", "PDF", "Image", "Popular", "New"];
 
@@ -27,7 +20,6 @@ export function ToolsSection() {
       const matchesSearch =
         tool.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tool.description.toLowerCase().includes(searchQuery.toLowerCase());
-
       const matchesFilter = activeFilter === "All" || tool.tags.includes(activeFilter);
 
       return matchesSearch && matchesFilter;
@@ -73,14 +65,14 @@ export function ToolsSection() {
           <Link
             key={index}
             href={tool.href}
-            className={cn("group block outline-none", !tool.active && "pointer-events-none opacity-80")}
+            className={cn("group block outline-none", tool.disabled && "pointer-events-none opacity-80")}
           >
             <Card className="h-full bg-card hover:bg-accent/5 transition-all duration-300 border-border/40 hover:border-border/80 p-4 flex flex-col gap-4 group-hover:-translate-y-1 group-hover:shadow-lg group-focus:ring-2 ring-primary/20">
               <div className="flex items-start justify-between">
                 <div className={cn("p-2.5 rounded-xl transition-colors", tool.color)}>
                   <tool.icon className="w-5 h-5" />
                 </div>
-                {!tool.active && (
+                {tool.disabled && (
                   <Badge
                     variant="outline"
                     className="text-[10px] px-1.5 py-0 h-5 border-muted-foreground/30 text-muted-foreground"

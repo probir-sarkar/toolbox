@@ -76,3 +76,5 @@ export const TOOLS_CONFIG = [
     ]
   }
 ];
+
+export const ALL_TOOLS = TOOLS_CONFIG.flatMap((category) => category.items);
