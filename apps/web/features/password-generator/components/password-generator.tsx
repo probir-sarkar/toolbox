@@ -10,10 +10,13 @@ import { cn } from "@/lib/utils";
 import { generatePassword, calculateStrength, PasswordOptions, PASSWORD_CHAR_OPTIONS } from "../utils/password-logic";
 import { useImmer } from "use-immer";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useClipboard } from "@mantine/hooks";
 
 export function PasswordGenerator() {
+  const clipboard = useClipboard({
+    timeout: 2000
+  });
   const [password, setPassword] = useState("");
-  const [copied, setCopied] = useState(false);
   const [strength, setStrength] = useState(0);
 
   const [options, setOptions] = useImmer<PasswordOptions>({
@@ -25,8 +28,8 @@ export function PasswordGenerator() {
     const newPassword = generatePassword(options);
     setPassword(newPassword);
     setStrength(calculateStrength(newPassword));
-    setCopied(false);
-  }, [options]);
+    clipboard.reset();
+  }, [options, clipboard]);
 
   const updatePassword = useEffectEvent(() => {
     handleGenerate();
@@ -35,17 +38,6 @@ export function PasswordGenerator() {
   useEffect(() => {
     updatePassword();
   }, [options]);
-
-  const copyToClipboard = async () => {
-    if (!password) return;
-    try {
-      await navigator.clipboard.writeText(password);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy", err);
-    }
-  };
 
   const getStrengthColor = (s: number) => {
     if (s < 40) return "bg-red-500";
@@ -96,16 +88,16 @@ export function PasswordGenerator() {
                   render={
                     <Button
                       size="icon"
-                      variant={copied ? "default" : "secondary"}
-                      onClick={copyToClipboard}
-                      className={cn("transition-all", copied && "bg-green-600 hover:bg-green-700")}
+                      variant={clipboard.copied ? "default" : "secondary"}
+                      onClick={() => clipboard.copy(password)}
+                      className={cn("transition-all", clipboard.copied && "bg-green-600 hover:bg-green-700")}
                     >
-                      {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                      {clipboard.copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
                     </Button>
                   }
                 ></TooltipTrigger>
                 <TooltipContent>
-                  <p>{copied ? "Copied!" : "Copy to Clipboard"}</p>
+                  <p>{clipboard.copied ? "Copied!" : "Copy to Clipboard"}</p>
                 </TooltipContent>
               </Tooltip>
             </div>
