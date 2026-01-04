@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { generatePassword, calculateStrength, PasswordOptions, PASSWORD_CHAR_OPTIONS } from "../utils/password-logic";
 import { useImmer } from "use-immer";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 export function PasswordGenerator() {
   const [password, setPassword] = useState("");
@@ -72,24 +73,41 @@ export function PasswordGenerator() {
               {password}
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleGenerate}
-                className="text-muted-foreground hover:text-foreground"
-                title="Regenerate"
-              >
-                <RefreshCw className="h-5 w-5" />
-              </Button>
-              <Button
-                size="icon"
-                variant={copied ? "default" : "secondary"}
-                onClick={copyToClipboard}
-                className={cn("transition-all", copied && "bg-green-600 hover:bg-green-700")}
-                title="Copy to clipboard"
-              >
-                {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
-              </Button>
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={handleGenerate}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      <RefreshCw className="h-5 w-5" />
+                    </Button>
+                  }
+                ></TooltipTrigger>
+                <TooltipContent>
+                  <p>Regenerate Password</p>
+                </TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <Button
+                      size="icon"
+                      variant={copied ? "default" : "secondary"}
+                      onClick={copyToClipboard}
+                      className={cn("transition-all", copied && "bg-green-600 hover:bg-green-700")}
+                    >
+                      {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                    </Button>
+                  }
+                ></TooltipTrigger>
+                <TooltipContent>
+                  <p>{copied ? "Copied!" : "Copy to Clipboard"}</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground px-1">
