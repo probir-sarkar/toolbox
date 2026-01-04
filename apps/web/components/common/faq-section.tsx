@@ -4,38 +4,28 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { cn } from "@/lib/utils";
 
 export interface FAQItem {
-    question: string;
-    answer: string;
+  question: string;
+  answer: string;
 }
 
 interface FAQSectionProps {
-    items: FAQItem[];
-    title?: string;
-    className?: string;
-    titleClassName?: string;
+  items: FAQItem[];
+  title?: string;
+  className?: string;
 }
 
-export function FAQSection({
-    items,
-    title = "Frequently asked questions",
-    className,
-    titleClassName = "text-muted-foreground"
-}: FAQSectionProps) {
-    return (
-        <div className={className}>
-            <h3 className={cn("text-balance text-2xl font-bold tracking-tight mb-6", titleClassName)}>
-                {title}
-            </h3>
-            <Accordion className="w-full">
-                {items.map((item, index) => (
-                    <AccordionItem key={index} value={`item-${index}`}>
-                        <AccordionTrigger>{item.question}</AccordionTrigger>
-                        <AccordionContent>
-                            {item.answer}
-                        </AccordionContent>
-                    </AccordionItem>
-                ))}
-            </Accordion>
-        </div>
-    );
+export function FAQSection({ items, title = "Frequently asked questions", className }: FAQSectionProps) {
+  return (
+    <div className={className}>
+      <h3 className={cn("text-balance text-2xl font-bold tracking-tight mb-6 text-center")}>{title}</h3>
+      <Accordion className="w-full">
+        {items.map((item, index) => (
+          <AccordionItem key={index} value={`item-${index}`}>
+            <AccordionTrigger>{item.question}</AccordionTrigger>
+            <AccordionContent>{item.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
+  );
 }

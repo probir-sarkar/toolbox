@@ -1,4 +1,4 @@
-import { Hammer, Palette } from "lucide-react";
+import { Hammer, Palette, Lock } from "lucide-react";
 
 export const TOOLS_CONFIG = [
   {
@@ -20,6 +20,15 @@ export const TOOLS_CONFIG = [
     items: [
       { title: "Image Converter", href: "/image-converter", description: "Batch convert image formats." },
       { title: "Resize Image", href: "/image-tools", description: "Change image dimensions.", disabled: true }
+    ]
+  },
+  {
+    title: "Security Tools",
+    href: "/password-generator",
+    icon: Lock,
+    description: "Protect your data and privacy.",
+    items: [
+      { title: "Password Generator", href: "/password-generator", description: "Create strong, secure passwords." }
     ]
   }
 ];
