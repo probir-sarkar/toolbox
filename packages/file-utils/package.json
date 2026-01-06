@@ -1,19 +1,28 @@
 {
   "name": "@toolbox/file-utils",
   "version": "0.0.1",
-  "private": true,
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
     "lint": "eslint ."
   },
   "dependencies": {
-    "jszip": "*"
+    "jszip": "^3.10.1"
   },
-  "devDependencies": {
-    "@types/jszip": "*"
+  "engines": {
+    "node": ">=18"
   }
 }
