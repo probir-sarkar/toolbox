@@ -25,9 +25,8 @@ export const TOOLS_CONFIG = [
       },
       {
         title: "Merge PDF",
-        href: "/pdf-tools",
+        href: "/merge-pdf",
         description: "Combine multiple PDFs into one.",
-        disabled: true,
         icon: Hammer,
         color: "bg-orange-500/10 text-orange-600",
         tags: ["PDF", "Utils"]
