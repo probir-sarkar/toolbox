@@ -1,4 +1,4 @@
-import { Hammer, Palette, Lock, FileText, Image as ImageIcon } from "lucide-react";
+import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors } from "lucide-react";
 
 export const TOOLS_CONFIG = [
   {
@@ -30,6 +30,14 @@ export const TOOLS_CONFIG = [
         icon: Hammer,
         color: "bg-orange-500/10 text-orange-600",
         tags: ["PDF", "Utils"]
+      },
+      {
+        title: "Split PDF",
+        href: "/split-pdf",
+        description: "Extract pages or split into multiple files.",
+        icon: Scissors,
+        color: "bg-orange-500/10 text-orange-600",
+        tags: ["PDF", "Editor"]
       }
     ]
   },
