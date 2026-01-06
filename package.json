@@ -17,5 +17,10 @@
     "@types/node": "^20.11.24",
     "tsup": "^8.3.5",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/jszip": "^3.4.1",
+    "jszip": "^3.10.1",
+    "pdfjs-dist": "^5.4.54"
   }
 }

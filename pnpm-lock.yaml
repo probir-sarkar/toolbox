@@ -7,6 +7,16 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@types/jszip':
+        specifier: ^3.4.1
+        version: 3.4.1
+      jszip:
+        specifier: ^3.10.1
+        version: 3.10.1
+      pdfjs-dist:
+        specifier: ^5.4.54
+        version: 5.4.54
     devDependencies:
       '@types/node':
         specifier: ^20.11.24
@@ -230,29 +240,26 @@ importers:
   packages/file-utils:
     dependencies:
       jszip:
-        specifier: ^3.10.1
+        specifier: '*'
         version: 3.10.1
     devDependencies:
       '@types/jszip':
-        specifier: ^3.4.0
+        specifier: '*'
         version: 3.4.1
 
   packages/image-utils:
     dependencies:
-      '@silvia-odwyer/photon':
-        specifier: ^0.3.3
-        version: 0.3.3
       jszip:
-        specifier: ^3.10.1
+        specifier: '*'
         version: 3.10.1
 
   packages/pdf-utils:
     dependencies:
       jszip:
-        specifier: ^3.10.1
+        specifier: '*'
         version: 3.10.1
       pdfjs-dist:
-        specifier: 5.4.54
+        specifier: '*'
         version: 5.4.54
 
 packages:
@@ -2010,9 +2017,6 @@ packages:
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
-
-  '@silvia-odwyer/photon@0.3.3':
-    resolution: {integrity: sha512-8BhUjEch4slwRe8uXnaA4vcA5uiiOTT90UMsxulOj2gN98X1p0q9Z4Ysk4DkD05uNgbR9XoSqtZ37w+33w4QKQ==}
 
   '@sindresorhus/merge-streams@4.0.0':
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
@@ -6904,8 +6908,6 @@ snapshots:
   '@rtsao/scc@1.1.0': {}
 
   '@sec-ant/readable-stream@0.4.1': {}
-
-  '@silvia-odwyer/photon@0.3.3': {}
 
   '@sindresorhus/merge-streams@4.0.0': {}
 

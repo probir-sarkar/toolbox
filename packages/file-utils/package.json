@@ -11,9 +11,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "jszip": "*"
   },
   "devDependencies": {
-    "@types/jszip": "^3.4.0"
+    "@types/jszip": "*"
   }
 }

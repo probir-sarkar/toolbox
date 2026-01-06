@@ -19,10 +19,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "jszip": "^3.10.1",
-    "pdfjs-dist": "5.4.54"
+    "jszip": "*",
+    "pdfjs-dist": "*"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18"
   }

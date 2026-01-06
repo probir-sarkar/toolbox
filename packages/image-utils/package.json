@@ -19,10 +19,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@silvia-odwyer/photon": "^0.3.3",
-    "jszip": "^3.10.1"
+    "jszip": "*"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">=18"
   }
