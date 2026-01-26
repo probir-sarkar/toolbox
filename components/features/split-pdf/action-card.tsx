@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { useSplitPdfStore } from "./store";
 import { PDFDocument } from "pdf-lib";
 import { Loader2, Download, Scissors } from "lucide-react";
-import { createZip, downloadBlob } from "@toolbox/file-utils";
+import { createZip, downloadBlob } from "@/utils/file";
 
 export function SplitActionCard() {
   const file = useSplitPdfStore((state) => state.file);

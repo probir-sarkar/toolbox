@@ -2,7 +2,7 @@
 
 import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
 import { usePdfToImageStore } from "./store";
-import { pdfToImagesBrowser, downloadAll } from "@toolbox/pdf-utils";
+import { pdfToImagesBrowser, downloadAll } from "@/utils/pdf";
 
 export function ActionCard() {
   const file = usePdfToImageStore((state) => state.file);

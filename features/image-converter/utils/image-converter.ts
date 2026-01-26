@@ -1,5 +1,5 @@
 import imageCompression from "browser-image-compression";
-import { filesToZipEntries, createAndDownloadZip, type ZipOptions } from "@toolbox/image-utils";
+import { filesToZipEntries, createAndDownloadZip, type ZipOptions } from "@/utils/image";
 
 export interface ConversionOptions {
   format: "webp" | "jpg" | "png" | "avif";
@@ -38,7 +38,8 @@ export async function convertImage(
   // Check if AVIF is supported
   const supportsAvif = async (): Promise<boolean> => {
     if (typeof document === "undefined") return false;
-    const avif = "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
+    const avif =
+      "data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAADybWV0YQAAAAAAAAAoaGRscgAAAAAAAAAAcGljdAAAAAAAAAAAAAAAAGxpYmF2aWYAAAAADnBpdG0AAAAAAAEAAAAeaWxvYwAAAABEAAABAAEAAAABAAABGgAAAB0AAAAoaWluZgAAAAAAAQAAABppbmZlAgAAAAABAABhdjAxQ29sb3IAAAAAamlwcnAAAABLaXBjbwAAABRpc3BlAAAAAAAAAAIAAAACAAAAEHBpeGkAAAAAAwgICAAAAAxhdjFDgQ0MAAAAABNjb2xybmNseAACAAIAAYAAAAAXaXBtYQAAAAAAAAABAAEEAQKDBAAAACVtZGF0EgAKCBgANogQEAwgMg8f8D///8WfhwB8+ErK42A=";
     const img = new Image();
     img.src = avif;
     return new Promise((resolve) => {
@@ -143,10 +144,7 @@ export function downloadFiles(results: ConversionResult[]): void {
 /**
  * Creates a ZIP file with all converted images and triggers download
  */
-export async function createZipArchive(
-  results: ConversionResult[],
-  options?: ZipOptions
-): Promise<void> {
+export async function createZipArchive(results: ConversionResult[], options?: ZipOptions): Promise<void> {
   const files = results.map((r) => r.compressedFile);
   await createAndDownloadZip(filesToZipEntries(files), {
     filename: "converted-images",

@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { getFileInfo } from "@toolbox/pdf-utils";
+import { getFileInfo } from "@/utils/pdf";
 import { usePdfToImageStore } from "./store";
 
 export function PdfDropZone() {

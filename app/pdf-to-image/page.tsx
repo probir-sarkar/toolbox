@@ -8,7 +8,7 @@ import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone";
 import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list";
 import { TrustBar } from "@/components/common/trust-bar";
 import { useEffect } from "react";
-import { initPdfWorker } from "@toolbox/pdf-utils";
+import { initPdfWorker } from "@/utils/pdf";
 
 export default function PdfToImagePage() {
 

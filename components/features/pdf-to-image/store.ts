@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { type FileInfo, type ImageResult } from "@toolbox/pdf-utils";
+import { type FileInfo, type ImageResult } from "@/utils/pdf";
 
 interface PdfToImageState {
   // Files
