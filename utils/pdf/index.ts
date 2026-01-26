@@ -57,9 +57,9 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
     const context = canvas.getContext("2d")!;
     canvas.width = viewport.width;
     canvas.height = viewport.height;
-
-    await page.render({ canvasContext: context, viewport }).promise;
-
+    
+    await page.render({ canvasContext: context, viewport, canvas }).promise;
+    
     // PNG ignores quality param, JPEG uses it
     const blob: Blob = await new Promise((resolve) =>
       canvas.toBlob((b) => resolve(b!), format, format === "image/jpeg" ? quality : undefined)
