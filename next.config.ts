@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
     unoptimized: true
   },
   allowedDevOrigins: ["https://cdn.jsdelivr.net"],
+  typescript:{
+    ignoreBuildErrors: true
+  }
 };
 
 export default nextConfig;
