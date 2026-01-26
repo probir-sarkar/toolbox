@@ -1,7 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
 
-import { ActionCard } from "@/components/features/pdf-to-image/action-card";
 import { ConversionSettings } from "@/components/features/pdf-to-image/conversion-settings";
 import { FAQ } from "@/components/features/pdf-to-image/faq";
 import { HowItWorks } from "@/components/common/how-it-works";
@@ -13,14 +12,15 @@ const PdfFileList = dynamic(
   () => import("@/components/features/pdf-to-image/pdf-file-list").then((mod) => ({ default: mod.PdfFileList })),
   { ssr: false }
 );
+const ActionCard = dynamic(
+  () => import("@/components/features/pdf-to-image/action-card").then((mod) => ({ default: mod.ActionCard })),
+  { ssr: false }
+);
 import { TrustBar } from "@/components/common/trust-bar";
 import { Suspense, useEffect } from "react";
-import { initPdfWorker } from "@/utils/pdf";
 
 export default function PdfToImagePage() {
-  useEffect(() => {
-    initPdfWorker();
-  }, []);
+
 
   return (
     <main className="container mx-auto p-6 space-y-6">
@@ -49,7 +49,9 @@ export default function PdfToImagePage() {
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
             <ConversionSettings />
-            <ActionCard />
+            <Suspense fallback={<div>Loading...</div>}>
+              <ActionCard />
+            </Suspense>
           </div>
         </div>
 

@@ -1,13 +1,6 @@
+"use client";
 import JSZip from "jszip";
-import * as pdfjsLib from "pdfjs-dist";
-
-/**
- * Initialize PDF.js worker with custom worker source.
- * This should be called before using any PDF functions.
- */
-export async function initPdfWorker() {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
-}
+import { getPdfjsLibWithWorker } from "./pdf";
 
 function getBaseName(file: File): string {
   const name = file.name.replace(/\.[^/.]+$/, ""); // remove extension
@@ -42,6 +35,7 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
   } = options;
   const baseName = getBaseName(file);
 
+  const pdfjsLib = await getPdfjsLibWithWorker();
   const fileData = await file.arrayBuffer();
   const pdf = await pdfjsLib.getDocument({ data: fileData }).promise;
 
@@ -57,9 +51,9 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
     const context = canvas.getContext("2d")!;
     canvas.width = viewport.width;
     canvas.height = viewport.height;
-    
+
     await page.render({ canvasContext: context, viewport, canvas }).promise;
-    
+
     // PNG ignores quality param, JPEG uses it
     const blob: Blob = await new Promise((resolve) =>
       canvas.toBlob((b) => resolve(b!), format, format === "image/jpeg" ? quality : undefined)
@@ -125,6 +119,7 @@ export async function getFileInfo(file: File): Promise<FileInfo> {
 
   if (file.type === "application/pdf") {
     const arrayBuffer = await file.arrayBuffer();
+    const pdfjsLib = await getPdfjsLibWithWorker();
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
     pages = pdf.numPages;
   }
