@@ -1,17 +1,23 @@
 "use client";
+import dynamic from "next/dynamic";
 
 import { ActionCard } from "@/components/features/pdf-to-image/action-card";
 import { ConversionSettings } from "@/components/features/pdf-to-image/conversion-settings";
 import { FAQ } from "@/components/features/pdf-to-image/faq";
 import { HowItWorks } from "@/components/common/how-it-works";
-import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone";
-import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list";
+const PdfDropZone = dynamic(
+  () => import("@/components/features/pdf-to-image/pdf-drop-zone").then((mod) => ({ default: mod.PdfDropZone })),
+  { ssr: false }
+);
+const PdfFileList = dynamic(
+  () => import("@/components/features/pdf-to-image/pdf-file-list").then((mod) => ({ default: mod.PdfFileList })),
+  { ssr: false }
+);
 import { TrustBar } from "@/components/common/trust-bar";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { initPdfWorker } from "@/utils/pdf";
 
 export default function PdfToImagePage() {
-
   useEffect(() => {
     initPdfWorker();
   }, []);
@@ -34,8 +40,10 @@ export default function PdfToImagePage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <PdfDropZone />
-            <PdfFileList />
+            <Suspense fallback={<div>Loading...</div>}>
+              <PdfDropZone />
+              <PdfFileList />
+            </Suspense>
           </div>
 
           {/* Right Column - Settings & Actions */}
