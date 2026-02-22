@@ -4,7 +4,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router"
-import appCss from "../styles/globals.css?url"
+import appCss from "../../styles/globals.css?url"
 import { Navbar } from "@/components/common/navbar"
 import { Footer } from "@/components/common/footer"
 import { ThemeProvider } from "@/components/theme-provider"
