@@ -8,7 +8,10 @@
       "Bash(bun pm ls:*)",
       "Bash(bun run dev)",
       "Bash(curl:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(bun run build:*)",
+      "Bash(bun update:*)",
+      "Bash(git add:*)"
     ]
   }
 }

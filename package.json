@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite start",
+    "preview": "vite preview",
+    "start": "node .output/server/index.mjs",
     "lint": "eslint"
   },
   "dependencies": {

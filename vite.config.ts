@@ -17,7 +17,9 @@ export default defineConfig({
       }
     }),
     viteReact(),
-    tsconfigPaths(),
+    tsconfigPaths({
+      projects: ["./tsconfig.json"]
+    }),
     tailwindcss()
   ]
 });
