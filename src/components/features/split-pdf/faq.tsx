@@ -6,7 +6,7 @@ export function SplitFaq() {
   return (
     <div className="space-y-4">
       <h2 className="text-3xl font-bold tracking-tight text-center mb-8">Frequently Asked Questions</h2>
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>Is my data safe?</AccordionTrigger>
           <AccordionContent>

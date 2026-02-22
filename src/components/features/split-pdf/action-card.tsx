@@ -71,7 +71,7 @@ export function SplitActionCard() {
         copiedPages.forEach((page) => newPdf.addPage(page));
 
         const pdfBytes = await newPdf.save();
-        downloadBlob(new Blob([pdfBytes], { type: "application/pdf" }), `${originalName}-extracted.pdf`);
+        downloadBlob(new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" }), `${originalName}-extracted.pdf`);
       } else if (splitMode === "split-all") {
         const files: Record<string, Uint8Array> = {};
 

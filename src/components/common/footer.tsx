@@ -16,10 +16,10 @@ export function Footer() {
                             Built with privacy in mind – all processing happens locally in your browser.
                         </p>
                         <div className="flex items-center gap-4 pt-4">
-                            <Link href="#" className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors">
+                            <Link to="." className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors">
                                 <Github className="w-5 h-5" />
                             </Link>
-                            <Link href="#" className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors">
+                            <Link to="." className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors">
                                 <Twitter className="w-5 h-5" />
                             </Link>
                         </div>
@@ -47,16 +47,16 @@ export function Footer() {
                         <h4 className="font-semibold text-foreground mb-6">Project</h4>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
-                                <Link to="#" className="hover:text-primary transition-colors">About</Link>
+                                <Link to="." className="hover:text-primary transition-colors">About</Link>
                             </li>
                             <li>
-                                <Link to="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                                <Link to="." className="hover:text-primary transition-colors">Privacy Policy</Link>
                             </li>
                             <li>
-                                <Link to="#" className="hover:text-primary transition-colors">Terms of Service</Link>
+                                <Link to="." className="hover:text-primary transition-colors">Terms of Service</Link>
                             </li>
                             <li>
-                                <Link to="#" className="hover:text-primary transition-colors">Contact</Link>
+                                <Link to="." className="hover:text-primary transition-colors">Contact</Link>
                             </li>
                         </ul>
                     </div>
