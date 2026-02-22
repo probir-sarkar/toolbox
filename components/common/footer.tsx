@@ -1,5 +1,5 @@
 import { Layers, Github, Twitter, Heart } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 
 export function Footer() {
     return (
@@ -7,7 +7,7 @@ export function Footer() {
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <div className="md:col-span-2 space-y-4">
-                        <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-foreground">
+                        <Link to="/" className="flex items-center space-x-2 font-bold text-xl text-foreground">
                             <Layers className="w-6 h-6 text-primary" />
                             <span>Toolbox.</span>
                         </Link>
@@ -29,16 +29,16 @@ export function Footer() {
                         <h4 className="font-semibold text-foreground mb-6">Tools</h4>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
-                                <Link href="/pdf-to-image" className="hover:text-primary transition-colors">PDF to Image</Link>
+                                <Link to="/pdf-to-image" className="hover:text-primary transition-colors">PDF to Image</Link>
                             </li>
                             <li>
-                                <Link href="/image-converter" className="hover:text-primary transition-colors">Image Converter</Link>
+                                <Link to="/image-converter" className="hover:text-primary transition-colors">Image Converter</Link>
                             </li>
                             <li>
-                                <Link href="/pdf-tools" className="hover:text-primary transition-colors">Merge PDF</Link>
+                                <Link to="/pdf-tools" className="hover:text-primary transition-colors">Merge PDF</Link>
                             </li>
                             <li>
-                                <Link href="/image-tools" className="hover:text-primary transition-colors">Resize Image</Link>
+                                <Link to="/image-tools" className="hover:text-primary transition-colors">Resize Image</Link>
                             </li>
                         </ul>
                     </div>
@@ -47,16 +47,16 @@ export function Footer() {
                         <h4 className="font-semibold text-foreground mb-6">Project</h4>
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
-                                <Link href="#" className="hover:text-primary transition-colors">About</Link>
+                                <Link to="#" className="hover:text-primary transition-colors">About</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                                <Link to="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link>
+                                <Link to="#" className="hover:text-primary transition-colors">Terms of Service</Link>
                             </li>
                             <li>
-                                <Link href="#" className="hover:text-primary transition-colors">Contact</Link>
+                                <Link to="#" className="hover:text-primary transition-colors">Contact</Link>
                             </li>
                         </ul>
                     </div>

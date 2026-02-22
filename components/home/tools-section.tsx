@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Search, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -64,7 +64,7 @@ export function ToolsSection() {
         {filteredTools.map((tool, index) => (
           <Link
             key={index}
-            href={tool.href}
+            to={tool.href}
             className={cn("group block outline-none", tool.disabled && "pointer-events-none opacity-80")}
           >
             <Card className="h-full bg-card hover:bg-accent/5 transition-all duration-300 border-border/40 hover:border-border/80 p-4 flex flex-col gap-4 group-hover:-translate-y-1 group-hover:shadow-lg group-focus:ring-2 ring-primary/20">

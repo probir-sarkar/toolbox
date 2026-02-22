@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(pnpm build:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(bun remove:*)",
+      "Bash(bun add:*)",
+      "Bash(bun pm ls:*)",
+      "Bash(bun run dev)",
+      "Bash(curl:*)",
+      "Bash(ls:*)"
     ]
   }
 }

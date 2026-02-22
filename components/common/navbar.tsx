@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -53,7 +53,7 @@ export function Navbar() {
                                 <li key={item.title}>
                                   <NavigationMenuLink>
                                     <Link
-                                      href={item.href}
+                                      to={item.href}
                                       className="block px-2 py-1 text-xs text-muted-foreground rounded-md hover:bg-muted hover:text-primary transition-colors"
                                     >
                                       {item.title}
@@ -72,7 +72,7 @@ export function Navbar() {
                           <h5 className="font-medium text-sm text-foreground">Need more tools?</h5>
                         </div>
                         <Link
-                          href={SITE_CONFIG.links.issues}
+                          to={SITE_CONFIG.links.issues}
                           target="_blank"
                           className={cn(buttonVariants({ variant: "outline", size: "sm" }), "h-7 text-xs px-2")}
                         >
@@ -128,7 +128,7 @@ export function Navbar() {
 
               <div className="flex-1 overflow-y-auto px-6 py-4 flex flex-col gap-6 min-h-0">
                 <Link
-                  href="/"
+                  to="/"
                   onClick={() => setIsOpen(false)}
                   className={cn("text-lg font-medium transition-colors hover:text-primary text-muted-foreground")}
                 >
@@ -140,7 +140,7 @@ export function Navbar() {
                   {TOOLS_CONFIG.map((tool) => (
                     <div key={tool.title} className="space-y-3 pl-2">
                       <Link
-                        href={tool.href}
+                        to={tool.href}
                         onClick={() => setIsOpen(false)}
                         className="flex items-center gap-2 font-medium text-foreground hover:text-primary transition-colors"
                       >
@@ -153,7 +153,7 @@ export function Navbar() {
                           .map((item) => (
                             <Link
                               key={item.title}
-                              href={item.href}
+                              to={item.href}
                               onClick={() => setIsOpen(false)}
                               className="block text-sm text-muted-foreground hover:text-primary px-2 transition-colors"
                             >
