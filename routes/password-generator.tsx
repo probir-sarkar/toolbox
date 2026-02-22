@@ -7,6 +7,25 @@ import { PasswordGenerator } from "@/features/password-generator/components/pass
 export const Route = createFileRoute('/password-generator')({
   component: PasswordGeneratorPage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Secure Password Generator - Free Online Tool | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Generate strong, secure passwords instantly in your browser. Customizable length, character types, and options. 100% offline, no data stored.",
+      },
+      {
+        property: "og:title",
+        content: "Secure Password Generator - Free Online",
+      },
+      {
+        property: "og:description",
+        content: "Generate strong, secure passwords instantly. Works offline, no data stored.",
+      },
+    ],
+  }),
 })
 
 function PasswordGeneratorPage() {

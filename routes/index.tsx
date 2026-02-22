@@ -5,6 +5,25 @@ import { ToolsSection } from "@/components/home/tools-section"
 export const Route = createFileRoute('/')({
   component: HomePage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Toolbox - Free Online Tools for PDF, Images & Password Generation",
+      },
+      {
+        name: "description",
+        content: "Free, privacy-focused online tools. Merge, split, and convert PDFs. Convert, resize, and optimize images. Generate secure passwords. 100% offline, no uploads.",
+      },
+      {
+        property: "og:title",
+        content: "Toolbox - Free Online Tools",
+      },
+      {
+        property: "og:description",
+        content: "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
+      },
+    ],
+  }),
 })
 
 function HomePage() {

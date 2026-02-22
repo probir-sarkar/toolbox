@@ -38,6 +38,25 @@ function ImageToPdfFaq() {
 export const Route = createFileRoute('/image-to-pdf')({
   component: ImageToPdfPage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Image to PDF Converter - Convert Images to PDF Free | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Convert images (JPG, PNG, WebP) to PDF documents. Sortable pages, custom settings, 100% offline. Free and secure image to PDF converter.",
+      },
+      {
+        property: "og:title",
+        content: "Image to PDF Converter - Free",
+      },
+      {
+        property: "og:description",
+        content: "Convert images to PDF documents. Custom settings, 100% offline.",
+      },
+    ],
+  }),
 })
 
 function ImageToPdfPage() {

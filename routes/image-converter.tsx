@@ -9,7 +9,26 @@ import { TrustBar } from "@/components/common/trust-bar"
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
-  ssr: false
+  ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Image Converter & Optimizer - Convert & Compress Images Free | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Convert, resize, and compress images in bulk. Support for JPG, PNG, WebP, and more. 100% free, private, and works offline.",
+      },
+      {
+        property: "og:title",
+        content: "Image Converter & Optimizer - Free",
+      },
+      {
+        property: "og:description",
+        content: "Convert, resize, and compress images. 100% free and works offline.",
+      },
+    ],
+  }),
 })
 
 function ImageConverterPage() {

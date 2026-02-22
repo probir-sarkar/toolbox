@@ -12,6 +12,25 @@ import { useSplitPdfStore } from "@/components/features/split-pdf/store"
 export const Route = createFileRoute('/split-pdf')({
   component: SplitPdfPage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Split PDF File - Extract Pages Free Online | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Split PDF files and extract pages for free. Works offline, no uploads. Separate PDF into individual pages or extract specific pages.",
+      },
+      {
+        property: "og:title",
+        content: "Split PDF File - Extract Pages Free",
+      },
+      {
+        property: "og:description",
+        content: "Split PDF files and extract pages. Works offline, no uploads.",
+      },
+    ],
+  }),
 })
 
 function SplitPdfPage() {

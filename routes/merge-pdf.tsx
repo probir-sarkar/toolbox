@@ -11,6 +11,25 @@ import { MergeError } from "@/components/features/merge-pdf/error-display"
 export const Route = createFileRoute('/merge-pdf')({
   component: MergePdfPage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "Merge PDF Files - Free Online PDF Combiner | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds.",
+      },
+      {
+        property: "og:title",
+        content: "Merge PDF Files - Free Online",
+      },
+      {
+        property: "og:description",
+        content: "Combine multiple PDFs into one. Fast, secure, and works offline.",
+      },
+    ],
+  }),
 })
 
 function MergePdfPage() {

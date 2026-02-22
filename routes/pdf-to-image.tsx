@@ -20,6 +20,25 @@ import { TrustBar } from "@/components/common/trust-bar"
 export const Route = createFileRoute('/pdf-to-image')({
   component: PdfToImagePage,
   ssr: false,
+  head: () => ({
+    meta: [
+      {
+        title: "PDF to Image Converter - Free & Online | Toolbox",
+      },
+      {
+        name: "description",
+        content: "Convert PDF pages to high-quality images (JPG, PNG) for free. Works offline, no uploads. Fast, secure, and completely private PDF to image conversion.",
+      },
+      {
+        property: "og:title",
+        content: "PDF to Image Converter - Free & Online",
+      },
+      {
+        property: "og:description",
+        content: "Convert PDF pages to high-quality images. Works offline, no uploads. Fast and secure.",
+      },
+    ],
+  }),
 })
 
 function PdfToImagePage() {
