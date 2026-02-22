@@ -18,8 +18,9 @@ export default defineConfig({
     tailwindcss(),
     tanstackStart({
       srcDirectory: "./src",
-      router: {
-        routesDirectory: "routes"
+      prerender: {
+        enabled: true,
+        concurrency: 14
       }
     }),
     viteReact()

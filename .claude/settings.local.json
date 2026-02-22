@@ -11,7 +11,9 @@
       "Bash(ls:*)",
       "Bash(bun run build:*)",
       "Bash(bun update:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm run build:*)",
+      "Bash(git push:*)"
     ]
   }
 }
