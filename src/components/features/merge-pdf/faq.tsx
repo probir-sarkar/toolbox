@@ -18,7 +18,7 @@ export function MergeFaq() {
           <AccordionTrigger>How many files can I merge?</AccordionTrigger>
           <AccordionContent>
             You can merge as many PDF files as your browser memory allows. Since everything runs on your device, it
-            depends on your computer's performance, but usually, dozens of files are handled easily.
+            depends on your computer&apos;s performance, but usually, dozens of files are handled easily.
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">

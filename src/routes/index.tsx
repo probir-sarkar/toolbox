@@ -4,7 +4,6 @@ import { ToolsSection } from "@/components/home/tools-section"
 
 export const Route = createFileRoute('/')({
   component: HomePage,
-  ssr: false,
   head: () => ({
     meta: [
       {

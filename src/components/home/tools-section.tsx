@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useMemo } from "react";
 import { Search, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
