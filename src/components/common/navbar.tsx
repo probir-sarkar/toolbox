@@ -24,7 +24,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md upports-backdrop-filter:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 font-bold text-xl text-primary mr-8">
+        <Link to="/" className="flex items-center space-x-2 font-bold text-xl text-primary mr-8">
           <Layers className="w-6 h-6" />
           <span className="text-foreground">{SITE_CONFIG.name}</span>
         </Link>
@@ -38,7 +38,7 @@ export function Navbar() {
                   Tools
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="w-[420px] p-3 lg:w-[500px]">
+                  <div className="w-105 p-3 lg:w-125">
                     <div className="grid grid-cols-2 gap-3">
                       {TOOLS_CONFIG.map((category) => (
                         <div key={category.title} className="space-y-2">
@@ -96,7 +96,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             render={
-              <Link href={SITE_CONFIG.links.github} target="_blank">
+              <Link to={SITE_CONFIG.links.github} target="_blank">
                 Star on GitHub
               </Link>
             }
@@ -104,7 +104,7 @@ export function Navbar() {
           <Button
             variant="default"
             render={
-              <Link href={SITE_CONFIG.links.sponsor} target="_blank">
+              <Link to={SITE_CONFIG.links.sponsor} target="_blank">
                 Support Project
               </Link>
             }
@@ -171,7 +171,7 @@ export function Navbar() {
                   <span className="font-medium text-foreground">Theme</span>
                   <ModeToggle />
                 </div>
-                <Button render={<Link href={SITE_CONFIG.links.sponsor} target="_blank" />}>Support Project</Button>
+                <Button render={<Link to={SITE_CONFIG.links.sponsor} target="_blank" />}>Support Project</Button>
               </div>
             </SheetContent>
           </Sheet>
