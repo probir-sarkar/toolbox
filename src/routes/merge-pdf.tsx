@@ -1,36 +1,37 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { TrustBar } from "@/components/common/trust-bar"
-import { HowItWorks } from "@/components/common/how-it-works"
-import { MergePdfDropZone } from "@/components/features/merge-pdf/drop-zone"
-import { MergeFileList } from "@/components/features/merge-pdf/file-list"
-import { MergeSettings } from "@/components/features/merge-pdf/settings"
-import { MergeActionCard } from "@/components/features/merge-pdf/action-card"
-import { MergeFaq } from "@/components/features/merge-pdf/faq"
-import { MergeError } from "@/components/features/merge-pdf/error-display"
+import { createFileRoute } from "@tanstack/react-router";
+import { TrustBar } from "@/components/common/trust-bar";
+import { HowItWorks } from "@/components/common/how-it-works";
+import { MergePdfDropZone } from "@/components/features/merge-pdf/drop-zone";
+import { MergeFileList } from "@/components/features/merge-pdf/file-list";
+import { MergeSettings } from "@/components/features/merge-pdf/settings";
+import { MergeActionCard } from "@/components/features/merge-pdf/action-card";
+import { MergeFaq } from "@/components/features/merge-pdf/faq";
+import { MergeError } from "@/components/features/merge-pdf/error-display";
 
-export const Route = createFileRoute('/merge-pdf')({
+export const Route = createFileRoute("/merge-pdf")({
   component: MergePdfPage,
   ssr: false,
   head: () => ({
     meta: [
       {
-        title: "Merge PDF Files - Free Online PDF Combiner | Toolbox",
+        title: "Merge PDF Files - Free Online PDF Combiner | Toolbox"
       },
       {
         name: "description",
-        content: "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds.",
+        content:
+          "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds."
       },
       {
         property: "og:title",
-        content: "Merge PDF Files - Free Online",
+        content: "Merge PDF Files - Free Online"
       },
       {
         property: "og:description",
-        content: "Combine multiple PDFs into one. Fast, secure, and works offline.",
-      },
-    ],
-  }),
-})
+        content: "Combine multiple PDFs into one. Fast, secure, and works offline."
+      }
+    ]
+  })
+});
 
 function MergePdfPage() {
   return (
@@ -88,5 +89,5 @@ function MergePdfPage() {
         </section>
       </div>
     </main>
-  )
+  );
 }
