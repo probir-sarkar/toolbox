@@ -10,18 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SplitPdfRouteImport } from './routes/split-pdf'
+import { Route as QrGeneratorRouteImport } from './routes/qr-generator'
 import { Route as PdfToolsRouteImport } from './routes/pdf-tools'
 import { Route as PdfToImageRouteImport } from './routes/pdf-to-image'
 import { Route as PasswordGeneratorRouteImport } from './routes/password-generator'
 import { Route as MergePdfRouteImport } from './routes/merge-pdf'
 import { Route as ImageToolsRouteImport } from './routes/image-tools'
 import { Route as ImageToPdfRouteImport } from './routes/image-to-pdf'
+import { Route as ImageResizeRouteImport } from './routes/image-resize'
 import { Route as ImageConverterRouteImport } from './routes/image-converter'
+import { Route as ImageCompressorRouteImport } from './routes/image-compressor'
 import { Route as IndexRouteImport } from './routes/index'
 
 const SplitPdfRoute = SplitPdfRouteImport.update({
   id: '/split-pdf',
   path: '/split-pdf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QrGeneratorRoute = QrGeneratorRouteImport.update({
+  id: '/qr-generator',
+  path: '/qr-generator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PdfToolsRoute = PdfToolsRouteImport.update({
@@ -54,9 +62,19 @@ const ImageToPdfRoute = ImageToPdfRouteImport.update({
   path: '/image-to-pdf',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImageResizeRoute = ImageResizeRouteImport.update({
+  id: '/image-resize',
+  path: '/image-resize',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImageConverterRoute = ImageConverterRouteImport.update({
   id: '/image-converter',
   path: '/image-converter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImageCompressorRoute = ImageCompressorRouteImport.update({
+  id: '/image-compressor',
+  path: '/image-compressor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -67,83 +85,104 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/image-converter': typeof ImageConverterRoute
+  '/image-resize': typeof ImageResizeRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
   '/merge-pdf': typeof MergePdfRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/pdf-to-image': typeof PdfToImageRoute
   '/pdf-tools': typeof PdfToolsRoute
+  '/qr-generator': typeof QrGeneratorRoute
   '/split-pdf': typeof SplitPdfRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/image-converter': typeof ImageConverterRoute
+  '/image-resize': typeof ImageResizeRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
   '/merge-pdf': typeof MergePdfRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/pdf-to-image': typeof PdfToImageRoute
   '/pdf-tools': typeof PdfToolsRoute
+  '/qr-generator': typeof QrGeneratorRoute
   '/split-pdf': typeof SplitPdfRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/image-compressor': typeof ImageCompressorRoute
   '/image-converter': typeof ImageConverterRoute
+  '/image-resize': typeof ImageResizeRoute
   '/image-to-pdf': typeof ImageToPdfRoute
   '/image-tools': typeof ImageToolsRoute
   '/merge-pdf': typeof MergePdfRoute
   '/password-generator': typeof PasswordGeneratorRoute
   '/pdf-to-image': typeof PdfToImageRoute
   '/pdf-tools': typeof PdfToolsRoute
+  '/qr-generator': typeof QrGeneratorRoute
   '/split-pdf': typeof SplitPdfRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/image-compressor'
     | '/image-converter'
+    | '/image-resize'
     | '/image-to-pdf'
     | '/image-tools'
     | '/merge-pdf'
     | '/password-generator'
     | '/pdf-to-image'
     | '/pdf-tools'
+    | '/qr-generator'
     | '/split-pdf'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/image-compressor'
     | '/image-converter'
+    | '/image-resize'
     | '/image-to-pdf'
     | '/image-tools'
     | '/merge-pdf'
     | '/password-generator'
     | '/pdf-to-image'
     | '/pdf-tools'
+    | '/qr-generator'
     | '/split-pdf'
   id:
     | '__root__'
     | '/'
+    | '/image-compressor'
     | '/image-converter'
+    | '/image-resize'
     | '/image-to-pdf'
     | '/image-tools'
     | '/merge-pdf'
     | '/password-generator'
     | '/pdf-to-image'
     | '/pdf-tools'
+    | '/qr-generator'
     | '/split-pdf'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ImageCompressorRoute: typeof ImageCompressorRoute
   ImageConverterRoute: typeof ImageConverterRoute
+  ImageResizeRoute: typeof ImageResizeRoute
   ImageToPdfRoute: typeof ImageToPdfRoute
   ImageToolsRoute: typeof ImageToolsRoute
   MergePdfRoute: typeof MergePdfRoute
   PasswordGeneratorRoute: typeof PasswordGeneratorRoute
   PdfToImageRoute: typeof PdfToImageRoute
   PdfToolsRoute: typeof PdfToolsRoute
+  QrGeneratorRoute: typeof QrGeneratorRoute
   SplitPdfRoute: typeof SplitPdfRoute
 }
 
@@ -154,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/split-pdf'
       fullPath: '/split-pdf'
       preLoaderRoute: typeof SplitPdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qr-generator': {
+      id: '/qr-generator'
+      path: '/qr-generator'
+      fullPath: '/qr-generator'
+      preLoaderRoute: typeof QrGeneratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pdf-tools': {
@@ -198,11 +244,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImageToPdfRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/image-resize': {
+      id: '/image-resize'
+      path: '/image-resize'
+      fullPath: '/image-resize'
+      preLoaderRoute: typeof ImageResizeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/image-converter': {
       id: '/image-converter'
       path: '/image-converter'
       fullPath: '/image-converter'
       preLoaderRoute: typeof ImageConverterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/image-compressor': {
+      id: '/image-compressor'
+      path: '/image-compressor'
+      fullPath: '/image-compressor'
+      preLoaderRoute: typeof ImageCompressorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -217,13 +277,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ImageCompressorRoute: ImageCompressorRoute,
   ImageConverterRoute: ImageConverterRoute,
+  ImageResizeRoute: ImageResizeRoute,
   ImageToPdfRoute: ImageToPdfRoute,
   ImageToolsRoute: ImageToolsRoute,
   MergePdfRoute: MergePdfRoute,
   PasswordGeneratorRoute: PasswordGeneratorRoute,
   PdfToImageRoute: PdfToImageRoute,
   PdfToolsRoute: PdfToolsRoute,
+  QrGeneratorRoute: QrGeneratorRoute,
   SplitPdfRoute: SplitPdfRoute,
 }
 export const routeTree = rootRouteImport

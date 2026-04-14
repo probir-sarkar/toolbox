@@ -1,6 +1,16 @@
-import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors } from "lucide-react";
+import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors, Sparkles, QrCode } from "lucide-react";
 
-export const TOOLS_CONFIG = [
+interface ToolItem {
+  title: string;
+  href: string;
+  description: string;
+  icon: any;
+  color: string;
+  tags: string[];
+  disabled?: boolean;
+}
+
+export const TOOLS_CONFIG: ToolItem[][] = [
   {
     title: "PDF Tools",
     href: "/pdf-tools",
@@ -53,16 +63,23 @@ export const TOOLS_CONFIG = [
         description: "Batch convert image formats freely.",
         icon: ImageIcon,
         color: "bg-blue-500/10 text-blue-600",
-        tags: ["Image", "Optimization", "New"]
+        tags: ["Image", "Optimization", "Popular"]
       },
       {
-        title: "Resize Image",
-        href: "/image-tools",
-        description: "Change image dimensions.",
-        disabled: true,
-        icon: Palette,
+        title: "Image Resizer",
+        href: "/image-resize",
+        description: "Resize images to any dimension.",
+        icon: ImageIcon,
         color: "bg-purple-500/10 text-purple-600",
-        tags: ["Image", "AI", "Editor"]
+        tags: ["Image", "Editor", "New"]
+      },
+      {
+        title: "Image Compressor",
+        href: "/image-compressor",
+        description: "Compress images while maintaining quality.",
+        icon: ImageIcon,
+        color: "bg-blue-500/10 text-blue-600",
+        tags: ["Image", "Optimization", "New"]
       }
     ]
   },
@@ -78,7 +95,23 @@ export const TOOLS_CONFIG = [
         description: "Create strong, secure passwords.",
         icon: Lock,
         color: "bg-green-500/10 text-green-600",
-        tags: ["Security", "Privacy", "New"]
+        tags: ["Security", "Privacy", "Popular"]
+      }
+    ]
+  },
+  {
+    title: "Developer Tools",
+    href: "/qr-generator",
+    icon: Sparkles,
+    description: "Generate codes and optimize workflows.",
+    items: [
+      {
+        title: "QR Code Generator",
+        href: "/qr-generator",
+        description: "Create custom QR codes for any purpose.",
+        icon: QrCode,
+        color: "bg-pink-500/10 text-pink-600",
+        tags: ["Generator", "New", "Popular"]
       }
     ]
   }
