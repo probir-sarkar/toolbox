@@ -1,4 +1,4 @@
-import { Layers, Github, Twitter, Heart } from "lucide-react";
+import { Layers, Github, Heart } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 export function Footer() {
@@ -17,20 +17,13 @@ export function Footer() {
                         </p>
                         <div className="flex items-center gap-4 pt-4">
                             <a
-                                href="https://github.com/yourusername/toolbox"
+                                href="https://github.com/probir-sarkar/toolbox"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors"
+                                aria-label="GitHub Repository"
                             >
                                 <Github className="w-5 h-5" />
-                            </a>
-                            <a
-                                href="https://twitter.com/yourusername"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors"
-                            >
-                                <Twitter className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
