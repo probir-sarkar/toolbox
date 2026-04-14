@@ -51,6 +51,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.4",
     "eslint": "^9",
+    "rollup-plugin-visualizer": "^7.0.1",
     "tailwindcss": "^4.2.0",
     "typescript": "^5",
     "vite": "^7.3.1",

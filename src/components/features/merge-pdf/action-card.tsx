@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useMergePdfStore } from "./store";
-import { PDFDocument } from "pdf-lib";
 import { Loader2, Download } from "lucide-react";
 
 export function MergeActionCard() {
@@ -25,6 +24,8 @@ export function MergeActionCard() {
     setSuccess(false);
 
     try {
+      // Dynamic import to reduce initial bundle size
+      const { PDFDocument } = await import('pdf-lib');
       const mergedPdf = await PDFDocument.create();
 
       for (const pdfFile of files) {

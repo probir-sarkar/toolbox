@@ -56,6 +56,12 @@ export const Route = createFileRoute('/image-to-pdf')({
         content: "Convert images to PDF documents. Custom settings, 100% offline.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://toolbox.com/image-to-pdf"
+      }
+    ]
   }),
 })
 

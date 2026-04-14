@@ -1,11 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ImageConversionSettings } from "@/features/image-converter/conversion-settings"
-import { ImageDropZone } from "@/features/image-converter/image-drop-zone"
-import { FileList } from "@/features/image-converter/file-list"
-import { ActionCard } from "@/features/image-converter/action-card"
-import { FAQ } from "@/features/image-converter/faq"
+import { lazy, Suspense } from "react"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { TrustBar } from "@/components/common/trust-bar"
+
+const ImageConversionSettings = lazy(() => import("@/features/image-converter/conversion-settings").then(mod => ({ default: mod.ImageConversionSettings })))
+const ImageDropZone = lazy(() => import("@/features/image-converter/image-drop-zone").then(mod => ({ default: mod.ImageDropZone })))
+const FileList = lazy(() => import("@/features/image-converter/file-list").then(mod => ({ default: mod.FileList })))
+const ActionCard = lazy(() => import("@/features/image-converter/action-card").then(mod => ({ default: mod.ActionCard })))
+const FAQ = lazy(() => import("@/features/image-converter/faq").then(mod => ({ default: mod.FAQ })))
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
@@ -28,6 +30,12 @@ export const Route = createFileRoute('/image-converter')({
         content: "Convert, resize, and compress images. 100% free and works offline.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://toolbox.com/image-converter"
+      }
+    ]
   }),
 })
 
@@ -50,14 +58,18 @@ function ImageConverterPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <ImageDropZone />
-            <FileList />
+            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+              <ImageDropZone />
+              <FileList />
+            </Suspense>
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <ImageConversionSettings />
-            <ActionCard />
+            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+              <ImageConversionSettings />
+              <ActionCard />
+            </Suspense>
           </div>
         </div>
 
@@ -82,7 +94,9 @@ function ImageConverterPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <FAQ />
+          <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+            <FAQ />
+          </Suspense>
         </section>
       </div>
     </main>

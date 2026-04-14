@@ -4,6 +4,7 @@ import appCss from "@/styles/globals.css?url";
 import { Navbar } from "@/components/common/navbar";
 import { Footer } from "@/components/common/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SkipLink } from "@/components/common/skip-link";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -81,8 +82,9 @@ function RootLayout() {
       </head>
       <body className="antialiased min-h-screen flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <SkipLink />
           <Navbar />
-          <div className="flex-1">
+          <div className="flex-1" id="main-content" tabIndex={-1}>
             <Outlet />
           </div>
           <Footer />

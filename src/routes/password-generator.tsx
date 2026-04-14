@@ -25,6 +25,12 @@ export const Route = createFileRoute('/password-generator')({
         content: "Generate strong, secure passwords instantly. Works offline, no data stored.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://toolbox.com/password-generator"
+      }
+    ]
   }),
 })
 

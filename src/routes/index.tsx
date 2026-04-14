@@ -22,6 +22,12 @@ export const Route = createFileRoute('/')({
         content: "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://toolbox.com/"
+      }
+    ]
   }),
 })
 

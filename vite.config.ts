@@ -5,6 +5,7 @@ import viteReact from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
   server: {
@@ -23,6 +24,12 @@ export default defineConfig({
         concurrency: 14
       }
     }),
-    viteReact()
+    viteReact(),
+    visualizer({
+      filename: './dist/stats.html',
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    })
   ]
 });

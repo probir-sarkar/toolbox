@@ -28,6 +28,10 @@ interface ActionCardProps {
   // Icons
   ConvertIcon?: LucideIcon;
   DownloadIcon?: LucideIcon;
+
+  // Accessibility props
+  ariaLive?: "polite" | "assertive" | "off";
+  roleStatus?: string;
 }
 
 export function ActionCard({
@@ -49,7 +53,10 @@ export function ActionCard({
   statusTextClassName,
 
   ConvertIcon = Sparkles,
-  DownloadIcon = Package
+  DownloadIcon = Package,
+
+  ariaLive = "polite",
+  roleStatus = "status"
 }: ActionCardProps) {
   return (
     <Card className={cn("p-6 border-0 sticky top-8 text-white shadow-lg", className)}>
@@ -94,7 +101,13 @@ export function ActionCard({
         </Button>
       )}
 
-      <p className={cn("text-xs text-center opacity-80", statusTextClassName)}>{statusMessage}</p>
+      <div
+        className={cn("text-xs text-center opacity-80", statusTextClassName)}
+        role={roleStatus}
+        aria-live={ariaLive}
+      >
+        {statusMessage}
+      </div>
     </Card>
   );
 }

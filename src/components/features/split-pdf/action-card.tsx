@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSplitPdfStore } from "./store";
-import { PDFDocument } from "pdf-lib";
 import { Loader2, Download, Scissors } from "lucide-react";
 import { createZip, downloadBlob } from "@/utils/file";
 
@@ -53,6 +52,8 @@ export function SplitActionCard() {
     setSuccess(false);
 
     try {
+      // Dynamic import to reduce initial bundle size
+      const { PDFDocument } = await import('pdf-lib');
       const arrayBuffer = await file.arrayBuffer();
       const pdfDoc = await PDFDocument.load(arrayBuffer);
       const originalName = file.name.replace(".pdf", "");

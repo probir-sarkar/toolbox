@@ -38,6 +38,12 @@ export const Route = createFileRoute('/pdf-to-image')({
         content: "Convert PDF pages to high-quality images. Works offline, no uploads. Fast and secure.",
       },
     ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://toolbox.com/pdf-to-image"
+      }
+    ]
   }),
 })
 
