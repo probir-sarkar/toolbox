@@ -64,21 +64,21 @@ function HomePage() {
       <ToolsSection />
 
       {/* Recommended Partner Section */}
-      <section className="max-w-4xl mx-auto mt-16 mb-8">
-        <div className="relative bg-linear-to-r from-primary/5 to-secondary/5 rounded-2xl p-8 border border-primary/20">
-          <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="flex-1 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium w-fit">
-                <Sparkles className="w-4 h-4" />
+      <section className="max-w-4xl mx-auto mt-16 mb-8 px-4">
+        <div className="relative bg-linear-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 md:p-8 border border-primary/20">
+          <div className="flex flex-col gap-6">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs md:text-sm font-medium w-fit">
+                <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
                 Recommended Partner
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">
                 Quiz Zone - Master Your Knowledge
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Explore thousands of curated quizzes across diverse topics. Challenge yourself with <span className="font-semibold text-foreground">8,464+ quizzes</span> in <span className="font-semibold text-foreground">68+ categories</span> and <span className="font-semibold text-foreground">2,391+ sub-topics</span>. Track your journey to mastery.
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
+                Explore thousands of curated quizzes across diverse topics. Challenge yourself with <span className="font-semibold text-foreground">new quizzes added daily</span> across <span className="font-semibold text-foreground">all categories</span>. Track your journey to mastery.
               </p>
-              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3 text-xs md:text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 rounded-full bg-green-500"></div>
                   <span>Free Access</span>
@@ -89,19 +89,19 @@ function HomePage() {
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                  <span>8,464+ Quizzes</span>
+                  <span>Daily Updates</span>
                 </div>
               </div>
             </div>
-            <div className="flex-shrink-0">
+            <div className="flex justify-start">
               <a
                 href="https://quizzone.club/"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg"
+                className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg text-sm md:text-base"
               >
                 Explore Quizzes
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3.5 h-3.5 md:w-4 md:h-4" />
               </a>
             </div>
           </div>

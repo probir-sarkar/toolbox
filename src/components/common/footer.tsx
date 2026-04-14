@@ -80,7 +80,7 @@ export function Footer() {
                             </li>
                         </ul>
                         <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
-                            Master your knowledge with <span className="text-primary font-medium">8,464+</span> quizzes across <span className="text-primary font-medium">68+</span> categories.
+                            Master your knowledge with <span className="text-primary font-medium">new quizzes daily</span> across all categories.
                         </p>
                     </div>
                 </div>
