@@ -89,7 +89,7 @@ export function ToolsSection() {
               </div>
 
               <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
-                {tool.tags.map((tag) => (
+                {tool.tags.map((tag: string) => (
                   <Badge
                     key={tag}
                     variant="secondary"

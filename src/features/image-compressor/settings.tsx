@@ -21,7 +21,7 @@ export function ImageCompressorSettings() {
             <Slider
               id="quality"
               defaultValue={[settings.quality * 100]}
-              onValueChange={(value) => updateSettings({ quality: (value[0] ?? 0) / 100 })}
+              onValueChange={(value) => updateSettings({ quality: ((Array.isArray(value) ? value[0] : value) ?? 0) / 100 })}
               min={1}
               max={100}
               step={1}

@@ -21,7 +21,7 @@ export function QRGeneratorSettings() {
             <Slider
               id="size"
               defaultValue={[settings.size]}
-              onValueChange={(value) => updateSettings({ size: value[0] ?? 300 })}
+              onValueChange={(value) => updateSettings({ size: (Array.isArray(value) ? value[0] : value) ?? 300 })}
               min={200}
               max={600}
               step={50}

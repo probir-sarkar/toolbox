@@ -1,4 +1,4 @@
-import { Layers, Github, Heart } from "lucide-react";
+import { Layers, Github, Heart, ExternalLink } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 export function Footer() {
@@ -63,14 +63,44 @@ export function Footer() {
                             </li>
                         </ul>
                     </div>
+
+                    <div>
+                        <h4 className="font-semibold text-foreground mb-6">Recommended</h4>
+                        <ul className="space-y-3 text-sm text-muted-foreground">
+                            <li>
+                                <a
+                                    href="https://quizzone.club/"
+                                    target="_blank"
+                                    rel="noopener noreferrer sponsored"
+                                    className="flex items-center gap-1 hover:text-primary transition-colors group"
+                                >
+                                    <ExternalLink className="w-3 h-3 opacity-60 group-hover:opacity-100" />
+                                    Quiz Zone
+                                </a>
+                            </li>
+                        </ul>
+                        <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
+                            Master your knowledge with <span className="text-primary font-medium">8,464+</span> quizzes across <span className="text-primary font-medium">68+</span> categories.
+                        </p>
+                    </div>
                 </div>
 
-                <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="border-t border-border pt-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-center md:text-left">
                     <p className="text-sm text-muted-foreground">
                         © {new Date().getFullYear()} Toolbox. MIT Licensed.
                     </p>
-                    <p className="text-sm text-muted-foreground flex items-center gap-1">
+                    <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
                         Made with <Heart className="w-4 h-4 text-primary fill-primary" /> by developers, for developers.
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                        <a
+                            href="https://quizzone.club/"
+                            target="_blank"
+                            rel="noopener noreferrer sponsored"
+                            className="hover:text-primary transition-colors"
+                        >
+                            Quiz Zone Partner
+                        </a>
                     </p>
                 </div>
             </div>

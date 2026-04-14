@@ -1,16 +1,24 @@
-import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors, Sparkles, QrCode } from "lucide-react";
+import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors, Sparkles, QrCode, LucideIcon } from "lucide-react";
 
 interface ToolItem {
   title: string;
   href: string;
   description: string;
-  icon: any;
+  icon: LucideIcon;
   color: string;
   tags: string[];
   disabled?: boolean;
 }
 
-export const TOOLS_CONFIG: ToolItem[][] = [
+interface ToolCategory {
+  title: string;
+  href: string;
+  icon: LucideIcon;
+  description: string;
+  items: ToolItem[];
+}
+
+export const TOOLS_CONFIG: ToolCategory[] = [
   {
     title: "PDF Tools",
     href: "/pdf-tools",
