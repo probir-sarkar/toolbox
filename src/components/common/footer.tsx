@@ -69,7 +69,7 @@ export function Footer() {
                         <ul className="space-y-3 text-sm text-muted-foreground">
                             <li>
                                 <a
-                                    href="https://quizzone.club/"
+                                    href="https://quizzy.probir.dev/"
                                     target="_blank"
                                     rel="noopener noreferrer sponsored"
                                     className="flex items-center gap-1 hover:text-primary transition-colors group"
@@ -94,7 +94,7 @@ export function Footer() {
                     </p>
                     <p className="text-xs text-muted-foreground">
                         <a
-                            href="https://quizzone.club/"
+                            href="https://quizzy.probir.dev/"
                             target="_blank"
                             rel="noopener noreferrer sponsored"
                             className="hover:text-primary transition-colors"

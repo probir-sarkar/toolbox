@@ -95,7 +95,7 @@ function HomePage() {
             </div>
             <div className="flex justify-start">
               <a
-                href="https://quizzone.club/"
+                href="https://quizzy.probir.dev/"
                 target="_blank"
                 rel="noopener noreferrer sponsored"
                 className="inline-flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors shadow-lg text-sm md:text-base"
