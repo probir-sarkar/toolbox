@@ -1,4 +1,3 @@
-"use client";
 
 import { useEffect, useEffectEvent, useState, useCallback } from "react";
 import { Copy, RefreshCw, Check, ShieldCheck, ShieldAlert, Shield } from "lucide-react";

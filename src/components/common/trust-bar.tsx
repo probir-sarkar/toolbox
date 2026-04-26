@@ -1,4 +1,3 @@
-"use client";
 
 import { ShieldCheck, Lock, Zap, Github } from "lucide-react";
 import { cn } from "@/lib/utils";

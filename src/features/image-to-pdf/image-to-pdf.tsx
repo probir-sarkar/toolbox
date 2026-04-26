@@ -1,4 +1,3 @@
-"use client";
 
 import { useImageToPdfStore } from "./image-to-pdf.store";
 import { DropZone } from "./components/drop-zone";

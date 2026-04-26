@@ -1,4 +1,3 @@
-"use client";
 
 import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";

@@ -1,4 +1,3 @@
-"use client";
 
 import { useMergePdfStore, PdfFile } from "./store";
 import {

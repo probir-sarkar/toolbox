@@ -1,4 +1,3 @@
-"use client";
 
 import { useMergePdfStore } from "./store";
 import { AlertCircle, X } from "lucide-react";

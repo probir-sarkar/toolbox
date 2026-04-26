@@ -1,4 +1,3 @@
-"use client";
 
 import { Loader2, LucideIcon, Package, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";

@@ -1,4 +1,3 @@
-"use client";
 
 import { useRef } from "react";
 import { Upload } from "lucide-react";

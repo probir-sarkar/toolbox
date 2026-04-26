@@ -1,4 +1,3 @@
-"use client";
 
 import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
 import { Sparkles } from "lucide-react";

@@ -1,4 +1,3 @@
-"use client";
 
 import { useSplitPdfStore } from "./store";
 import { AlertCircle, X } from "lucide-react";

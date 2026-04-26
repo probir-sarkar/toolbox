@@ -1,4 +1,3 @@
-"use client";
 import JSZip from "jszip";
 import { getPdfjsLibWithWorker } from "./pdf";
 
