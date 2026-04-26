@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
 import { TrustBar } from "@/components/common/trust-bar";
 import { HowItWorks } from "@/components/common/how-it-works";
 import { FAQSection } from "@/components/common/faq-section";
-import { DropZoneSkeleton, ActionCardSkeleton, SettingsSkeleton } from "@/components/skeletons";
-
-const MergePdfDropZone = lazy(() => import("@/components/features/merge-pdf/drop-zone").then(mod => ({ default: mod.MergePdfDropZone })));
-const MergeFileList = lazy(() => import("@/components/features/merge-pdf/file-list").then(mod => ({ default: mod.MergeFileList })));
-const MergeSettings = lazy(() => import("@/components/features/merge-pdf/settings").then(mod => ({ default: mod.MergeSettings })));
-const MergeActionCard = lazy(() => import("@/components/features/merge-pdf/action-card").then(mod => ({ default: mod.MergeActionCard })));
-const MergeError = lazy(() => import("@/components/features/merge-pdf/error-display").then(mod => ({ default: mod.MergeError })));
+import { MergePdfDropZone } from "@/components/features/merge-pdf/drop-zone";
+import { MergeFileList } from "@/components/features/merge-pdf/file-list";
+import { MergeSettings } from "@/components/features/merge-pdf/settings";
+import { MergeActionCard } from "@/components/features/merge-pdf/action-card";
+import { MergeError } from "@/components/features/merge-pdf/error-display";
 
 const mergePdfFaqItems = [
   {
@@ -79,21 +76,15 @@ function MergePdfPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<DropZoneSkeleton />}>
-              <MergeError />
-              <MergePdfDropZone />
-            </Suspense>
+            <MergeError />
+            <MergePdfDropZone />
             <MergeFileList />
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <Suspense fallback={<SettingsSkeleton />}>
-              <MergeSettings />
-            </Suspense>
-            <Suspense fallback={<ActionCardSkeleton variant="card" />}>
-              <MergeActionCard />
-            </Suspense>
+            <MergeSettings />
+            <MergeActionCard />
           </div>
         </div>
 

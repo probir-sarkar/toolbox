@@ -1,14 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { TrustBar } from "@/components/common/trust-bar"
-import { DropZoneSkeleton, ActionCardSkeleton, SettingsSkeleton } from "@/components/skeletons"
-
-const ImageConversionSettings = lazy(() => import("@/features/image-converter/conversion-settings").then(mod => ({ default: mod.ImageConversionSettings })))
-const ImageDropZone = lazy(() => import("@/features/image-converter/image-drop-zone").then(mod => ({ default: mod.ImageDropZone })))
-const FileList = lazy(() => import("@/features/image-converter/file-list").then(mod => ({ default: mod.FileList })))
-const ActionCard = lazy(() => import("@/features/image-converter/action-card").then(mod => ({ default: mod.ActionCard })))
-const FAQ = lazy(() => import("@/features/image-converter/faq").then(mod => ({ default: mod.FAQ })))
+import { ImageConversionSettings } from "@/features/image-converter/conversion-settings"
+import { ImageDropZone } from "@/features/image-converter/image-drop-zone"
+import { FileList } from "@/features/image-converter/file-list"
+import { ActionCard } from "@/features/image-converter/action-card"
+import { FAQ } from "@/features/image-converter/faq"
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
@@ -58,20 +55,14 @@ function ImageConverterPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<DropZoneSkeleton />}>
-              <ImageDropZone />
-            </Suspense>
+            <ImageDropZone />
             <FileList />
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <Suspense fallback={<SettingsSkeleton />}>
-              <ImageConversionSettings />
-            </Suspense>
-            <Suspense fallback={<ActionCardSkeleton />}>
-              <ActionCard />
-            </Suspense>
+            <ImageConversionSettings />
+            <ActionCard />
           </div>
         </div>
 
@@ -96,13 +87,7 @@ function ImageConverterPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <Suspense fallback={<div className="space-y-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="h-16 bg-muted rounded animate-pulse" />
-            ))}
-          </div>}>
-            <FAQ />
-          </Suspense>
+          <FAQ />
         </section>
       </div>
     </main>

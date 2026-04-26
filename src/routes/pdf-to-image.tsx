@@ -1,21 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 
 import { ConversionSettings } from "@/components/features/pdf-to-image/conversion-settings"
 import { FAQ } from "@/components/features/pdf-to-image/faq"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { DropZoneSkeleton, ActionCardSkeleton } from "@/components/skeletons"
-
-const PdfDropZone = lazy(
-  () => import("@/components/features/pdf-to-image/pdf-drop-zone").then((mod) => ({ default: mod.PdfDropZone }))
-)
-const PdfFileList = lazy(
-  () => import("@/components/features/pdf-to-image/pdf-file-list").then((mod) => ({ default: mod.PdfFileList }))
-)
-const ActionCard = lazy(
-  () => import("@/components/features/pdf-to-image/action-card").then((mod) => ({ default: mod.ActionCard }))
-)
-
+import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone"
+import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list"
+import { ActionCard } from "@/components/features/pdf-to-image/action-card"
 import { TrustBar } from "@/components/common/trust-bar"
 
 export const Route = createFileRoute('/pdf-to-image')({
@@ -66,18 +56,14 @@ function PdfToImagePage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<DropZoneSkeleton />}>
-              <PdfDropZone />
-            </Suspense>
+            <PdfDropZone />
             <PdfFileList />
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
             <ConversionSettings />
-            <Suspense fallback={<ActionCardSkeleton />}>
-              <ActionCard />
-            </Suspense>
+            <ActionCard />
           </div>
         </div>
 

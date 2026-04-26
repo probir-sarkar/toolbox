@@ -1,16 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 import { TrustBar } from "@/components/common/trust-bar"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { useSplitPdfStore } from "@/components/features/split-pdf/store"
-import { DropZoneSkeleton, ActionCardSkeleton, SettingsSkeleton } from "@/components/skeletons"
-
-const SplitPdfDropZone = lazy(() => import("@/components/features/split-pdf/drop-zone").then(mod => ({ default: mod.SplitPdfDropZone })))
-const SplitFileDetails = lazy(() => import("@/components/features/split-pdf/file-details").then(mod => ({ default: mod.SplitFileDetails })))
-const SplitSettings = lazy(() => import("@/components/features/split-pdf/settings").then(mod => ({ default: mod.SplitSettings })))
-const SplitActionCard = lazy(() => import("@/components/features/split-pdf/action-card").then(mod => ({ default: mod.SplitActionCard })))
-const SplitError = lazy(() => import("@/components/features/split-pdf/error-display").then(mod => ({ default: mod.SplitError })))
+import { SplitPdfDropZone } from "@/components/features/split-pdf/drop-zone"
+import { SplitFileDetails } from "@/components/features/split-pdf/file-details"
+import { SplitSettings } from "@/components/features/split-pdf/settings"
+import { SplitActionCard } from "@/components/features/split-pdf/action-card"
+import { SplitError } from "@/components/features/split-pdf/error-display"
 
 const splitPdfFaqItems = [
   {
@@ -81,20 +78,14 @@ function SplitPdfPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & Details */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<DropZoneSkeleton />}>
-              <SplitError />
-              {!file ? <SplitPdfDropZone /> : <SplitFileDetails />}
-            </Suspense>
+            <SplitError />
+            {!file ? <SplitPdfDropZone /> : <SplitFileDetails />}
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <Suspense fallback={<SettingsSkeleton />}>
-              <SplitSettings />
-            </Suspense>
-            <Suspense fallback={<ActionCardSkeleton variant="card" />}>
-              <SplitActionCard />
-            </Suspense>
+            <SplitSettings />
+            <SplitActionCard />
           </div>
         </div>
 
