@@ -1,14 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 import { TrustBar } from "@/components/common/trust-bar"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { ImageResize, ImageResizeFaq } from "@/features/image-resize/image-resize"
+import { FAQSection } from "@/components/common/faq-section"
+import { ImageResize } from "@/features/image-resize/image-resize"
 
-const ImageResizeComponent = lazy(() => import("@/features/image-resize/image-resize").then(mod => ({ default: mod.ImageResize })))
+const imageResizeFaqItems = [
+  {
+    question: "Will I lose image quality when resizing?",
+    answer: "Resizing to larger dimensions may reduce quality, but our tool uses high-quality algorithms to minimize degradation. When resizing to smaller dimensions, quality loss is minimal. You can control the output quality using the quality slider."
+  },
+  {
+    question: "What formats are supported?",
+    answer: "We support all major image formats including JPG, PNG, WebP, GIF, BMP, and more. You can also convert between formats during the resize process."
+  },
+  {
+    question: "Can I batch resize multiple images?",
+    answer: "Yes! You can upload multiple images and they will all be resized to the same dimensions. Each image will be downloaded individually after processing."
+  },
+  {
+    question: "What does 'maintain aspect ratio' mean?",
+    answer: "When enabled, the tool will automatically calculate the height or width to preserve the original proportions of your image. This prevents distortion and stretching. For example, a 1920×1080 image resized to 1280px wide will automatically become 1280×720."
+  }
+];
 
 export const Route = createFileRoute('/image-resize')({
   component: ImageResizePage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -52,9 +68,7 @@ function ImageResizePage() {
           <TrustBar />
         </div>
 
-        <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
-          <ImageResize />
-        </Suspense>
+        <ImageResize />
 
         <section className="mb-24">
           <HowItWorks
@@ -77,8 +91,7 @@ function ImageResizePage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
-          <ImageResizeFaq />
+          <FAQSection items={imageResizeFaqItems} title="Frequently Asked Questions" />
         </section>
       </div>
     </main>

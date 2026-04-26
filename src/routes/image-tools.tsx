@@ -5,8 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Palette, ArrowLeft, Mail } from "lucide-react";
 
 export const Route = createFileRoute("/image-tools")({
-  component: ImageToolsComingSoon,
-  ssr: false
+  component: ImageToolsComingSoon
 });
 
 function ImageToolsComingSoon() {

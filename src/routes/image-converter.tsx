@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { lazy, Suspense } from "react"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { TrustBar } from "@/components/common/trust-bar"
+import { DropZoneSkeleton, ActionCardSkeleton, SettingsSkeleton } from "@/components/skeletons"
 
 const ImageConversionSettings = lazy(() => import("@/features/image-converter/conversion-settings").then(mod => ({ default: mod.ImageConversionSettings })))
 const ImageDropZone = lazy(() => import("@/features/image-converter/image-drop-zone").then(mod => ({ default: mod.ImageDropZone })))
@@ -11,7 +12,6 @@ const FAQ = lazy(() => import("@/features/image-converter/faq").then(mod => ({ d
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -58,16 +58,18 @@ function ImageConverterPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+            <Suspense fallback={<DropZoneSkeleton />}>
               <ImageDropZone />
-              <FileList />
             </Suspense>
+            <FileList />
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+            <Suspense fallback={<SettingsSkeleton />}>
               <ImageConversionSettings />
+            </Suspense>
+            <Suspense fallback={<ActionCardSkeleton />}>
               <ActionCard />
             </Suspense>
           </div>
@@ -94,7 +96,11 @@ function ImageConverterPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+          <Suspense fallback={<div className="space-y-3">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="h-16 bg-muted rounded animate-pulse" />
+            ))}
+          </div>}>
             <FAQ />
           </Suspense>
         </section>

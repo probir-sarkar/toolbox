@@ -1,14 +1,34 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 import { TrustBar } from "@/components/common/trust-bar"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { QRGenerator, QRGeneratorFaq } from "@/features/qr-generator/qr-generator"
+import { FAQSection } from "@/components/common/faq-section"
+import { QRGenerator } from "@/features/qr-generator/qr-generator"
 
-const QRGeneratorComponent = lazy(() => import("@/features/qr-generator/qr-generator").then(mod => ({ default: mod.QRGenerator })))
+const qrGeneratorFaqItems = [
+  {
+    question: "What can I create QR codes for?",
+    answer: "You can create QR codes for website URLs, plain text, WiFi network credentials, and contact information (vCards). Each type serves a different purpose - URLs for websites, WiFi for easy network sharing, and vCards for sharing contacts."
+  },
+  {
+    question: "What size should my QR code be?",
+    answer: "For print materials, 300-400px is recommended. For digital use, 200-300px is sufficient. Larger QR codes are easier to scan from a distance. Our generator allows sizes from 200-600px."
+  },
+  {
+    question: "What is error correction level?",
+    answer: "Error correction allows QR codes to be scanned even if partially damaged or obscured. Higher levels (H, Q) can recover more data but result in larger QR codes. Medium (M) is recommended for most use cases."
+  },
+  {
+    question: "Can I customize QR code colors?",
+    answer: "Yes! You can choose from preset colors or use a custom hex color. Ensure good contrast between the QR code and background for reliable scanning. Dark colors on light backgrounds work best."
+  },
+  {
+    question: "Are these QR codes free to use?",
+    answer: "Yes! All QR codes generated are completely free and can be used for any purpose - personal or commercial. There are no watermarks, usage limits, or expiration dates."
+  }
+];
 
 export const Route = createFileRoute('/qr-generator')({
   component: QRGeneratorPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -52,9 +72,7 @@ function QRGeneratorPage() {
           <TrustBar />
         </div>
 
-        <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
-          <QRGenerator />
-        </Suspense>
+        <QRGenerator />
 
         <section className="mb-24">
           <HowItWorks
@@ -77,8 +95,7 @@ function QRGeneratorPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
-          <QRGeneratorFaq />
+          <FAQSection items={qrGeneratorFaqItems} title="Frequently Asked Questions" />
         </section>
       </div>
     </main>

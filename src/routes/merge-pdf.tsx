@@ -2,17 +2,36 @@ import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense } from "react";
 import { TrustBar } from "@/components/common/trust-bar";
 import { HowItWorks } from "@/components/common/how-it-works";
+import { FAQSection } from "@/components/common/faq-section";
+import { DropZoneSkeleton, ActionCardSkeleton, SettingsSkeleton } from "@/components/skeletons";
 
 const MergePdfDropZone = lazy(() => import("@/components/features/merge-pdf/drop-zone").then(mod => ({ default: mod.MergePdfDropZone })));
 const MergeFileList = lazy(() => import("@/components/features/merge-pdf/file-list").then(mod => ({ default: mod.MergeFileList })));
 const MergeSettings = lazy(() => import("@/components/features/merge-pdf/settings").then(mod => ({ default: mod.MergeSettings })));
 const MergeActionCard = lazy(() => import("@/components/features/merge-pdf/action-card").then(mod => ({ default: mod.MergeActionCard })));
-const MergeFaq = lazy(() => import("@/components/features/merge-pdf/faq").then(mod => ({ default: mod.MergeFaq })));
 const MergeError = lazy(() => import("@/components/features/merge-pdf/error-display").then(mod => ({ default: mod.MergeError })));
+
+const mergePdfFaqItems = [
+  {
+    question: "Is there a file size limit?",
+    answer: "No, you can merge PDFs of any size. The processing happens locally on your device, so the only limit is your available memory."
+  },
+  {
+    question: "Can I merge password-protected PDFs?",
+    answer: "You can merge password-protected PDFs if you know the password. However, the merged PDF will not retain the password protection."
+  },
+  {
+    question: "What happens to the original PDFs?",
+    answer: "Your original PDF files are never modified or uploaded. The merging process creates a new PDF file, leaving your originals intact."
+  },
+  {
+    question: "Can I reorder the PDFs before merging?",
+    answer: "Yes, you can drag and drop the files in the list to set the order they will appear in the merged PDF."
+  }
+];
 
 export const Route = createFileRoute("/merge-pdf")({
   component: MergePdfPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -60,17 +79,19 @@ function MergePdfPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+            <Suspense fallback={<DropZoneSkeleton />}>
               <MergeError />
               <MergePdfDropZone />
-              <MergeFileList />
             </Suspense>
+            <MergeFileList />
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
+            <Suspense fallback={<SettingsSkeleton />}>
               <MergeSettings />
+            </Suspense>
+            <Suspense fallback={<ActionCardSkeleton variant="card" />}>
               <MergeActionCard />
             </Suspense>
           </div>
@@ -97,9 +118,7 @@ function MergePdfPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
-            <MergeFaq />
-          </Suspense>
+          <FAQSection items={mergePdfFaqItems} title="Frequently Asked Questions" />
         </section>
       </div>
     </main>

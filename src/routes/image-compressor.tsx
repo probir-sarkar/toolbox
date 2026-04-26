@@ -1,14 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { lazy, Suspense } from "react"
 import { TrustBar } from "@/components/common/trust-bar"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { ImageCompressor, ImageCompressorFaq } from "@/features/image-compressor/image-compressor"
+import { FAQSection } from "@/components/common/faq-section"
+import { ImageCompressor } from "@/features/image-compressor/image-compressor"
 
-const ImageCompressorComponent = lazy(() => import("@/features/image-compressor/image-compressor").then(mod => ({ default: mod.ImageCompressor })))
+const imageCompressorFaqItems = [
+  {
+    question: "How much can I reduce the file size?",
+    answer: "The compression ratio depends on the image content and quality settings. Typically, you can reduce file sizes by 50-80% with minimal visible quality loss. Photos with lots of detail compress better than simple graphics."
+  },
+  {
+    question: "Will compression affect image quality?",
+    answer: "There's always a trade-off between file size and quality. Our tool uses high-quality compression algorithms to minimize quality loss. You can preview the compression ratio and adjust quality settings to find the right balance."
+  },
+  {
+    question: "What format should I choose?",
+    answer: "JPEG offers the best compression for photos. WebP provides even better compression with good quality but may not be supported by older browsers. PNG is lossless but results in larger files. Choose based on your use case."
+  },
+  {
+    question: "Can I batch compress multiple images?",
+    answer: "Yes! Upload multiple images and they'll all be compressed using the same settings. Each image will be downloaded individually after compression."
+  }
+];
 
 export const Route = createFileRoute('/image-compressor')({
   component: ImageCompressorPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -52,9 +68,7 @@ function ImageCompressorPage() {
           <TrustBar />
         </div>
 
-        <Suspense fallback={<div className="flex items-center justify-center h-32">Loading...</div>}>
-          <ImageCompressor />
-        </Suspense>
+        <ImageCompressor />
 
         <section className="mb-24">
           <HowItWorks
@@ -77,8 +91,7 @@ function ImageCompressorPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
-          <ImageCompressorFaq />
+          <FAQSection items={imageCompressorFaqItems} title="Frequently Asked Questions" />
         </section>
       </div>
     </main>

@@ -6,7 +6,6 @@ import { Hammer, ArrowLeft, Mail } from "lucide-react"
 
 export const Route = createFileRoute('/pdf-tools')({
   component: PdfToolsComingSoon,
-  ssr: false,
 })
 
 function PdfToolsComingSoon() {

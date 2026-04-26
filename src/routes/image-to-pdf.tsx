@@ -2,42 +2,29 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ImageToPdf } from "@/features/image-to-pdf/image-to-pdf"
 import { TrustBar } from "@/components/common/trust-bar"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { FAQSection } from "@/components/common/faq-section"
 
-function ImageToPdfFaq() {
-  return (
-    <Accordion className="w-full">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>Is it safe? Are my images uploaded?</AccordionTrigger>
-        <AccordionContent>
-          Yes, it is 100% safe. Your images are processed entirely within your browser. They are never uploaded to any
-          server, ensuring complete privacy.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>What image formats are supported?</AccordionTrigger>
-        <AccordionContent>We support common image formats including JPG, PNG, and WebP.</AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>Can I reorder the pages?</AccordionTrigger>
-        <AccordionContent>
-          Yes! Once you upload your images, you can simply drag and drop them to arrange the order of pages in your PDF.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-4">
-        <AccordionTrigger>Does it limit the number of images?</AccordionTrigger>
-        <AccordionContent>
-          There is no hard limit on the number of images. However, processing a very large number of high-resolution
-          images might be limited by your device&apos;s memory.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  )
-}
+const imageToPdfFaqItems = [
+  {
+    question: "Is it safe? Are my images uploaded?",
+    answer: "Yes, it is 100% safe. Your images are processed entirely within your browser. They are never uploaded to any server, ensuring complete privacy."
+  },
+  {
+    question: "What image formats are supported?",
+    answer: "We support common image formats including JPG, PNG, and WebP."
+  },
+  {
+    question: "Can I reorder the pages?",
+    answer: "Yes! Once you upload your images, you can simply drag and drop them to arrange the order of pages in your PDF."
+  },
+  {
+    question: "Does it limit the number of images?",
+    answer: "There is no hard limit on the number of images. However, processing a very large number of high-resolution images might be limited by your device's memory."
+  }
+];
 
 export const Route = createFileRoute('/image-to-pdf')({
   component: ImageToPdfPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
@@ -106,8 +93,7 @@ function ImageToPdfPage() {
         </section>
 
         <section className="max-w-3xl mx-auto mb-12">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
-          <ImageToPdfFaq />
+          <FAQSection items={imageToPdfFaqItems} title="Frequently Asked Questions" />
         </section>
       </div>
     </main>

@@ -6,7 +6,6 @@ import { PasswordGenerator } from "@/features/password-generator/components/pass
 
 export const Route = createFileRoute('/password-generator')({
   component: PasswordGeneratorPage,
-  ssr: false,
   head: () => ({
     meta: [
       {
