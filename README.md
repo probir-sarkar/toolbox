@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Toolbox
+
+A collection of web-based tools and utilities built with React, Vite, and Cloudflare Workers.
+
+## Features
+
+- **Image Tools**
+  - Image resizing and compression
+  - Browser-based image optimization
+
+- **PDF Tools**
+  - PDF manipulation with pdf-lib and jsPDF
+  - PDF.js for document rendering
+  - ZIP file generation for downloads
+
+- **QR Code Generation**
+  - Create QR codes with qrcode library
+  - Download generated codes
+
+- **Modern UI/UX**
+  - Built with React 19 and Vite
+  - TanStack Router for routing
+  - Tailwind CSS v4 for styling
+  - Dark mode support with next-themes
+  - Drag-and-drop functionality with dnd-kit
+  - Icons from Huge Icons and Lucide React
+
+## Tech Stack
+
+- **Frontend**: React 19, Vite, TypeScript
+- **Routing**: TanStack Router & Start
+- **Styling**: Tailwind CSS v4, class-variance-authority
+- **State Management**: Zustand, Immer
+- **UI Components**: Base UI, Radix UI
+- **Deployment**: Cloudflare Workers
+- **Build Tools**: Vite, TypeScript, ESLint
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- [Bun](https://bun.sh) or npm/yarn/pnpm
+- Cloudflare Workers account (for deployment)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+# Install dependencies
+bun install
+```
+
+### Development
+
+```bash
+# Start development server
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Build for production
+bun run build
+```
 
-## Learn More
+### Deployment
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Deploy to Cloudflare Workers
+bun run deploy
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Source Code**: Located in `src/` directory
+- **Configuration**: Vite config for build setup
+- **Workers**: Cloudflare Workers configuration for deployment
+- **Types**: Auto-generated Cloudflare types in `worker-configuration.d.ts`
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Copyright 2026 Probir Sarkar
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
