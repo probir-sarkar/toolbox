@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { TrustBar } from "@/components/common/trust-bar";
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/components/common/page-header";
 import { HowItWorks } from "@/components/common/how-it-works";
 import { FAQSection } from "@/components/common/faq-section";
 import { MergePdfDropZone } from "@/components/features/merge-pdf/drop-zone";
@@ -61,30 +61,27 @@ function MergePdfPage() {
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
-              Merge PDF Files
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Combine multiple PDFs into a single document. Fast, secure, and fully offline.
-            </p>
-          </div>
-          <TrustBar />
-        </div>
+        <PageHeader
+          title="Merge PDF Files"
+          subtitle="Combine multiple PDFs into a single document. Fast, secure, and fully offline."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
           {/* Left Column - Upload & List */}
           <div className="lg:col-span-2 space-y-6">
-            <MergeError />
-            <MergePdfDropZone />
-            <MergeFileList />
+            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+              <MergeError />
+              <MergePdfDropZone />
+              <MergeFileList />
+            </ClientOnly>
           </div>
 
           {/* Right Column - Settings & Actions */}
           <div className="space-y-6">
-            <MergeSettings />
-            <MergeActionCard />
+            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+              <MergeSettings />
+              <MergeActionCard />
+            </ClientOnly>
           </div>
         </div>
 

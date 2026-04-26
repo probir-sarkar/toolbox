@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 import { ImageToPdf } from "@/features/image-to-pdf/image-to-pdf"
-import { TrustBar } from "@/components/common/trust-bar"
+import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 
@@ -56,20 +56,15 @@ function ImageToPdfPage() {
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
-              Image to PDF Converter
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Turn your images into a single PDF document. Sortable pages, custom settings, and 100% offline.
-            </p>
-          </div>
-          <TrustBar />
-        </div>
+        <PageHeader
+          title="Image to PDF Converter"
+          subtitle="Turn your images into a single PDF document. Sortable pages, custom settings, and 100% offline."
+        />
 
         <div className="mb-24">
-          <ImageToPdf />
+          <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+            <ImageToPdf />
+          </ClientOnly>
         </div>
 
         <section className="mb-24">

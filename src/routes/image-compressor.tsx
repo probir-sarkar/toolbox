@@ -1,5 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { TrustBar } from "@/components/common/trust-bar"
+import { createFileRoute, ClientOnly } from '@tanstack/react-router'
+import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageCompressor } from "@/features/image-compressor/image-compressor"
@@ -56,19 +56,14 @@ function ImageCompressorPage() {
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center space-y-6">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight text-balance">
-              Image Compressor
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Compress images to reduce file size while maintaining quality. Smart compression algorithms, batch processing, and format conversion. 100% free and private.
-            </p>
-          </div>
-          <TrustBar />
-        </div>
+        <PageHeader
+          title="Image Compressor"
+          subtitle="Compress images to reduce file size while maintaining quality. Smart compression algorithms, batch processing, and format conversion. 100% free and private."
+        />
 
-        <ImageCompressor />
+        <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+          <ImageCompressor />
+        </ClientOnly>
 
         <section className="mb-24">
           <HowItWorks
