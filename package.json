@@ -57,6 +57,7 @@
     "eslint": "^9",
     "tailwindcss": "^4.2.0",
     "typescript": "^5",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "wrangler": "^4.94.0"
   }
 }
