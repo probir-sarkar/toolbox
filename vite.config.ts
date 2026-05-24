@@ -21,6 +21,10 @@ export default defineConfig({
         enabled: true,
         concurrency: 14,
         crawlLinks: true
+      },
+      sitemap: {
+        enabled: true,
+        host: "https://toolbox.probir.dev"
       }
     }),
     viteReact()
