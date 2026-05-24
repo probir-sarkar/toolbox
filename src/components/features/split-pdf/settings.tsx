@@ -3,15 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useSplitPdfStore, SplitMode } from "./store";
+import { useSplitPdfContext, SplitMode } from "./split-pdf.context";
 
 export function SplitSettings() {
-  const file = useSplitPdfStore((state) => state.file);
-  const splitMode = useSplitPdfStore((state) => state.splitMode);
-  const setSplitMode = useSplitPdfStore((state) => state.setSplitMode);
-  const pageRange = useSplitPdfStore((state) => state.pageRange);
-  const setPageRange = useSplitPdfStore((state) => state.setPageRange);
-  const pageCount = useSplitPdfStore((state) => state.pageCount);
+  const { file, splitMode, setSplitMode, pageRange, setPageRange, pageCount } = useSplitPdfContext();
 
   if (!file) return null;
 

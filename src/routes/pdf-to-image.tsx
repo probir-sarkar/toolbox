@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/common/how-it-works"
 import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone"
 import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list"
 import { ActionCard } from "@/components/features/pdf-to-image/action-card"
+import { PdfToImageProvider } from "@/components/features/pdf-to-image/pdf-to-image.context"
 
 export const Route = createFileRoute('/pdf-to-image')({
   component: PdfToImagePage,
@@ -46,23 +47,25 @@ function PdfToImagePage() {
           subtitle="Convert PDF pages to high-quality images with no uploads. Works offline, fast, and secure."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-          {/* Left Column - Upload & List */}
-          <div className="lg:col-span-2 space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <PdfDropZone />
-              <PdfFileList />
-            </ClientOnly>
-          </div>
+        <PdfToImageProvider>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+            {/* Left Column - Upload & List */}
+            <div className="lg:col-span-2 space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <PdfDropZone />
+                <PdfFileList />
+              </ClientOnly>
+            </div>
 
-          {/* Right Column - Settings & Actions */}
-          <div className="space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <ConversionSettings />
-              <ActionCard />
-            </ClientOnly>
+            {/* Right Column - Settings & Actions */}
+            <div className="space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <ConversionSettings />
+                <ActionCard />
+              </ClientOnly>
+            </div>
           </div>
-        </div>
+        </PdfToImageProvider>
 
         <section className="mb-24">
           <HowItWorks

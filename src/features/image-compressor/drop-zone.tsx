@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { Upload } from "lucide-react";
-import { useImageCompressorStore } from "./store";
+import { useImageCompressorContext } from "./image-compressor.context";
 
 export function ImageCompressorDropZone() {
-  const addFiles = useImageCompressorStore((state) => state.addFiles);
+  const { addFiles } = useImageCompressorContext();
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {

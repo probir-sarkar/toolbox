@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useImageToPdfStore } from "../image-to-pdf.store";
+import { useImageToPdfContext } from "../image-to-pdf.context";
 
 export function DropZone() {
-  const addImages = useImageToPdfStore((state) => state.addImages);
+  const { addImages } = useImageToPdfContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = async (files: File[]) => {

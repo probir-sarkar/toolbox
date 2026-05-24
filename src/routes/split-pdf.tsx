@@ -2,12 +2,22 @@ import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
-import { useSplitPdfStore } from "@/components/features/split-pdf/store"
 import { SplitPdfDropZone } from "@/components/features/split-pdf/drop-zone"
 import { SplitFileDetails } from "@/components/features/split-pdf/file-details"
 import { SplitSettings } from "@/components/features/split-pdf/settings"
 import { SplitActionCard } from "@/components/features/split-pdf/action-card"
 import { SplitError } from "@/components/features/split-pdf/error-display"
+import { SplitPdfProvider, useSplitPdfContext } from "@/components/features/split-pdf/split-pdf.context"
+
+function SplitPdfContent() {
+  const { file } = useSplitPdfContext()
+  return (
+    <>
+      <SplitError />
+      {!file ? <SplitPdfDropZone /> : <SplitFileDetails />}
+    </>
+  )
+}
 
 const splitPdfFaqItems = [
   {
@@ -58,8 +68,6 @@ export const Route = createFileRoute('/split-pdf')({
 })
 
 function SplitPdfPage() {
-  const file = useSplitPdfStore((state) => state.file)
-
   return (
     <main className="container mx-auto p-6 space-y-6">
       <div className="max-w-6xl mx-auto">
@@ -68,23 +76,24 @@ function SplitPdfPage() {
           subtitle="Extract specific pages or split your PDF into separate documents."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-          {/* Left Column - Upload & Details */}
-          <div className="lg:col-span-2 space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <SplitError />
-              {!file ? <SplitPdfDropZone /> : <SplitFileDetails />}
-            </ClientOnly>
-          </div>
+        <SplitPdfProvider>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+            {/* Left Column - Upload & Details */}
+            <div className="lg:col-span-2 space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <SplitPdfContent />
+              </ClientOnly>
+            </div>
 
-          {/* Right Column - Settings & Actions */}
-          <div className="space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <SplitSettings />
-              <SplitActionCard />
-            </ClientOnly>
+            {/* Right Column - Settings & Actions */}
+            <div className="space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <SplitSettings />
+                <SplitActionCard />
+              </ClientOnly>
+            </div>
           </div>
-        </div>
+        </SplitPdfProvider>
 
         <section className="mb-24">
           <HowItWorks

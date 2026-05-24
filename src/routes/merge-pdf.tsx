@@ -7,6 +7,7 @@ import { MergeFileList } from "@/components/features/merge-pdf/file-list";
 import { MergeSettings } from "@/components/features/merge-pdf/settings";
 import { MergeActionCard } from "@/components/features/merge-pdf/action-card";
 import { MergeError } from "@/components/features/merge-pdf/error-display";
+import { MergePdfProvider } from "@/components/features/merge-pdf/merge-pdf.context";
 
 const mergePdfFaqItems = [
   {
@@ -66,24 +67,26 @@ function MergePdfPage() {
           subtitle="Combine multiple PDFs into a single document. Fast, secure, and fully offline."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-          {/* Left Column - Upload & List */}
-          <div className="lg:col-span-2 space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <MergeError />
-              <MergePdfDropZone />
-              <MergeFileList />
-            </ClientOnly>
-          </div>
+        <MergePdfProvider>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+            {/* Left Column - Upload & List */}
+            <div className="lg:col-span-2 space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <MergeError />
+                <MergePdfDropZone />
+                <MergeFileList />
+              </ClientOnly>
+            </div>
 
-          {/* Right Column - Settings & Actions */}
-          <div className="space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <MergeSettings />
-              <MergeActionCard />
-            </ClientOnly>
+            {/* Right Column - Settings & Actions */}
+            <div className="space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <MergeSettings />
+                <MergeActionCard />
+              </ClientOnly>
+            </div>
           </div>
-        </div>
+        </MergePdfProvider>
 
         <section className="mb-24">
           <HowItWorks

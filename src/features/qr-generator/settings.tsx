@@ -3,11 +3,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useQRGeneratorStore } from "./store";
+import { useQRGeneratorContext } from "./qr-generator.context";
 
 export function QRGeneratorSettings() {
-  const settings = useQRGeneratorStore((state) => state.settings);
-  const updateSettings = useQRGeneratorStore((state) => state.updateSettings);
+  const { settings, updateSettings } = useQRGeneratorContext();
 
   return (
     <Card>

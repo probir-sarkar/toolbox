@@ -2,11 +2,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useMergePdfStore } from "./store";
+import { useMergePdfContext } from "./merge-pdf.context";
 
 export function MergeSettings() {
-  const mergedFileName = useMergePdfStore((state) => state.mergedFileName);
-  const setMergedFileName = useMergePdfStore((state) => state.setMergedFileName);
+  const { mergedFileName, setMergedFileName } = useMergePdfContext();
 
   return (
     <Card>

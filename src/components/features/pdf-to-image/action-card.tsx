@@ -1,22 +1,10 @@
 
 import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
-import { usePdfToImageStore } from "./store";
+import { usePdfToImageContext } from "./pdf-to-image.context";
 import { pdfToImagesBrowser, downloadAll } from "@/utils/pdf";
 
 export function ActionCard() {
-  const file = usePdfToImageStore((state) => state.file);
-  const format = usePdfToImageStore((state) => state.format);
-  const quality = usePdfToImageStore((state) => state.quality);
-  const scale = usePdfToImageStore((state) => state.scale);
-  const startPage = usePdfToImageStore((state) => state.startPage);
-  const endPage = usePdfToImageStore((state) => state.endPage);
-
-  const isConverting = usePdfToImageStore((state) => state.isConverting);
-  const setIsConverting = usePdfToImageStore((state) => state.setIsConverting);
-  const setImages = usePdfToImageStore((state) => state.setImages);
-  const progress = usePdfToImageStore((state) => state.progress);
-  const setProgress = usePdfToImageStore((state) => state.setProgress);
-  const images = usePdfToImageStore((state) => state.images);
+  const { file, format, quality, scale, startPage, endPage, isConverting, setIsConverting, setImages, setProgress, progress, images } = usePdfToImageContext();
 
   const handleConvert = async () => {
     if (!file) return;

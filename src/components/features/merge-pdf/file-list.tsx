@@ -1,5 +1,5 @@
 
-import { useMergePdfStore, PdfFile } from "./store";
+import { useMergePdfContext, PdfFile } from "./merge-pdf.context";
 import {
   DndContext,
   closestCenter,
@@ -23,7 +23,7 @@ import { GripVertical, X, FileText } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 
 function SortableItem({ file }: { file: PdfFile }) {
-  const removeFile = useMergePdfStore((state) => state.removeFile);
+  const { removeFile } = useMergePdfContext();
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: file.id });
 
@@ -71,8 +71,7 @@ function SortableItem({ file }: { file: PdfFile }) {
 }
 
 export function MergeFileList() {
-  const files = useMergePdfStore((state) => state.files);
-  const setFiles = useMergePdfStore((state) => state.setFiles);
+  const { files, setFiles } = useMergePdfContext();
 
   const sensors = useSensors(
     useSensor(PointerSensor),

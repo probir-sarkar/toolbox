@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useMergePdfStore } from "./store";
+import { useMergePdfContext } from "./merge-pdf.context";
 import { Loader2, Download } from "lucide-react";
 
 export function MergeActionCard() {
-  const files = useMergePdfStore((state) => state.files);
-  const mergedFileName = useMergePdfStore((state) => state.mergedFileName);
-  const isMerging = useMergePdfStore((state) => state.isMerging);
-  const setIsMerging = useMergePdfStore((state) => state.setIsMerging);
-  const setError = useMergePdfStore((state) => state.setError);
+  const { files, mergedFileName, isMerging, setIsMerging, setError } = useMergePdfContext();
 
   const [success, setSuccess] = useState(false);
 

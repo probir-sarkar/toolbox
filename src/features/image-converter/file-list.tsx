@@ -4,15 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { X, Download, ArrowDown, Trash2 } from "lucide-react";
 import prettyBytes from "pretty-bytes";
-import { useImageConverterStore } from "./image-converter.store";
+import { useImageConverterContext } from "./image-converter.context";
 import { FileThumbnail } from "./utils/file-thumbnail";
 import { downloadFile } from "./utils/image-converter";
 
 export function FileList() {
-  const files = useImageConverterStore((state) => state.files);
-  const removeFile = useImageConverterStore((state) => state.removeFile);
-  const clearFiles = useImageConverterStore((state) => state.clearFiles);
-  const isProcessing = useImageConverterStore((state) => state.isProcessing);
+  const { files, removeFile, clearFiles, isProcessing } = useImageConverterContext();
 
   if (files.length === 0) {
     return null;

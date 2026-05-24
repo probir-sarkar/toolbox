@@ -1,10 +1,9 @@
 
-import { useMergePdfStore } from "./store";
+import { useMergePdfContext } from "./merge-pdf.context";
 import { AlertCircle, X } from "lucide-react";
 
 export function MergeError() {
-  const error = useMergePdfStore((state) => state.error);
-  const setError = useMergePdfStore((state) => state.setError);
+  const { error, setError } = useMergePdfContext();
 
   if (!error) return null;
 

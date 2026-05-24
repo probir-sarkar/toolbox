@@ -3,6 +3,7 @@ import { ImageToPdf } from "@/features/image-to-pdf/image-to-pdf"
 import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
+import { ImageToPdfProvider } from "@/features/image-to-pdf/image-to-pdf.context"
 
 const imageToPdfFaqItems = [
   {
@@ -63,7 +64,9 @@ function ImageToPdfPage() {
 
         <div className="mb-24">
           <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-            <ImageToPdf />
+            <ImageToPdfProvider>
+              <ImageToPdf />
+            </ImageToPdfProvider>
           </ClientOnly>
         </div>
 

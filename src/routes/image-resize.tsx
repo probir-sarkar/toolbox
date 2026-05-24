@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageResize } from "@/features/image-resize/image-resize"
+import { ImageResizeProvider } from "@/features/image-resize/image-resize.context"
 
 const imageResizeFaqItems = [
   {
@@ -62,7 +63,9 @@ function ImageResizePage() {
         />
 
         <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-          <ImageResize />
+          <ImageResizeProvider>
+            <ImageResize />
+          </ImageResizeProvider>
         </ClientOnly>
 
         <section className="mb-24">

@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Trash2 } from "lucide-react";
-import { useImageResizeStore } from "./store";
+import { useImageResizeContext } from "./image-resize.context";
 
 export function ImageResizeFileList() {
-  const files = useImageResizeStore((state) => state.files);
-  const removeFile = useImageResizeStore((state) => state.removeFile);
+  const { files, removeFile } = useImageResizeContext();
 
   if (files.length === 0) return null;
 

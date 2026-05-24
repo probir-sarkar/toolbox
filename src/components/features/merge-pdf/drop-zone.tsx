@@ -3,11 +3,10 @@ import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useMergePdfStore } from "./store";
+import { useMergePdfContext } from "./merge-pdf.context";
 
 export function MergePdfDropZone() {
-  const addFiles = useMergePdfStore((state) => state.addFiles);
-  const setError = useMergePdfStore((state) => state.setError);
+  const { addFiles, setError } = useMergePdfContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFiles = (files: File[]) => {

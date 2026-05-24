@@ -3,11 +3,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useImageCompressorStore } from "./store";
+import { useImageCompressorContext } from "./image-compressor.context";
 
 export function ImageCompressorSettings() {
-  const settings = useImageCompressorStore((state) => state.settings);
-  const updateSettings = useImageCompressorStore((state) => state.updateSettings);
+  const { settings, updateSettings } = useImageCompressorContext();
 
   return (
     <Card>

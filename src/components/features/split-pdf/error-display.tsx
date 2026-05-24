@@ -1,10 +1,9 @@
 
-import { useSplitPdfStore } from "./store";
+import { useSplitPdfContext } from "./split-pdf.context";
 import { AlertCircle, X } from "lucide-react";
 
 export function SplitError() {
-  const error = useSplitPdfStore((state) => state.error);
-  const setError = useSplitPdfStore((state) => state.setError);
+  const { error, setError } = useSplitPdfContext();
 
   if (!error) return null;
 

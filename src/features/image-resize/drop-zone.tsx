@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { Upload } from "lucide-react";
-import { useImageResizeStore } from "./store";
+import { useImageResizeContext } from "./image-resize.context";
 
 export function ImageResizeDropZone() {
-  const addFiles = useImageResizeStore((state) => state.addFiles);
+  const { addFiles } = useImageResizeContext();
 
   const handleDrop = useCallback(
     (e: React.DragEvent<HTMLDivElement>) => {

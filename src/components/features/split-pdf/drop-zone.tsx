@@ -3,12 +3,11 @@ import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useSplitPdfStore } from "./store";
+import { useSplitPdfContext } from "./split-pdf.context";
 import { PDFDocument } from "pdf-lib";
 
 export function SplitPdfDropZone() {
-  const setFile = useSplitPdfStore((state) => state.setFile);
-  const setError = useSplitPdfStore((state) => state.setError);
+  const { setFile, setError } = useSplitPdfContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = async (file: File) => {

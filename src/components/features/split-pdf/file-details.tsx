@@ -3,12 +3,10 @@ import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { useSplitPdfStore } from "./store";
+import { useSplitPdfContext } from "./split-pdf.context";
 
 export function SplitFileDetails() {
-  const file = useSplitPdfStore((state) => state.file);
-  const pageCount = useSplitPdfStore((state) => state.pageCount);
-  const reset = useSplitPdfStore((state) => state.reset);
+  const { file, pageCount, reset } = useSplitPdfContext();
 
   if (!file) return null;
 

@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { useImageConverterStore } from "./image-converter.store";
+import { useImageConverterContext } from "./image-converter.context";
 
 export function ImageDropZone() {
-    const addFiles = useImageConverterStore((state) => state.addFiles);
+    const { addFiles } = useImageConverterContext();
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleFiles = (files: File[]) => {

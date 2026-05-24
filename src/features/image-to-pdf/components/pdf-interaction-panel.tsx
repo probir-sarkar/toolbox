@@ -9,10 +9,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
-import { useImageToPdfStore, type PdfPageSize, type PdfOrientation } from "../image-to-pdf.store";
+import { useImageToPdfContext, type PdfPageSize, type PdfOrientation } from "../image-to-pdf.context";
 
 export function PdfInteractionPanel() {
-  const { images, settings, updateSettings, isGenerating, setGenerating } = useImageToPdfStore();
+  const { images, settings, updateSettings, isGenerating, setGenerating } = useImageToPdfContext();
   const [progress, setProgress] = useState(0);
 
   const handleConvert = async () => {

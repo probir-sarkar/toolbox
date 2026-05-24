@@ -3,11 +3,10 @@ import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { usePdfToImageStore } from "./store";
+import { usePdfToImageContext } from "./pdf-to-image.context";
 
 export function PdfFileList() {
-  const file = usePdfToImageStore((state) => state.file);
-  const reset = usePdfToImageStore((state) => state.reset);
+  const { file, reset } = usePdfToImageContext();
 
   if (!file) return null;
 

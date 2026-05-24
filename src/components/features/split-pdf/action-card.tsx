@@ -2,18 +2,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSplitPdfStore } from "./store";
+import { useSplitPdfContext } from "./split-pdf.context";
 import { Loader2, Download, Scissors } from "lucide-react";
 import { createZip, downloadBlob } from "@/utils/file";
 
 export function SplitActionCard() {
-  const file = useSplitPdfStore((state) => state.file);
-  const splitMode = useSplitPdfStore((state) => state.splitMode);
-  const pageRange = useSplitPdfStore((state) => state.pageRange);
-  const pageCount = useSplitPdfStore((state) => state.pageCount);
-  const isProcessing = useSplitPdfStore((state) => state.isProcessing);
-  const setIsProcessing = useSplitPdfStore((state) => state.setIsProcessing);
-  const setError = useSplitPdfStore((state) => state.setError);
+  const { file, splitMode, pageRange, pageCount, isProcessing, setIsProcessing, setError } = useSplitPdfContext();
 
   const [success, setSuccess] = useState(false);
 

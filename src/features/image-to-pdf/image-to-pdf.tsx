@@ -1,13 +1,13 @@
 
-import { useImageToPdfStore } from "./image-to-pdf.store";
 import { DropZone } from "./components/drop-zone";
 import { SortableImageList } from "./components/sortable-image-list";
 import { PdfInteractionPanel } from "./components/pdf-interaction-panel";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
+import { useImageToPdfContext } from "./image-to-pdf.context";
 
 export function ImageToPdf() {
-  const { images, reset } = useImageToPdfStore();
+  const { images, reset } = useImageToPdfContext();
 
   return (
     <div className="grid gap-8 lg:grid-cols-3">

@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageCompressor } from "@/features/image-compressor/image-compressor"
+import { ImageCompressorProvider } from "@/features/image-compressor/image-compressor.context"
 
 const imageCompressorFaqItems = [
   {
@@ -62,7 +63,9 @@ function ImageCompressorPage() {
         />
 
         <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-          <ImageCompressor />
+          <ImageCompressorProvider>
+            <ImageCompressor />
+          </ImageCompressorProvider>
         </ClientOnly>
 
         <section className="mb-24">

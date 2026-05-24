@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { QRGenerator } from "@/features/qr-generator/qr-generator"
+import { QRGeneratorProvider } from "@/features/qr-generator/qr-generator.context"
 
 const qrGeneratorFaqItems = [
   {
@@ -66,7 +67,9 @@ function QRGeneratorPage() {
         />
 
         <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-          <QRGenerator />
+          <QRGeneratorProvider>
+            <QRGenerator />
+          </QRGeneratorProvider>
         </ClientOnly>
 
         <section className="mb-24">

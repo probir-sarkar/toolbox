@@ -1,21 +1,12 @@
 
 import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
 import { Sparkles } from "lucide-react";
-import { useImageConverterStore } from "./image-converter.store";
+import { useImageConverterContext } from "./image-converter.context";
 import { convertImages, type ConversionOptions, createZipArchive } from "./utils/image-converter";
 import { useState } from "react";
 
 export function ActionCard() {
-    const files = useImageConverterStore((state) => state.files);
-    const isProcessing = useImageConverterStore((state) => state.isProcessing);
-    const setIsProcessing = useImageConverterStore((state) => state.setIsProcessing);
-    const updateFileStatus = useImageConverterStore((state) => state.updateFileStatus);
-    const updateFileResult = useImageConverterStore((state) => state.updateFileResult);
-
-    const selectedFormat = useImageConverterStore((state) => state.selectedFormat);
-    const quality = useImageConverterStore((state) => state.quality);
-    const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
-    const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
+    const { files, isProcessing, setIsProcessing, updateFileStatus, updateFileResult, selectedFormat, quality, autoOptimize, removeMetadata } = useImageConverterContext();
 
     const [overallProgress, setOverallProgress] = useState(0);
     const [isDownloadingZip, setIsDownloadingZip] = useState(false);

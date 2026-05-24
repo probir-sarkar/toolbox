@@ -2,11 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trash2 } from "lucide-react";
-import { useImageCompressorStore } from "./store";
+import { useImageCompressorContext } from "./image-compressor.context";
 
 export function ImageCompressorFileList() {
-  const files = useImageCompressorStore((state) => state.files);
-  const removeFile = useImageCompressorStore((state) => state.removeFile);
+  const { files, removeFile } = useImageCompressorContext();
 
   if (files.length === 0) return null;
 

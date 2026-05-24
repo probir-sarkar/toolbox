@@ -6,17 +6,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Link, Wifi, User, Type } from "lucide-react";
-import { useQRGeneratorStore } from "./store";
+import { useQRGeneratorContext } from "./qr-generator.context";
 
 export function QRGeneratorInput() {
-  const contentType = useQRGeneratorStore((state) => state.contentType);
-  const content = useQRGeneratorStore((state) => state.content);
-  const wifiConfig = useQRGeneratorStore((state) => state.wifiConfig);
-  const vcardConfig = useQRGeneratorStore((state) => state.vcardConfig);
-  const setContentType = useQRGeneratorStore((state) => state.setContentType);
-  const setContent = useQRGeneratorStore((state) => state.setContent);
-  const setWifiConfig = useQRGeneratorStore((state) => state.setWifiConfig);
-  const setVcardConfig = useQRGeneratorStore((state) => state.setVcardConfig);
+  const { contentType, content, wifiConfig, vcardConfig, setContentType, setContent, setWifiConfig, setVcardConfig } = useQRGeneratorContext();
 
   return (
     <Card>

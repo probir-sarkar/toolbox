@@ -2,14 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Download } from "lucide-react";
-import { useImageResizeStore } from "./store";
+import { useImageResizeContext } from "./image-resize.context";
 
 export function ImageResizeActionCard() {
-  const files = useImageResizeStore((state) => state.files);
-  const settings = useImageResizeStore((state) => state.settings);
-  const isResizing = useImageResizeStore((state) => state.isResizing);
-  const setIsResizing = useImageResizeStore((state) => state.setIsResizing);
-  const setError = useImageResizeStore((state) => state.setError);
+  const { files, settings, isResizing, setIsResizing, setError } = useImageResizeContext();
 
   const [success, setSuccess] = useState(false);
 

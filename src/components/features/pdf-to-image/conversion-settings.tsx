@@ -10,19 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { usePdfToImageStore } from "./store";
+import { usePdfToImageContext } from "./pdf-to-image.context";
 
 export function ConversionSettings() {
-  const format = usePdfToImageStore((state) => state.format);
-  const setFormat = usePdfToImageStore((state) => state.setFormat);
-  const quality = usePdfToImageStore((state) => state.quality);
-  const setQuality = usePdfToImageStore((state) => state.setQuality);
-  const scale = usePdfToImageStore((state) => state.scale);
-  const setScale = usePdfToImageStore((state) => state.setScale);
-  const startPage = usePdfToImageStore((state) => state.startPage);
-  const setStartPage = usePdfToImageStore((state) => state.setStartPage);
-  const endPage = usePdfToImageStore((state) => state.endPage);
-  const setEndPage = usePdfToImageStore((state) => state.setEndPage);
+  const { format, setFormat, quality, setQuality, scale, setScale, startPage, setStartPage, endPage, setEndPage } = usePdfToImageContext();
 
   return (
     <Card>

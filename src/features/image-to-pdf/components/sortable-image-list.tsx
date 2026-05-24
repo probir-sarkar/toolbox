@@ -9,11 +9,11 @@ import {
   DragEndEvent
 } from "@dnd-kit/core";
 import { SortableContext, sortableKeyboardCoordinates, rectSortingStrategy } from "@dnd-kit/sortable";
-import { useImageToPdfStore } from "../image-to-pdf.store";
+import { useImageToPdfContext } from "../image-to-pdf.context";
 import { SortableImageItem } from "./sortable-image-item";
 
 export function SortableImageList() {
-  const { images, removeImage, reorderImages } = useImageToPdfStore();
+  const { images, removeImage, reorderImages } = useImageToPdfContext();
 
   const sensors = useSensors(
     useSensor(PointerSensor),

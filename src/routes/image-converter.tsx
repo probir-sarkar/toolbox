@@ -6,6 +6,7 @@ import { ImageDropZone } from "@/features/image-converter/image-drop-zone"
 import { FileList } from "@/features/image-converter/file-list"
 import { ActionCard } from "@/features/image-converter/action-card"
 import { FAQ } from "@/features/image-converter/faq"
+import { ImageConverterProvider } from "@/features/image-converter/image-converter.context"
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
@@ -45,23 +46,25 @@ function ImageConverterPage() {
           subtitle="Convert, resize, and compress images in bulk. 100% free, private, and runs entirely in your browser."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-          {/* Left Column - Upload & List */}
-          <div className="lg:col-span-2 space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <ImageDropZone />
-              <FileList />
-            </ClientOnly>
-          </div>
+        <ImageConverterProvider>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+            {/* Left Column - Upload & List */}
+            <div className="lg:col-span-2 space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <ImageDropZone />
+                <FileList />
+              </ClientOnly>
+            </div>
 
-          {/* Right Column - Settings & Actions */}
-          <div className="space-y-6">
-            <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-              <ImageConversionSettings />
-              <ActionCard />
-            </ClientOnly>
+            {/* Right Column - Settings & Actions */}
+            <div className="space-y-6">
+              <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+                <ImageConversionSettings />
+                <ActionCard />
+              </ClientOnly>
+            </div>
           </div>
-        </div>
+        </ImageConverterProvider>
 
         <section className="mb-24">
           <HowItWorks

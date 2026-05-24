@@ -4,11 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useImageResizeStore } from "./store";
+import { useImageResizeContext } from "./image-resize.context";
 
 export function ImageResizeSettings() {
-  const settings = useImageResizeStore((state) => state.settings);
-  const updateSettings = useImageResizeStore((state) => state.updateSettings);
+  const { settings, updateSettings } = useImageResizeContext();
 
   return (
     <Card>

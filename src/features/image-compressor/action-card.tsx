@@ -2,15 +2,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Download } from "lucide-react";
-import { useImageCompressorStore } from "./store";
+import { useImageCompressorContext } from "./image-compressor.context";
 
 export function ImageCompressorActionCard() {
-  const files = useImageCompressorStore((state) => state.files);
-  const settings = useImageCompressorStore((state) => state.settings);
-  const isCompressing = useImageCompressorStore((state) => state.isCompressing);
-  const setIsCompressing = useImageCompressorStore((state) => state.setIsCompressing);
-  const setError = useImageCompressorStore((state) => state.setError);
-  const updateCompressedSize = useImageCompressorStore((state) => state.updateCompressedSize);
+  const { files, settings, isCompressing, setIsCompressing, setError, updateCompressedSize } = useImageCompressorContext();
 
   const [success, setSuccess] = useState(false);
 

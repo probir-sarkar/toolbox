@@ -2,17 +2,10 @@ import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
-import { FORMATS, ImageFormat, useImageConverterStore } from "./image-converter.store";
+import { FORMATS, ImageFormat, useImageConverterContext } from "./image-converter.context";
 
 export function ImageConversionSettings() {
-  const quality = useImageConverterStore((state) => state.quality);
-  const selectedFormat = useImageConverterStore((state) => state.selectedFormat);
-  const autoOptimize = useImageConverterStore((state) => state.autoOptimize);
-  const removeMetadata = useImageConverterStore((state) => state.removeMetadata);
-  const setQuality = useImageConverterStore((state) => state.setQuality);
-  const setFormat = useImageConverterStore((state) => state.setFormat);
-  const setAutoOptimize = useImageConverterStore((state) => state.setAutoOptimize);
-  const setRemoveMetadata = useImageConverterStore((state) => state.setRemoveMetadata);
+  const { quality, selectedFormat, autoOptimize, removeMetadata, setQuality, setFormat, setAutoOptimize, setRemoveMetadata } = useImageConverterContext();
   return (
     <Card className="p-6 bg-card backdrop-blur-sm border border-border space-y-6">
       {/* Format Selection */}
