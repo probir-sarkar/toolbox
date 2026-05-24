@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { QRGenerator } from "@/features/qr-generator/qr-generator"
 import { QRGeneratorProvider } from "@/features/qr-generator/qr-generator.context"
+import { BASE_URL } from "@/lib/seo"
 
 const qrGeneratorFaqItems = [
   {
@@ -51,7 +52,7 @@ export const Route = createFileRoute('/qr-generator')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/qr-generator"
+        href: `${BASE_URL}/qr-generator`
       }
     ]
   }),

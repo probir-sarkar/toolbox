@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Sparkles, ExternalLink } from "lucide-react"
 import { ToolsSection } from "@/components/home/tools-section"
+import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/')({
   component: HomePage,
@@ -25,7 +26,7 @@ export const Route = createFileRoute('/')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/"
+        href: `${BASE_URL}/`
       }
     ]
   }),

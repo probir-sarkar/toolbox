@@ -1,13 +1,14 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 
 import { PageHeader } from "@/components/common/page-header"
-import { ConversionSettings } from "@/components/features/pdf-to-image/conversion-settings"
-import { FAQ } from "@/components/features/pdf-to-image/faq"
+import { ConversionSettings } from "@/features/pdf-to-image/conversion-settings"
+import { FAQ } from "@/features/pdf-to-image/faq"
 import { HowItWorks } from "@/components/common/how-it-works"
-import { PdfDropZone } from "@/components/features/pdf-to-image/pdf-drop-zone"
-import { PdfFileList } from "@/components/features/pdf-to-image/pdf-file-list"
-import { ActionCard } from "@/components/features/pdf-to-image/action-card"
-import { PdfToImageProvider } from "@/components/features/pdf-to-image/pdf-to-image.context"
+import { PdfDropZone } from "@/features/pdf-to-image/pdf-drop-zone"
+import { PdfFileList } from "@/features/pdf-to-image/pdf-file-list"
+import { ActionCard } from "@/features/pdf-to-image/action-card"
+import { PdfToImageProvider } from "@/features/pdf-to-image/pdf-to-image.context"
+import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/pdf-to-image')({
   component: PdfToImagePage,
@@ -32,7 +33,7 @@ export const Route = createFileRoute('/pdf-to-image')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/pdf-to-image"
+        href: `${BASE_URL}/pdf-to-image`
       }
     ]
   }),

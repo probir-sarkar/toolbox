@@ -57,51 +57,52 @@ export function generateMeta(config: MetaConfig) {
  * @returns Full canonical URL
  */
 export function getCanonicalUrl(path: string): string {
-  const baseUrl = "https://toolbox.com";
   // Remove trailing slash if present and ensure consistent formatting
   const cleanPath = path.replace(/\/$/, "");
-  return `${baseUrl}${cleanPath}`;
+  return `${BASE_URL}${cleanPath}`;
 }
 
 /**
  * Predefined SEO configurations for all main routes
  * Add new routes here to maintain centralized SEO management
  */
+export const BASE_URL = "https://toolbox.probir.dev";
+
 export const metaConfigs = {
   home: {
     title: "Toolbox - Free Online Tools for PDF, Images & Password Generation",
     description: "Free, privacy-focused online tools. Merge, split, and convert PDFs. Convert, resize, and optimize images. Generate secure passwords. 100% offline, no uploads.",
-    canonicalUrl: "https://toolbox.com/"
+    canonicalUrl: `${BASE_URL}/`
   },
   pdfToImage: {
     title: "PDF to Image Converter - Free & Online | Toolbox",
     description: "Convert PDF pages to high-quality images (JPG, PNG) for free. Works offline, no uploads. Fast, secure, and completely private PDF to image conversion.",
-    canonicalUrl: "https://toolbox.com/pdf-to-image"
+    canonicalUrl: `${BASE_URL}/pdf-to-image`
   },
   mergePdf: {
     title: "Merge PDF Files - Free Online PDF Combiner | Toolbox",
     description: "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds.",
-    canonicalUrl: "https://toolbox.com/merge-pdf"
+    canonicalUrl: `${BASE_URL}/merge-pdf`
   },
   splitPdf: {
     title: "Split PDF File - Extract Pages Free Online | Toolbox",
     description: "Split PDF files and extract pages for free. Works offline, no uploads. Separate PDF into individual pages or extract specific pages.",
-    canonicalUrl: "https://toolbox.com/split-pdf"
+    canonicalUrl: `${BASE_URL}/split-pdf`
   },
   imageConverter: {
     title: "Image Converter & Optimizer - Convert & Compress Images Free | Toolbox",
     description: "Convert, resize, and compress images in bulk. Support for JPG, PNG, WebP, and more. 100% free, private, and works offline.",
-    canonicalUrl: "https://toolbox.com/image-converter"
+    canonicalUrl: `${BASE_URL}/image-converter`
   },
   imageToPdf: {
     title: "Image to PDF Converter - Convert Images to PDF Free | Toolbox",
     description: "Convert images (JPG, PNG, WebP) to PDF documents. Sortable pages, custom settings, 100% offline. Free and secure image to PDF converter.",
-    canonicalUrl: "https://toolbox.com/image-to-pdf"
+    canonicalUrl: `${BASE_URL}/image-to-pdf`
   },
   passwordGenerator: {
     title: "Secure Password Generator - Free Online Tool | Toolbox",
     description: "Generate strong, secure passwords instantly in your browser. Customizable length, character types, and options. 100% offline, no data stored.",
-    canonicalUrl: "https://toolbox.com/password-generator"
+    canonicalUrl: `${BASE_URL}/password-generator`
   }
 } as const;
 

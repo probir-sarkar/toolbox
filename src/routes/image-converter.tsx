@@ -7,6 +7,7 @@ import { FileList } from "@/features/image-converter/file-list"
 import { ActionCard } from "@/features/image-converter/action-card"
 import { FAQ } from "@/features/image-converter/faq"
 import { ImageConverterProvider } from "@/features/image-converter/image-converter.context"
+import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/image-converter')({
   component: ImageConverterPage,
@@ -31,7 +32,7 @@ export const Route = createFileRoute('/image-converter')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/image-converter"
+        href: `${BASE_URL}/image-converter`
       }
     ]
   }),

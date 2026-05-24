@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { PasswordGenerator } from "@/features/password-generator/components/password-generator"
+import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/password-generator')({
   component: PasswordGeneratorPage,
@@ -27,7 +28,7 @@ export const Route = createFileRoute('/password-generator')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/password-generator"
+        href: `${BASE_URL}/password-generator`
       }
     ]
   }),

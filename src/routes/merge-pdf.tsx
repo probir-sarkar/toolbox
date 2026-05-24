@@ -2,12 +2,13 @@ import { createFileRoute, ClientOnly } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/page-header";
 import { HowItWorks } from "@/components/common/how-it-works";
 import { FAQSection } from "@/components/common/faq-section";
-import { MergePdfDropZone } from "@/components/features/merge-pdf/drop-zone";
-import { MergeFileList } from "@/components/features/merge-pdf/file-list";
-import { MergeSettings } from "@/components/features/merge-pdf/settings";
-import { MergeActionCard } from "@/components/features/merge-pdf/action-card";
-import { MergeError } from "@/components/features/merge-pdf/error-display";
-import { MergePdfProvider } from "@/components/features/merge-pdf/merge-pdf.context";
+import { MergePdfDropZone } from "@/features/merge-pdf/drop-zone";
+import { MergeFileList } from "@/features/merge-pdf/file-list";
+import { MergeSettings } from "@/features/merge-pdf/settings";
+import { MergeActionCard } from "@/features/merge-pdf/action-card";
+import { MergeError } from "@/features/merge-pdf/error-display";
+import { MergePdfProvider } from "@/features/merge-pdf/merge-pdf.context";
+import { BASE_URL } from "@/lib/seo";
 
 const mergePdfFaqItems = [
   {
@@ -52,7 +53,7 @@ export const Route = createFileRoute("/merge-pdf")({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/merge-pdf"
+        href: `${BASE_URL}/merge-pdf`
       }
     ]
   })

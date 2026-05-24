@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageResize } from "@/features/image-resize/image-resize"
 import { ImageResizeProvider } from "@/features/image-resize/image-resize.context"
+import { BASE_URL } from "@/lib/seo"
 
 const imageResizeFaqItems = [
   {
@@ -47,7 +48,7 @@ export const Route = createFileRoute('/image-resize')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/image-resize"
+        href: `${BASE_URL}/image-resize`
       }
     ]
   }),

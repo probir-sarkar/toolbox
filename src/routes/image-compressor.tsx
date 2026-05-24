@@ -4,6 +4,7 @@ import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageCompressor } from "@/features/image-compressor/image-compressor"
 import { ImageCompressorProvider } from "@/features/image-compressor/image-compressor.context"
+import { BASE_URL } from "@/lib/seo"
 
 const imageCompressorFaqItems = [
   {
@@ -47,7 +48,7 @@ export const Route = createFileRoute('/image-compressor')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/image-compressor"
+        href: `${BASE_URL}/image-compressor`
       }
     ]
   }),

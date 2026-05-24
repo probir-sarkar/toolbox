@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
 import { ImageToPdfProvider } from "@/features/image-to-pdf/image-to-pdf.context"
+import { BASE_URL } from "@/lib/seo"
 
 const imageToPdfFaqItems = [
   {
@@ -47,7 +48,7 @@ export const Route = createFileRoute('/image-to-pdf')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/image-to-pdf"
+        href: `${BASE_URL}/image-to-pdf`
       }
     ]
   }),

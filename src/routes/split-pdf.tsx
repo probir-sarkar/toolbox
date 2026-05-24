@@ -2,12 +2,13 @@ import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 import { PageHeader } from "@/components/common/page-header"
 import { HowItWorks } from "@/components/common/how-it-works"
 import { FAQSection } from "@/components/common/faq-section"
-import { SplitPdfDropZone } from "@/components/features/split-pdf/drop-zone"
-import { SplitFileDetails } from "@/components/features/split-pdf/file-details"
-import { SplitSettings } from "@/components/features/split-pdf/settings"
-import { SplitActionCard } from "@/components/features/split-pdf/action-card"
-import { SplitError } from "@/components/features/split-pdf/error-display"
-import { SplitPdfProvider, useSplitPdfContext } from "@/components/features/split-pdf/split-pdf.context"
+import { SplitPdfDropZone } from "@/features/split-pdf/drop-zone"
+import { SplitFileDetails } from "@/features/split-pdf/file-details"
+import { SplitSettings } from "@/features/split-pdf/settings"
+import { SplitActionCard } from "@/features/split-pdf/action-card"
+import { SplitError } from "@/features/split-pdf/error-display"
+import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/split-pdf.context"
+import { BASE_URL } from "@/lib/seo"
 
 function SplitPdfContent() {
   const { file } = useSplitPdfContext()
@@ -61,7 +62,7 @@ export const Route = createFileRoute('/split-pdf')({
     links: [
       {
         rel: "canonical",
-        href: "https://toolbox.com/split-pdf"
+        href: `${BASE_URL}/split-pdf`
       }
     ]
   }),
