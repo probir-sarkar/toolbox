@@ -1,13 +1,13 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 
 import { PageHeader } from "@/shared/components/layout/page-header"
-import { ConversionSettings } from "@/features/pdf-to-image/conversion-settings"
-import { FAQ } from "@/features/pdf-to-image/faq"
+import { ConversionSettings } from "@/features/pdf-to-image/components/conversion-settings"
+import { FAQ } from "@/features/pdf-to-image/components/faq"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { PdfDropZone } from "@/features/pdf-to-image/pdf-drop-zone"
-import { PdfFileList } from "@/features/pdf-to-image/pdf-file-list"
-import { ActionCard } from "@/features/pdf-to-image/action-card"
-import { PdfToImageProvider } from "@/features/pdf-to-image/pdf-to-image.context"
+import { PdfDropZone } from "@/features/pdf-to-image/components/pdf-drop-zone"
+import { PdfFileList } from "@/features/pdf-to-image/components/pdf-file-list"
+import { ActionCard } from "@/features/pdf-to-image/components/action-card"
+import { PdfToImageProvider } from "@/features/pdf-to-image/context"
 import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/pdf-to-image')({

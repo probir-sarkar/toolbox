@@ -4,7 +4,7 @@ import { SortableImageList } from "./components/sortable-image-list";
 import { PdfInteractionPanel } from "./components/pdf-interaction-panel";
 import { Button } from "@/shared/components/ui/button";
 import { Trash2 } from "lucide-react";
-import { useImageToPdfContext } from "./image-to-pdf.context";
+import { useImageToPdfContext } from "./context";
 
 export function ImageToPdf() {
   const { images, reset } = useImageToPdfContext();

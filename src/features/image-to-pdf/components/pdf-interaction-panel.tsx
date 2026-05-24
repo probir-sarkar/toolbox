@@ -9,16 +9,17 @@ import { Label } from "@/shared/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Slider } from "@/shared/components/ui/slider";
 import { Separator } from "@/shared/components/ui/separator";
-import { useImageToPdfContext, type PdfPageSize, type PdfOrientation } from "../image-to-pdf.context";
+import { useImageToPdfContext } from "../context";
+import type { PdfPageSize, PdfOrientation } from "../types";
 
 export function PdfInteractionPanel() {
-  const { images, settings, updateSettings, isGenerating, setGenerating } = useImageToPdfContext();
+  const { images, settings, updateSettings, isProcessing, setIsProcessing } = useImageToPdfContext();
   const [progress, setProgress] = useState(0);
 
   const handleConvert = async () => {
     if (images.length === 0) return;
 
-    setGenerating(true);
+    setIsProcessing(true);
     setProgress(0);
 
     try {
@@ -82,7 +83,7 @@ export function PdfInteractionPanel() {
     } catch (error) {
       console.error("PDF Generation failed", error);
     } finally {
-      setGenerating(false);
+      setIsProcessing(false);
       setProgress(0);
     }
   };
@@ -160,8 +161,8 @@ export function PdfInteractionPanel() {
         <Separator />
 
         <div className="space-y-2">
-          <Button className="w-full" size="lg" onClick={handleConvert} disabled={images.length === 0 || isGenerating}>
-            {isGenerating ? (
+          <Button className="w-full" size="lg" onClick={handleConvert} disabled={images.length === 0 || isProcessing}>
+            {isProcessing ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Converting {progress}%

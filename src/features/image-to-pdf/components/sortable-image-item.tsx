@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { cn } from "@/lib/utils";
-import type { ImageItem } from "../image-to-pdf.context";
+import type { ImageItem } from "../types";
 
 interface SortableImageItemProps {
   image: ImageItem;

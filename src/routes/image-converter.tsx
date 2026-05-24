@@ -1,12 +1,12 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 import { PageHeader } from "@/shared/components/layout/page-header"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { ImageConversionSettings } from "@/features/image-converter/conversion-settings"
-import { ImageDropZone } from "@/features/image-converter/image-drop-zone"
-import { FileList } from "@/features/image-converter/file-list"
-import { ActionCard } from "@/features/image-converter/action-card"
-import { FAQ } from "@/features/image-converter/faq"
-import { ImageConverterProvider } from "@/features/image-converter/image-converter.context"
+import { ImageConversionSettings } from "@/features/image-converter/components/conversion-settings"
+import { ImageDropZone } from "@/features/image-converter/components/image-drop-zone"
+import { FileList } from "@/features/image-converter/components/file-list"
+import { ActionCard } from "@/features/image-converter/components/action-card"
+import { FAQ } from "@/features/image-converter/components/faq"
+import { ImageConverterProvider } from "@/features/image-converter/context"
 import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/image-converter')({

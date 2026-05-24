@@ -9,7 +9,7 @@ import {
   DragEndEvent
 } from "@dnd-kit/core";
 import { SortableContext, sortableKeyboardCoordinates, rectSortingStrategy } from "@dnd-kit/sortable";
-import { useImageToPdfContext } from "../image-to-pdf.context";
+import { useImageToPdfContext } from "../context";
 import { SortableImageItem } from "./sortable-image-item";
 
 export function SortableImageList() {

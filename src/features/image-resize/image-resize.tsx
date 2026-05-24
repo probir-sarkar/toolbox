@@ -1,8 +1,8 @@
-import { ImageResizeDropZone } from "./drop-zone";
-import { ImageResizeFileList } from "./file-list";
-import { ImageResizeSettings } from "./settings";
-import { ImageResizeActionCard } from "./action-card";
-import { ImageResizeFaq } from "./faq";
+import { ImageResizeDropZone } from "./components/drop-zone";
+import { ImageResizeFileList } from "./components/file-list";
+import { ImageResizeSettings } from "./components/settings";
+import { ImageResizeActionCard } from "./components/action-card";
+import { ImageResizeFaq } from "./components/faq";
 
 export function ImageResize() {
   return (

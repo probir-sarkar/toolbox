@@ -2,20 +2,20 @@ import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 import { PageHeader } from "@/shared/components/layout/page-header"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
-import { SplitPdfDropZone } from "@/features/split-pdf/drop-zone"
-import { SplitFileDetails } from "@/features/split-pdf/file-details"
-import { SplitSettings } from "@/features/split-pdf/settings"
-import { SplitActionCard } from "@/features/split-pdf/action-card"
-import { SplitError } from "@/features/split-pdf/error-display"
-import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/split-pdf.context"
+import { SplitPdfDropZone } from "@/features/split-pdf/components/drop-zone"
+import { SplitFileDetails } from "@/features/split-pdf/components/file-details"
+import { SplitSettings } from "@/features/split-pdf/components/settings"
+import { SplitActionCard } from "@/features/split-pdf/components/action-card"
+import { SplitError } from "@/features/split-pdf/components/error-display"
+import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/context"
 import { BASE_URL } from "@/lib/seo"
 
 function SplitPdfContent() {
-  const { file } = useSplitPdfContext()
+  const { fileData } = useSplitPdfContext()
   return (
     <>
       <SplitError />
-      {!file ? <SplitPdfDropZone /> : <SplitFileDetails />}
+      {!fileData ? <SplitPdfDropZone /> : <SplitFileDetails />}
     </>
   )
 }

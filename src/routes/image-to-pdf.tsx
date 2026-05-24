@@ -3,7 +3,7 @@ import { ImageToPdf } from "@/features/image-to-pdf/image-to-pdf"
 import { PageHeader } from "@/shared/components/layout/page-header"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
-import { ImageToPdfProvider } from "@/features/image-to-pdf/image-to-pdf.context"
+import { ImageToPdfProvider } from "@/features/image-to-pdf/context"
 import { BASE_URL } from "@/lib/seo"
 
 const imageToPdfFaqItems = [

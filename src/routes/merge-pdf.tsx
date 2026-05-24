@@ -2,12 +2,12 @@ import { createFileRoute, ClientOnly } from "@tanstack/react-router";
 import { PageHeader } from "@/shared/components/layout/page-header";
 import { HowItWorks } from "@/shared/components/layout/how-it-works";
 import { FAQSection } from "@/shared/components/layout/faq-section";
-import { MergePdfDropZone } from "@/features/merge-pdf/drop-zone";
-import { MergeFileList } from "@/features/merge-pdf/file-list";
-import { MergeSettings } from "@/features/merge-pdf/settings";
-import { MergeActionCard } from "@/features/merge-pdf/action-card";
-import { MergeError } from "@/features/merge-pdf/error-display";
-import { MergePdfProvider } from "@/features/merge-pdf/merge-pdf.context";
+import { MergePdfDropZone } from "@/features/merge-pdf/components/drop-zone";
+import { MergeFileList } from "@/features/merge-pdf/components/file-list";
+import { MergeSettings } from "@/features/merge-pdf/components/settings";
+import { MergeActionCard } from "@/features/merge-pdf/components/action-card";
+import { MergeError } from "@/features/merge-pdf/components/error-display";
+import { MergePdfProvider } from "@/features/merge-pdf/context";
 import { BASE_URL } from "@/lib/seo";
 
 const mergePdfFaqItems = [

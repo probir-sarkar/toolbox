@@ -3,7 +3,7 @@ import { PageHeader } from "@/shared/components/layout/page-header"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
 import { ImageResize } from "@/features/image-resize/image-resize"
-import { ImageResizeProvider } from "@/features/image-resize/image-resize.context"
+import { ImageResizeProvider } from "@/features/image-resize/context"
 import { BASE_URL } from "@/lib/seo"
 
 const imageResizeFaqItems = [
