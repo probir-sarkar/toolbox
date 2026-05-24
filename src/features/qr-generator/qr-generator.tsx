@@ -1,7 +1,7 @@
-import { QRGeneratorInput } from "./generator";
-import { QRGeneratorSettings } from "./settings";
-import { QRGeneratorActionCard } from "./action-card";
-import { QRGeneratorFaq } from "./faq";
+import { QRGeneratorInput } from "./components/generator";
+import { QRGeneratorSettings } from "./components/settings";
+import { QRGeneratorActionCard } from "./components/action-card";
+import { QRGeneratorFaq } from "./components/faq";
 
 export function QRGenerator() {
   return (

@@ -1,10 +1,10 @@
 /// <reference types="vite/client" />
 import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import appCss from "@/styles/globals.css?url";
-import { Navbar } from "@/components/common/navbar";
-import { Footer } from "@/components/common/footer";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SkipLink } from "@/components/common/skip-link";
+import { Navbar } from "@/shared/components/layout/navbar";
+import { Footer } from "@/shared/components/layout/footer";
+import { ThemeProvider } from "@/shared/components/layout/theme-provider";
+import { SkipLink } from "@/shared/components/layout/skip-link";
 
 export const Route = createRootRoute({
   head: () => ({

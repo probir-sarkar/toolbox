@@ -1,9 +1,9 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
 
-import { PageHeader } from "@/components/common/page-header"
+import { PageHeader } from "@/shared/components/layout/page-header"
 import { ConversionSettings } from "@/features/pdf-to-image/conversion-settings"
 import { FAQ } from "@/features/pdf-to-image/faq"
-import { HowItWorks } from "@/components/common/how-it-works"
+import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { PdfDropZone } from "@/features/pdf-to-image/pdf-drop-zone"
 import { PdfFileList } from "@/features/pdf-to-image/pdf-file-list"
 import { ActionCard } from "@/features/pdf-to-image/action-card"

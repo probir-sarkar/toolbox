@@ -1,8 +1,8 @@
 
 import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
 import { useSplitPdfContext } from "./split-pdf.context";
 
 export function SplitFileDetails() {

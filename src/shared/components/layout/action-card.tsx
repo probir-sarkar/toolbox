@@ -1,8 +1,8 @@
 
 import { Loader2, LucideIcon, Package, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { Progress } from "@/shared/components/ui/progress";
 import { cn } from "@/lib/utils";
 
 interface ActionCardProps {

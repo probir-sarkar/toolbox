@@ -1,7 +1,7 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/components/common/page-header"
-import { HowItWorks } from "@/components/common/how-it-works"
-import { FAQSection } from "@/components/common/faq-section"
+import { PageHeader } from "@/shared/components/layout/page-header"
+import { HowItWorks } from "@/shared/components/layout/how-it-works"
+import { FAQSection } from "@/shared/components/layout/faq-section"
 import { ImageResize } from "@/features/image-resize/image-resize"
 import { ImageResizeProvider } from "@/features/image-resize/image-resize.context"
 import { BASE_URL } from "@/lib/seo"

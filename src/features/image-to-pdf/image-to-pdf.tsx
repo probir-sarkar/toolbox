@@ -2,7 +2,7 @@
 import { DropZone } from "./components/drop-zone";
 import { SortableImageList } from "./components/sortable-image-list";
 import { PdfInteractionPanel } from "./components/pdf-interaction-panel";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { useImageToPdfContext } from "./image-to-pdf.context";
 

@@ -1,4 +1,3 @@
-
 let workerReady = false;
 let pdfjsLibModule: typeof import("pdfjs-dist") | null = null;
 

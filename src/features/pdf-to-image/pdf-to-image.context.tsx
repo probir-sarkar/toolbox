@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState, useCallback } from "react";
-import { type FileInfo, type ImageResult } from "@/utils/pdf";
+import { type FileInfo, type ImageResult } from "@/shared/services/pdf";
 
 interface PdfToImageContextValue {
   file: FileInfo | null;

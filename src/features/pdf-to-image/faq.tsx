@@ -1,4 +1,4 @@
-import { FAQSection } from "@/components/common/faq-section";
+import { FAQSection } from "@/shared/components/layout/faq-section";
 
 const FAQ_ITEMS = [
   {

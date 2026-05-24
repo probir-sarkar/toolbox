@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Sparkles, ExternalLink } from "lucide-react"
-import { ToolsSection } from "@/components/home/tools-section"
+import { ToolsSection } from "@/shared/components/layout/tools-section"
 import { BASE_URL } from "@/lib/seo"
 
 export const Route = createFileRoute('/')({

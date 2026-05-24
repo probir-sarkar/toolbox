@@ -1,5 +1,5 @@
 
-import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
+import { ActionCard as ReusableActionCard } from "@/shared/components/layout/action-card";
 import { Sparkles } from "lucide-react";
 import { useImageConverterContext } from "./image-converter.context";
 import { convertImages, type ConversionOptions, createZipArchive } from "./utils/image-converter";

@@ -1,5 +1,5 @@
 import imageCompression from "browser-image-compression";
-import { filesToZipEntries, createAndDownloadZip, type ZipOptions } from "@/utils/image";
+import { filesToZipEntries, createAndDownloadZip, type ZipOptions } from "@/shared/services/image";
 
 export interface ConversionOptions {
   format: "webp" | "jpg" | "png" | "avif";

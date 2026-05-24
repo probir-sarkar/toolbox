@@ -1,7 +1,7 @@
 
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/shared/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Badge } from "@/shared/components/ui/badge";
 import { X, Download, ArrowDown, Trash2 } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 import { useImageConverterContext } from "./image-converter.context";

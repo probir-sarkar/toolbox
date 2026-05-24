@@ -2,8 +2,8 @@ import { useState, useMemo } from "react";
 import { Search, ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/shared/components/ui/badge";
+import { Card } from "@/shared/components/ui/card";
 import { cn } from "@/lib/utils";
 import { ALL_TOOLS } from "@/config/tools";
 

@@ -1,7 +1,7 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/components/common/page-header"
-import { HowItWorks } from "@/components/common/how-it-works"
-import { FAQSection } from "@/components/common/faq-section"
+import { PageHeader } from "@/shared/components/layout/page-header"
+import { HowItWorks } from "@/shared/components/layout/how-it-works"
+import { FAQSection } from "@/shared/components/layout/faq-section"
 import { PasswordGenerator } from "@/features/password-generator/components/password-generator"
 import { BASE_URL } from "@/lib/seo"
 

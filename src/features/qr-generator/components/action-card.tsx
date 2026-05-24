@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Loader2, Download, RefreshCw } from "lucide-react";
-import { useQRGeneratorContext } from "./qr-generator.context";
+import { useQRGeneratorState } from "../context";
 
 export function QRGeneratorActionCard() {
-  const { qrCodeUrl, isGenerating, error, settings, generateQRCode, reset } = useQRGeneratorContext();
+  const { qrCodeUrl, isGenerating, error, settings, generateQR, reset } = useQRGeneratorState();
 
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleGenerate = () => {
-    generateQRCode();
+    generateQR();
   };
 
   const handleDownload = () => {

@@ -1,6 +1,6 @@
 import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/components/common/page-header"
-import { HowItWorks } from "@/components/common/how-it-works"
+import { PageHeader } from "@/shared/components/layout/page-header"
+import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { ImageConversionSettings } from "@/features/image-converter/conversion-settings"
 import { ImageDropZone } from "@/features/image-converter/image-drop-zone"
 import { FileList } from "@/features/image-converter/file-list"

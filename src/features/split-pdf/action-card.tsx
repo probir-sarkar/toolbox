@@ -1,10 +1,10 @@
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/shared/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { useSplitPdfContext } from "./split-pdf.context";
 import { Loader2, Download, Scissors } from "lucide-react";
-import { createZip, downloadBlob } from "@/utils/file";
+import { createZip, downloadBlob } from "@/shared/services/file";
 
 export function SplitActionCard() {
   const { file, splitMode, pageRange, pageCount, isProcessing, setIsProcessing, setError } = useSplitPdfContext();

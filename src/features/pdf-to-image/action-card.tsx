@@ -1,7 +1,7 @@
 
-import { ActionCard as ReusableActionCard } from "@/components/common/action-card";
+import { ActionCard as ReusableActionCard } from "@/shared/components/layout/action-card";
 import { usePdfToImageContext } from "./pdf-to-image.context";
-import { pdfToImagesBrowser, downloadAll } from "@/utils/pdf";
+import { pdfToImagesBrowser, downloadAll } from "@/shared/services/pdf";
 
 export function ActionCard() {
   const { file, format, quality, scale, startPage, endPage, isConverting, setIsConverting, setImages, setProgress, progress, images } = usePdfToImageContext();

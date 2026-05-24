@@ -3,7 +3,7 @@ import * as React from "react";
 import { Upload } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 
 interface DragDropZoneProps extends React.HTMLAttributes<HTMLDivElement> {
   onFilesAdded: (files: File[]) => void;

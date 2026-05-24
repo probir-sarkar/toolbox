@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/components/ui/button";
 import { useSplitPdfContext } from "./split-pdf.context";
 import { PDFDocument } from "pdf-lib";
 

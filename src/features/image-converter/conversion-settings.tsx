@@ -1,7 +1,7 @@
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Slider } from "@/components/ui/slider";
+import { Card } from "@/shared/components/ui/card";
+import { Label } from "@/shared/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
+import { Slider } from "@/shared/components/ui/slider";
 import { FORMATS, ImageFormat, useImageConverterContext } from "./image-converter.context";
 
 export function ImageConversionSettings() {

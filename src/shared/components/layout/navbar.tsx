@@ -7,13 +7,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger
-} from "@/components/ui/navigation-menu";
+} from "@/shared/components/ui/navigation-menu";
 import { Layers, Menu, Github } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { Button, buttonVariants } from "@/shared/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/shared/components/ui/sheet";
 import { TOOLS_CONFIG } from "@/config/tools";
 import { SITE_CONFIG } from "@/config/site";
-import { ModeToggle } from "@/components/theme-toggler";
+import { ModeToggle } from "@/shared/components/layout/theme-toggler";
 import { useState } from "react";
 
 export function Navbar() {
