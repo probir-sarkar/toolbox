@@ -87,7 +87,7 @@ export function Footer() {
 
                 <div className="border-t border-border pt-8 grid grid-cols-1 md:grid-cols-3 gap-4 items-center text-center md:text-left">
                     <p className="text-sm text-muted-foreground">
-                        © {new Date().getFullYear()} Toolbox. MIT Licensed.
+                        © {new Date().getFullYear()} Toolbox. Open source.
                     </p>
                     <p className="text-sm text-muted-foreground flex items-center justify-center gap-1">
                         Made with <Heart className="w-4 h-4 text-primary fill-primary" /> by developers, for developers.

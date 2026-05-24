@@ -8,7 +8,7 @@ const items = [
   { icon: ShieldCheck, label: "100% offline" },
   { icon: Lock, label: "No uploads, no tracking" },
   { icon: Zap, label: "In-browser rendering" },
-  { icon: Github, label: "Open source (MIT)" }
+  { icon: Github, label: "Open source" }
 ];
 
 export function TrustBar({ className }: Props) {

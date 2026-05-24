@@ -12,7 +12,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "Is this open source and free?",
-    answer: "Yes. It’s MIT licensed and free to use. You can view and fork the source code on GitHub."
+    answer: "Yes. It’s open source and free to use. You can view and fork the source code on GitHub."
   },
   {
     question: "Why are my files converting slowly?",
