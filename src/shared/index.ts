@@ -37,6 +37,9 @@ export * from "./components/layout/theme-toggler";
 export * from "./components/layout/tools-section";
 export * from "./components/layout/trust-bar";
 
+// Common feature components
+export * from "./components/common";
+
 // Skeletons
 export * from "./components/skeletons";
 

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Loader2, Download } from "lucide-react";
-import { useImageCompressorContext } from "./image-compressor.context";
+import { useImageCompressorContext } from "../context";
+import { compressImage, getCompressionOptions } from "../services/image-compressor";
 
 export function ImageCompressorActionCard() {
   const { files, settings, isCompressing, setIsCompressing, setError, updateCompressedSize } = useImageCompressorContext();
-
   const [success, setSuccess] = useState(false);
 
   const handleCompress = async () => {
@@ -20,28 +20,18 @@ export function ImageCompressorActionCard() {
     setSuccess(false);
 
     try {
-      // Dynamic import for browser-image-compression
-      const imageCompression = await import('browser-image-compression');
-
       for (const imageFile of files) {
-        const options = {
-          maxSizeMB: settings.targetSize ? settings.targetSize / 1024 : 10,
-          maxWidthOrHeight: settings.maxWidth || settings.maxHeight || undefined,
-          useWebWorker: true,
-          fileType: settings.outputFormat === 'original' ? imageFile.file.type : `image/${settings.outputFormat}`,
-          initialQuality: settings.quality,
-        };
-
-        const compressedFile = await imageCompression.default(imageFile.file, options);
+        const options = getCompressionOptions(settings, imageFile.file);
+        const result = await compressImage(imageFile.file, options);
 
         // Update compressed size
-        updateCompressedSize(imageFile.id, compressedFile.size);
+        updateCompressedSize(imageFile.id, result.compressedSize);
 
         // Download the compressed image
-        const url = URL.createObjectURL(compressedFile);
+        const url = URL.createObjectURL(result.compressedFile);
         const link = document.createElement('a');
         link.href = url;
-        const ext = compressedFile.type.split('/')[1];
+        const ext = result.compressedFile.type.split('/')[1];
         link.download = `${imageFile.file.name.split('.')[0]}_compressed.${ext}`;
         document.body.appendChild(link);
         link.click();

@@ -1,44 +1,7 @@
-import { CaseLower, CaseUpper, Fingerprint, Hash } from "lucide-react";
+import type { PasswordOptions, PasswordStrength } from "../types";
+import { PASSWORD_CHAR_OPTIONS } from "../constants";
 
-export const PASSWORD_CHAR_OPTIONS = [
-  {
-    id: "uppercase",
-    label: "Uppercase",
-    value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    example: "ABC",
-    icon: CaseUpper
-  },
-  {
-    id: "lowercase",
-    label: "Lowercase",
-    value: "abcdefghijklmnopqrstuvwxyz",
-    example: "abc",
-    icon: CaseLower
-  },
-  {
-    id: "numbers",
-    label: "Numbers",
-    value: "0123456789",
-    example: "123",
-    icon: Hash
-  },
-  {
-    id: "symbols",
-    label: "Symbols",
-    value: "!@#$%^&*()_+~`|}{[]:;?><,./-=",
-    example: "!@#",
-    icon: Fingerprint
-  }
-] as const;
-
-export type PasswordCharOption = (typeof PASSWORD_CHAR_OPTIONS)[number]["id"];
-
-export interface PasswordOptions {
-  length: number;
-  selected: PasswordCharOption[];
-}
-
-export const generatePassword = (options: PasswordOptions): string => {
+export function generatePassword(options: PasswordOptions): string {
   const { length, selected } = options;
 
   let allChars = "";
@@ -61,7 +24,7 @@ export const generatePassword = (options: PasswordOptions): string => {
     return array[0] % max;
   };
 
-  const ensureChar = (id: PasswordCharOption) => {
+  const ensureChar = (id: (typeof PASSWORD_CHAR_OPTIONS)[number]["id"]) => {
     const charset = PASSWORD_CHAR_OPTIONS.find((o) => o.id === id)?.value || "";
     if (charset) password += charset[getSecureRandomIndex(charset.length)];
   };
@@ -80,9 +43,9 @@ export const generatePassword = (options: PasswordOptions): string => {
     .split("")
     .sort(() => 0.5 - Math.random())
     .join("");
-};
+}
 
-export const calculateStrength = (password: string): number => {
+export function calculateStrength(password: string): number {
   let strength = 0;
   if (password.length > 8) strength += 20;
   if (password.length > 12) strength += 20;
@@ -91,4 +54,20 @@ export const calculateStrength = (password: string): number => {
   if (/[0-9]/.test(password)) strength += 10;
   if (/[^A-Za-z0-9]/.test(password)) strength += 10;
   return Math.min(100, strength);
-};
+}
+
+export function getPasswordStrength(score: number): PasswordStrength {
+  if (score < 40) {
+    return { score, label: "Weak", color: "text-red-500" };
+  }
+  if (score < 70) {
+    return { score, label: "Medium", color: "text-yellow-500" };
+  }
+  return { score, label: "Strong", color: "text-green-500" };
+}
+
+export const STRENGTH_COLORS = {
+  weak: "bg-red-500",
+  medium: "bg-yellow-500",
+  strong: "bg-green-500",
+} as const;

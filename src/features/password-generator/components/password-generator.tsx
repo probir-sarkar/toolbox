@@ -1,54 +1,62 @@
-
-import { useEffect, useEffectEvent, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Copy, RefreshCw, Check, ShieldCheck, ShieldAlert, Shield } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Slider } from "@/shared/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/shared/components/ui/card";
 import { Label } from "@/shared/components/ui/label";
 import { cn } from "@/lib/utils";
-import { generatePassword, calculateStrength, PasswordOptions, PASSWORD_CHAR_OPTIONS } from "../utils/password-logic";
+import { generatePassword, getPasswordStrength, STRENGTH_COLORS } from "../services/password-generator";
+import type { PasswordOptions } from "../types";
+import { PASSWORD_CHAR_OPTIONS, DEFAULT_PASSWORD_OPTIONS } from "../constants";
 import { useImmer } from "use-immer";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
 import { useClipboard } from "@mantine/hooks";
 
 export function PasswordGenerator() {
-  const clipboard = useClipboard({
-    timeout: 2000
-  });
+  const clipboard = useClipboard({ timeout: 2000 });
   const [password, setPassword] = useState("");
-  const [strength, setStrength] = useState(0);
+  const [strength, setStrength] = useState(getPasswordStrength(0));
 
   const [options, setOptions] = useImmer<PasswordOptions>({
-    length: 16,
-    selected: ["uppercase", "lowercase", "numbers"]
+    ...DEFAULT_PASSWORD_OPTIONS
   });
 
   const handleGenerate = useCallback(() => {
     const newPassword = generatePassword(options);
     setPassword(newPassword);
-    setStrength(calculateStrength(newPassword));
+    setStrength(getPasswordStrength(calculateStrengthValue(newPassword)));
     clipboard.reset();
   }, [options, clipboard]);
 
-  const updatePassword = useEffectEvent(() => {
-    handleGenerate();
-  });
+  // Local helper for strength calculation
+  const calculateStrengthValue = (password: string): number => {
+    let strength = 0;
+    if (password.length > 8) strength += 20;
+    if (password.length > 12) strength += 20;
+    if (/[A-Z]/.test(password)) strength += 20;
+    if (/[a-z]/.test(password)) strength += 20;
+    if (/[0-9]/.test(password)) strength += 10;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 10;
+    return Math.min(100, strength);
+  };
 
   useEffect(() => {
-    updatePassword();
+    handleGenerate();
   }, [options]);
 
-  const getStrengthColor = (s: number) => {
-    if (s < 40) return "bg-red-500";
-    if (s < 70) return "bg-yellow-500";
-    return "bg-green-500";
+  const getStrengthIcon = () => {
+    if (strength.score >= 70) return ShieldCheck;
+    if (strength.score >= 40) return Shield;
+    return ShieldAlert;
   };
 
-  const getStrengthLabel = (s: number) => {
-    if (s < 40) return "Weak";
-    if (s < 70) return "Medium";
-    return "Strong";
+  const getStrengthColor = () => {
+    if (strength.score < 40) return STRENGTH_COLORS.weak;
+    if (strength.score < 70) return STRENGTH_COLORS.medium;
+    return STRENGTH_COLORS.strong;
   };
+
+  const StrengthIcon = getStrengthIcon();
 
   return (
     <Card className="w-full shadow-lg border-border/50">
@@ -103,24 +111,15 @@ export function PasswordGenerator() {
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground px-1">
             <span className="flex items-center gap-1.5">
-              {strength >= 70 ? (
-                <ShieldCheck className="w-3.5 h-3.5 text-green-500" />
-              ) : strength >= 40 ? (
-                <Shield className="w-3.5 h-3.5 text-yellow-500" />
-              ) : (
-                <ShieldAlert className="w-3.5 h-3.5 text-red-500" />
-              )}
-              Strength:{" "}
-              <span className={cn("font-medium", getStrengthColor(strength).replace("bg-", "text-"))}>
-                {getStrengthLabel(strength)}
-              </span>
+              <StrengthIcon className={cn("w-3.5 h-3.5", strength.color.replace("text-", "text-"))} />
+              Strength: <span className={cn("font-medium", strength.color)}>{strength.label}</span>
             </span>
             <span>{password.length} chars</span>
           </div>
           <div className="mt-1 h-1.5 w-full bg-secondary rounded-full overflow-hidden">
             <div
-              className={cn("h-full transition-all duration-300 ease-out", getStrengthColor(strength))}
-              style={{ width: `${strength}%` }}
+              className={cn("h-full transition-all duration-300 ease-out", getStrengthColor())}
+              style={{ width: `${strength.score}%` }}
             />
           </div>
         </div>
@@ -135,7 +134,7 @@ export function PasswordGenerator() {
               </span>
             </div>
             <Slider
-              defaultValue={[16]}
+              defaultValue={[DEFAULT_PASSWORD_OPTIONS.length]}
               value={[options.length]}
               min={6}
               max={50}

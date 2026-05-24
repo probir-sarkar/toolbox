@@ -2,7 +2,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
 import { Badge } from "@/shared/components/ui/badge";
 import { Trash2 } from "lucide-react";
-import { useImageCompressorContext } from "./image-compressor.context";
+import { useImageCompressorContext } from "../context";
 
 export function ImageCompressorFileList() {
   const { files, removeFile } = useImageCompressorContext();

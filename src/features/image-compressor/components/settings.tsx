@@ -3,7 +3,7 @@ import { Label } from "@/shared/components/ui/label";
 import { Input } from "@/shared/components/ui/input";
 import { Slider } from "@/shared/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
-import { useImageCompressorContext } from "./image-compressor.context";
+import { useImageCompressorContext } from "../context";
 
 export function ImageCompressorSettings() {
   const { settings, updateSettings } = useImageCompressorContext();

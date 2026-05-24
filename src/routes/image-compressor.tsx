@@ -3,7 +3,7 @@ import { PageHeader } from "@/shared/components/layout/page-header"
 import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
 import { ImageCompressor } from "@/features/image-compressor/image-compressor"
-import { ImageCompressorProvider } from "@/features/image-compressor/image-compressor.context"
+import { ImageCompressorProvider } from "@/features/image-compressor/context"
 import { BASE_URL } from "@/lib/seo"
 
 const imageCompressorFaqItems = [
