@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Image } from "lucide-react";
-import { ConverterFile } from "../image-converter.context";
+import { ConverterFile } from "../../types";
 import { cn } from "@/lib/utils";
 
 interface FileThumbnailProps {

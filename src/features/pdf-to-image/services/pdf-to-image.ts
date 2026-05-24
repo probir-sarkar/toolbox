@@ -1,5 +1,9 @@
-import { convertPdfToImages } from "@/shared/services/pdf";
+import { pdfToImagesBrowser } from "@/shared/services/pdf";
 import type { ImageFormat } from "../types";
+
+function toMimeType(format: ImageFormat): "image/png" | "image/jpeg" {
+  return format === "png" ? "image/png" : "image/jpeg";
+}
 
 export interface ConvertOptions {
   format: ImageFormat;
@@ -14,12 +18,19 @@ export async function convertPdf(
   file: File,
   options: ConvertOptions
 ): Promise<{ blob: Blob; url: string; pageNumber: number }[]> {
-  return convertPdfToImages(file, {
-    format: options.format,
+  const results = await pdfToImagesBrowser(file, {
+    format: toMimeType(options.format),
     quality: options.quality / 100,
     scale: options.scale,
     startPage: options.startPage,
-    endPage: options.endPage ?? undefined,
-    onProgress: options.onProgress
+    endPage: options.endPage ?? undefined
   });
+
+  options.onProgress?.(results.length, results.length);
+
+  return results.map(r => ({
+    blob: r.blob,
+    url: r.url,
+    pageNumber: r.page
+  }));
 }
