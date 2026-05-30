@@ -39,21 +39,21 @@ A collection of web-based tools and utilities built with React, Vite, and Cloudf
 
 ### Prerequisites
 
-- [Bun](https://bun.sh) or npm/yarn/pnpm
+- [pnpm](https://pnpm.io)
 - Cloudflare Workers account (for deployment)
 
 ### Installation
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 ```
 
 ### Development
 
 ```bash
 # Start development server
-bun dev
+pnpm dev
 ```
 
 The application will be available at `http://localhost:3000`
@@ -62,14 +62,14 @@ The application will be available at `http://localhost:3000`
 
 ```bash
 # Build for production
-bun run build
+pnpm build
 ```
 
 ### Deployment
 
 ```bash
 # Deploy to Cloudflare Workers
-bun run deploy
+pnpm deploy
 ```
 
 ## Project Structure
