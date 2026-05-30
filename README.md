@@ -30,7 +30,7 @@ A collection of web-based tools and utilities built with React, Vite, and Cloudf
 - **Frontend**: React 19, Vite, TypeScript
 - **Routing**: TanStack Router & Start
 - **Styling**: Tailwind CSS v4, class-variance-authority
-- **State Management**: Zustand, Immer
+- **State Management**: Immer
 - **UI Components**: Base UI, Radix UI
 - **Deployment**: Cloudflare Workers
 - **Build Tools**: Vite, TypeScript, ESLint
