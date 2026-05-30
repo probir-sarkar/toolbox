@@ -1,5 +1,5 @@
 import imageCompression from "browser-image-compression";
-import { createZipWorker } from "@/shared/services/zip";
+import { createZip } from "@/shared/services";
 import { downloadBlob } from "@/shared/services/download";
 
 export interface ConversionOptions {
@@ -151,6 +151,6 @@ export async function createZipArchive(results: ConversionResult[]): Promise<voi
   files.forEach((file) => {
     zipEntries[file.name] = file;
   });
-  const zipBlob = await createZipWorker(zipEntries);
+  const zipBlob = await createZip(zipEntries);
   downloadBlob(zipBlob, "converted-images.zip");
 }

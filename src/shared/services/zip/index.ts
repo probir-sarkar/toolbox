@@ -5,4 +5,4 @@
  */
 
 export type { ZipWorkerApi } from "./zip.worker";
-export { createZipWorker } from "./zip";
+export { createZip } from "./zip";

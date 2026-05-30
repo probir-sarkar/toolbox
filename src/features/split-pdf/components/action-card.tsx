@@ -3,7 +3,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { useSplitPdfContext } from "../context";
 import { Loader2, Download, Scissors } from "lucide-react";
-import { createZipWorker as createZip } from "@/shared/services/zip";
+import { createZip } from "@/shared/services/zip";
 import { downloadBlob } from "@/shared/services/download";
 
 export function SplitActionCard() {
@@ -67,7 +67,7 @@ export function SplitActionCard() {
         const pdfBytes = await newPdf.save();
         downloadBlob(new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" }), `${originalName}-extracted.pdf`);
       } else if (settings.splitMode === "split-all") {
-        const files: Record<string, Uint8Array> = {};
+        const files: Record<string, Blob> = {};
 
         for (let i = 0; i < fileData.pageCount; i++) {
           const newPdf = await PDFDocument.create();
@@ -75,7 +75,7 @@ export function SplitActionCard() {
           newPdf.addPage(copiedPage);
           const pdfBytes = await newPdf.save();
 
-          files[`${originalName}-page-${i + 1}.pdf`] = pdfBytes;
+          files[`${originalName}-page-${i + 1}.pdf`] = new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" });
         }
 
         const zipBlob = await createZip(files);
