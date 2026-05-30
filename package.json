@@ -8,8 +8,6 @@
     "build": "vite build && tsc --noEmit",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
-    "cf-typegen": "wrangler types",
-    "postinstall": "npm run cf-typegen",
     "test": "vitest"
   },
   "dependencies": {
@@ -54,11 +52,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/browser-playwright": "^4.1.7",
     "eslint": "^10",
     "tailwindcss": "^4.2.0",
     "typescript": "^6",
     "vite": "^8.0.10",
     "vitest": "^4.1.7",
+    "vitest-browser-react": "^2.2.0",
     "wrangler": "^4.95.0"
   }
 }
