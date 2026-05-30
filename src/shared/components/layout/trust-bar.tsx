@@ -1,6 +1,7 @@
 
-import { ShieldCheck, Lock, Zap, Github } from "lucide-react";
+import { ShieldCheck, Lock, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { GithubIcon } from "@/shared/components/common";
 
 type Props = { className?: string };
 
@@ -8,7 +9,7 @@ const items = [
   { icon: ShieldCheck, label: "100% offline" },
   { icon: Lock, label: "No uploads, no tracking" },
   { icon: Zap, label: "In-browser rendering" },
-  { icon: Github, label: "Open source" }
+  { icon: GithubIcon, label: "Open source" }
 ];
 
 export function TrustBar({ className }: Props) {

@@ -8,12 +8,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger
 } from "@/shared/components/ui/navigation-menu";
-import { Layers, Menu, Github } from "lucide-react";
+import { Layers, Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/shared/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/shared/components/ui/sheet";
 import { TOOLS_CONFIG } from "@/config/tools";
 import { SITE_CONFIG } from "@/config/site";
 import { ModeToggle } from "@/shared/components/layout/theme-toggler";
+import { GithubIcon } from "@/shared/components/common";
 import { useState } from "react";
 
 export function Navbar() {
@@ -97,7 +98,7 @@ export function Navbar() {
             size="icon"
             render={
               <Link to={SITE_CONFIG.links.github} target="_blank" aria-label="GitHub Repository">
-                <Github className="h-5 w-5" />
+                <GithubIcon className="h-5 w-5" />
               </Link>
             }
           />
@@ -178,7 +179,7 @@ export function Navbar() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    render={<Link to={SITE_CONFIG.links.github} target="_blank" aria-label="GitHub Repository"><Github className="h-5 w-5" /></Link>}
+                    render={<Link to={SITE_CONFIG.links.github} target="_blank" aria-label="GitHub Repository"><GithubIcon className="h-5 w-5" /></Link>}
                   />
                 </div>
 
