@@ -1,7 +1,7 @@
 import JSZip from "jszip";
 import { expose } from "comlink";
 
-export async function createZip(files: Record<string, Blob | string | ArrayBuffer | Uint8Array>): Promise<Blob> {
+async function createZipWorker(files: Record<string, Blob>): Promise<Blob> {
   const zip = new JSZip();
 
   Object.entries(files).forEach(([filename, content]) => {
@@ -11,8 +11,8 @@ export async function createZip(files: Record<string, Blob | string | ArrayBuffe
   return zip.generateAsync({ type: "blob" });
 }
 
-expose({ createZip });
+expose({ createZipWorker });
 
 export type ZipWorkerApi = {
-  createZip: typeof createZip;
+  createZipWorker: typeof createZipWorker;
 };

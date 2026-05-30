@@ -1,4 +1,4 @@
-import { createZipWorker } from "../zip";
+import { createZip } from "../zip";
 import { getPdfjsLibWithWorker } from "./processor";
 
 function getBaseName(file: File): string {
@@ -94,7 +94,7 @@ export async function downloadAll(images: ImageResult[]) {
   const files = Object.fromEntries(
     images.map((img) => [`${baseName}/${img.filename}`, img.blob])
   );
-  const blob = await createZipWorker(files);
+  const blob = await createZip(files);
   triggerDownload(blob, `${baseName}-images.zip`);
 }
 

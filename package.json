@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "cf-typegen": "wrangler types",
-    "postinstall": "npm run cf-typegen"
+    "postinstall": "npm run cf-typegen",
+    "test": "vitest"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
@@ -57,6 +58,7 @@
     "tailwindcss": "^4.2.0",
     "typescript": "^6",
     "vite": "^8.0.10",
+    "vitest": "^4.1.7",
     "wrangler": "^4.95.0"
   }
 }
