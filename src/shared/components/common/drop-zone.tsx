@@ -122,7 +122,6 @@ export function DropZone({
       }}
     >
       <div
-        tabIndex={disabled ? -1 : 0}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onDragLeave={handleDragLeave}
