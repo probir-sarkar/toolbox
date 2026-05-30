@@ -34,7 +34,7 @@ export function isAccepted(file: File, accept?: string): boolean {
 
       // If file type is empty and this is a MIME pattern, skip it
       // (extension patterns above are the fallback for empty types)
-      if (!fileType && !pattern.startsWith(".")) {
+      if (!fileType) {
         return false;
       }
 
