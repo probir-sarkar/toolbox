@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState } from "react";
-import { Upload, FileText } from "lucide-react";
+import { Upload } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 
@@ -11,6 +11,28 @@ import type {
 } from "./drop-zone.types";
 
 const DropzoneContext = createContext<DropzoneContextValue | null>(null);
+
+export function isAccepted(file: File, accept?: string): boolean {
+  if (!accept?.trim()) return true;
+
+  const fileName = file.name.toLowerCase();
+  const fileType = file.type.toLowerCase();
+
+  return accept
+    .split(",")
+    .map((pattern) => pattern.trim().toLowerCase())
+    .some((pattern) => {
+      if (pattern.startsWith(".")) {
+        return fileName.endsWith(pattern);
+      }
+
+      if (pattern.endsWith("/*")) {
+        return fileType.startsWith(pattern.slice(0, -1));
+      }
+
+      return fileType === pattern;
+    });
+}
 
 export const useDropzoneContext = () => {
   const context = useContext(DropzoneContext);
@@ -32,9 +54,9 @@ export function DropZone({
   const handleFiles = async (files: File[]) => {
     if (!onDrop || disabled || !files || files.length === 0) return;
     if (multiple) {
-      await (onDrop as (files: File[]) => void | Promise<void>)?.(files);
+      await (onDrop as (files: File[]) => void | Promise<void>)(files);
     } else {
-      await (onDrop as (file: File) => void | Promise<void>)?.(files[0]);
+      await (onDrop as (file: File) => void | Promise<void>)(files[0]);
     }
   };
   const handleDragOver = (e: React.DragEvent) => {
@@ -54,17 +76,27 @@ export function DropZone({
     e.stopPropagation();
     setIsDragActive(false);
     if (disabled) return;
-    const files = Array.from(e.dataTransfer.files);
+    const files = Array.from(e.dataTransfer.files).filter((f) => isAccepted(f, accept));
     handleFiles(files);
   };
 
   const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled || !e.target.files?.length) return;
-    handleFiles(Array.from(e.target.files));
+    const files = Array.from(e.target.files).filter((f) => isAccepted(f, accept));
+    handleFiles(files);
+    e.target.value = "";
   };
 
   const trigger = () => {
     if (!disabled) inputRef.current?.click();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (disabled) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      trigger();
+    }
   };
 
   return (
@@ -78,13 +110,17 @@ export function DropZone({
       }}
     >
       <div
+        role="button"
+        tabIndex={disabled ? -1 : 0}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onDragLeave={handleDragLeave}
         onClick={trigger}
+        onKeyDown={handleKeyDown}
         className={cn(
           "group relative flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-muted-foreground/25 px-6 py-12 text-center transition-colors",
           "hover:border-primary/50 hover:bg-muted/50",
+          "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none",
           isDragActive && "border-primary bg-primary/5",
           disabled && "cursor-not-allowed opacity-50",
           className
@@ -95,6 +131,7 @@ export function DropZone({
           type="file"
           accept={accept}
           onChange={handleFileInputChange}
+          multiple={multiple}
           disabled={disabled}
           className="hidden"
         />
@@ -113,7 +150,7 @@ DropZone.Icon = function DropZoneIcon({ icon: Icon = Upload, className, ...props
     <Icon
       className={cn(
         "mb-4 transition-all",
-        isDragActive ? "text-primary scale-110" : "text-red-600 opacity-70",
+        isDragActive ? "text-primary scale-110" : "text-muted-foreground opacity-70",
         className
       )}
       {...props}
@@ -142,10 +179,23 @@ DropZone.Button = function DropZoneButton({
   children,
   variant = "outline",
   size = "default",
-  className
+  className,
+  onClick
 }: DropzoneButtonProps) {
+  const { trigger, disabled } = useDropzoneContext();
+
   return (
-    <Button variant={variant} size={size} className={className}>
+    <Button
+      variant={variant}
+      size={size}
+      className={className}
+      disabled={disabled}
+      onClick={(e) => {
+        e.stopPropagation();
+        trigger();
+        onClick?.(e);
+      }}
+    >
       {children}
     </Button>
   );
