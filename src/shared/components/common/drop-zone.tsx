@@ -18,12 +18,24 @@ export function isAccepted(file: File, accept?: string): boolean {
   const fileName = file.name.toLowerCase();
   const fileType = file.type.toLowerCase();
 
+  // When file.type is empty (common for custom formats on some platforms),
+  // and accept contains only MIME patterns (no extensions), the file is rejected.
+  // Extension patterns are checked first and work regardless of MIME type.
+  // If accept is MIME-only and type is empty, we reject to avoid passing through
+  // files that don't match the intended MIME constraints.
   return accept
     .split(",")
     .map((pattern) => pattern.trim().toLowerCase())
     .some((pattern) => {
+      // Check extension patterns first (they work regardless of MIME type)
       if (pattern.startsWith(".")) {
         return fileName.endsWith(pattern);
+      }
+
+      // If file type is empty and this is a MIME pattern, skip it
+      // (extension patterns above are the fallback for empty types)
+      if (!fileType) {
+        return false;
       }
 
       if (pattern.endsWith("/*")) {
@@ -110,8 +122,6 @@ export function DropZone({
       }}
     >
       <div
-        role="button"
-        tabIndex={disabled ? -1 : 0}
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         onDragLeave={handleDragLeave}
