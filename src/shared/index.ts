@@ -25,7 +25,6 @@ export * from "./components/ui/tooltip";
 
 // Layout components
 export * from "./components/layout/action-card";
-export * from "./components/layout/drag-drop-zone";
 export * from "./components/layout/faq-section";
 export * from "./components/layout/footer";
 export * from "./components/layout/how-it-works";
