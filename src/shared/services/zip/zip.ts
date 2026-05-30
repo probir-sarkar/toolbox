@@ -5,4 +5,4 @@ const worker = new Worker(new URL("./zip.worker.ts", import.meta.url), { type: "
 
 const api = wrap<ZipWorkerApi>(worker);
 
-export const createZip = api.createZip;
+export const createZipWorker = api.createZip;

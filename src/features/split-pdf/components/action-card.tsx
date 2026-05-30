@@ -3,7 +3,8 @@ import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { useSplitPdfContext } from "../context";
 import { Loader2, Download, Scissors } from "lucide-react";
-import { createZip, downloadBlob } from "@/shared/services/file";
+import { createZipWorker as createZip } from "@/shared/services/zip";
+import { downloadBlob } from "@/shared/services/download";
 
 export function SplitActionCard() {
   const { fileData, settings, isProcessing, setIsProcessing, setError } = useSplitPdfContext();

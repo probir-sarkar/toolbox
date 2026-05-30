@@ -1,2 +1,1 @@
-export * from "./image-converter";
-export * from "./zip";
+export * from "./converter";

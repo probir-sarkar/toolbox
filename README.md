@@ -79,6 +79,24 @@ bun run deploy
 - **Workers**: Cloudflare Workers configuration for deployment
 - **Types**: Auto-generated Cloudflare types in `worker-configuration.d.ts`
 
+## File Naming Conventions
+
+This project follows a consistent file naming convention to improve code organization and discoverability:
+
+### Service Files
+- `index.ts` - Main entry point, exports public API
+- `*.ts` - Primary implementation file
+- `*.worker.ts` - Web Worker implementations
+- `*.test.ts` - Test files (when applicable)
+
+### Examples
+```
+src/shared/services/zip/
+├── index.ts          # Exports public API
+├── zip.ts            # Main implementation
+└── zip.worker.ts     # Web Worker wrapper
+```
+
 ## License
 
 Licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.

@@ -1,5 +1,5 @@
-import { createZip } from "../file/zip";
-import { getPdfjsLibWithWorker } from "./pdf";
+import { createZipWorker } from "../zip";
+import { getPdfjsLibWithWorker } from "./processor";
 
 function getBaseName(file: File): string {
   const name = file.name.replace(/\.[^/.]+$/, ""); // remove extension
@@ -76,7 +76,7 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
   return results;
 }
 
-export function triggerDownload(blob: Blob, filename: string) {
+function triggerDownload(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -94,7 +94,7 @@ export async function downloadAll(images: ImageResult[]) {
   const files = Object.fromEntries(
     images.map((img) => [`${baseName}/${img.filename}`, img.blob])
   );
-  const blob = await createZip(files);
+  const blob = await createZipWorker(files);
   triggerDownload(blob, `${baseName}-images.zip`);
 }
 
