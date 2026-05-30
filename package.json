@@ -23,7 +23,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.13",
     "@tanstack/react-router": "^1.162.2",
-    "@tanstack/react-start": "^1.162.2",
+    "@tanstack/react-start": "^1.168.17",
     "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
