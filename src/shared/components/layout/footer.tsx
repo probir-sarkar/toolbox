@@ -1,5 +1,6 @@
-import { Layers, Github, Heart, ExternalLink } from "lucide-react";
+import { Layers, Heart, ExternalLink } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { GithubIcon } from "@/shared/components/common";
 
 export function Footer() {
     return (
@@ -23,7 +24,7 @@ export function Footer() {
                                 className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground transition-colors"
                                 aria-label="GitHub Repository"
                             >
-                                <Github className="w-5 h-5" />
+                                <GithubIcon className="w-5 h-5" />
                             </a>
                         </div>
                     </div>
