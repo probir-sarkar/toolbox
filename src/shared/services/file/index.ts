@@ -1,20 +1,3 @@
-import JSZip from "jszip";
-
-/**
- * Creates a ZIP file from a record of filenames and contents.
- * @param files Record where key is filename and value is content (Blob, string, etc.)
- * @returns Promise resolving to the ZIP file as a Blob
- */
-export async function createZip(files: Record<string, Blob | string | ArrayBuffer | Uint8Array>): Promise<Blob> {
-  const zip = new JSZip();
-
-  Object.entries(files).forEach(([filename, content]) => {
-    zip.file(filename, content);
-  });
-
-  return await zip.generateAsync({ type: "blob" });
-}
-
 /**
  * Triggers a browser download for a given Blob.
  * @param blob The Blob to download
@@ -30,3 +13,7 @@ export function downloadBlob(blob: Blob, filename: string): void {
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
 }
+
+
+
+export * from "./zip";

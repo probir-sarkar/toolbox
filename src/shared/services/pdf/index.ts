@@ -1,4 +1,4 @@
-import JSZip from "jszip";
+import { createZip } from "../file/zip";
 import { getPdfjsLibWithWorker } from "./pdf";
 
 function getBaseName(file: File): string {
@@ -91,16 +91,11 @@ export async function downloadAll(images: ImageResult[]) {
   if (!images.length) return;
 
   const baseName = images[0].baseName || "document";
-
-  if (images.length === 1) {
-    triggerDownload(images[0].blob, images[0].filename);
-  } else {
-    const zip = new JSZip();
-    const folder = zip.folder(baseName) as JSZip;
-    images.forEach((img) => folder.file(img.filename, img.blob));
-    const blob = await zip.generateAsync({ type: "blob" });
-    triggerDownload(blob, `${baseName}-images.zip`);
-  }
+  const files = Object.fromEntries(
+    images.map((img) => [`${baseName}/${img.filename}`, img.blob])
+  );
+  const blob = await createZip(files);
+  triggerDownload(blob, `${baseName}-images.zip`);
 }
 
 export interface FileInfo {
