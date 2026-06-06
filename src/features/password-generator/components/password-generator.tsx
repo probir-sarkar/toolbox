@@ -10,7 +10,7 @@ import type { PasswordOptions } from "../types";
 import { PASSWORD_CHAR_OPTIONS, DEFAULT_PASSWORD_OPTIONS } from "../constants";
 import { useImmer } from "use-immer";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/components/ui/tooltip";
-import { useClipboard } from "@mantine/hooks";
+import { useClipboard } from "@/shared/hooks/use-clipboard";
 
 export function PasswordGenerator() {
   const clipboard = useClipboard({ timeout: 2000 });
