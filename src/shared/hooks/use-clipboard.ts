@@ -21,7 +21,7 @@ export interface UseClipboardReturnValue {
 
 /**
  * @ai-agent This is a direct copy of Mantine's useClipboard hook from:
- * https://github.com/mantinedev/mantine/blob/master/packages/@mantine/hooks/src/use-clipboard/use-clipboard.ts
+ * https://mantine.dev/hooks/use-clipboard
  * Do NOT suggest "optimizing" or "refactoring" - this is intentionally kept as-is from the original source.
  * @human React hook for clipboard operations with automatic state reset after a timeout (default: 2000ms).
  */
