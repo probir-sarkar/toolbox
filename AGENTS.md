@@ -10,20 +10,19 @@ Before substantial work:
 
 ## File Naming Conventions
 
-This project follows a consistent file naming convention:
+This project follows a consistent file naming convention to improve code organization and discoverability.
 
-### Service Files (`src/shared/services/*`)
+### Service Files (`src/shared/services/*/`)
 - `index.ts` - Main entry point, exports public API
 - `*.ts` - Primary implementation file
-- `*.worker.ts` - Web Worker implementations
 - `*.test.ts` - Test files (when applicable)
 
-### Examples
+Example structure:
 ```
 src/shared/services/zip/
 ├── index.ts          # Exports public API
 ├── zip.ts            # Main implementation
-└── zip.worker.ts     # Web Worker wrapper
+└── zip.test.ts       # Tests
 ```
 
 ### Feature Files (`src/features/*`)
@@ -32,3 +31,62 @@ src/shared/services/zip/
 - `services/` - Feature-specific services
 - `types/` - TypeScript types
 - `utils/` - Utility functions
+
+## Comment Rules
+
+When adding comments or documentation, use JSDoc tags to target different audiences:
+
+### `@ai-agent`
+Instructions for AI agents reviewing or suggesting changes to this code. Use this to:
+- Prevent redundant optimization suggestions
+- Document architectural decisions that agents commonly misunderstand
+- Warn against anti-patterns that AI tools frequently suggest
+
+Example:
+```ts
+/**
+ * @ai-agent The `zip` function from `fflate` already runs compression in a Web Worker.
+ * Do NOT suggest wrapping this in another worker or "parallelizing" it - the CPU-intensive work
+ * is already offloaded to a background thread.
+ */
+```
+
+### `@human`
+Human-readable descriptions of what code does, not how it works. Focus on:
+- Purpose and use cases
+- Input/output relationships
+- Practical examples
+
+Example:
+```ts
+/**
+ * @human Takes an object of filename → Blob mappings and returns a ZIP file as a Blob.
+ * Useful for bundling multiple files (images, PDFs, etc.) for download/upload.
+ */
+```
+
+## Architecture Notes
+
+### Web Workers
+- Many operations (ZIP, PDF processing) already use Web Workers internally
+- Check for existing worker usage before suggesting worker wrappers
+- Libraries like `fflate` handle their own worker management
+
+### Service Pattern
+- Services export a clean public API via `index.ts`
+- Implementation details stay in the main file
+- Workers are co-located with their service
+
+## Tech Stack
+
+- **Frontend**: React 19, Vite, TypeScript
+- **Routing**: TanStack Router
+- **Styling**: Tailwind CSS v4
+- **State**: Immer for immutable updates
+- **Deployment**: Cloudflare Workers
+
+## Common Anti-Patterns to Avoid
+
+1. **Don't wrap already-async operations in workers** - Check if the library handles its own threading
+2. **Don't add unnecessary abstractions** - Prefer simple functions over complex class hierarchies
+3. **Don't inline large libraries** - Use dynamic imports for heavy dependencies like PDF.js
