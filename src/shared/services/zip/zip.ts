@@ -1,8 +1,20 @@
-import { wrap } from "comlink";
-import type { ZipWorkerApi } from "./zip.worker";
+import { zip } from "fflate";
 
-const worker = new Worker(new URL("./zip.worker.ts", import.meta.url), { type: "module" });
+export async function createZip(files: Record<string, Blob>): Promise<Blob> {
+  const zipData: Record<string, Uint8Array> = {};
 
-const api = wrap<ZipWorkerApi>(worker);
+  // 1. Read all blobs concurrently using Promise.all
+  await Promise.all(
+    Object.entries(files).map(async ([filename, blob]) => {
+      zipData[filename] = new Uint8Array(await blob.arrayBuffer());
+    })
+  );
 
-export const createZip = api.createZipWorker;
+  const zipped = await new Promise<Uint8Array<ArrayBuffer>>((resolve, reject) => {
+    zip(zipData, (err, data) => {
+      if (err) reject(err);
+      else resolve(data);
+    });
+  });
+  return new Blob([zipped], { type: "application/zip" });
+}
