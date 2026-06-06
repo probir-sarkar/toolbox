@@ -21,3 +21,4 @@ bun.lock
 /blob-report/
 /playwright/.cache/
 .tanstack
+*.tsbuildinfo
