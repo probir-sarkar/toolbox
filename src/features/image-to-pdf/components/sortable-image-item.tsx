@@ -4,7 +4,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 import type { ImageItem } from "../types";
 
 interface SortableImageItemProps {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Upload, LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 import { Button } from "@/shared/components/ui/button";
 
 export interface DropZoneBaseProps {
