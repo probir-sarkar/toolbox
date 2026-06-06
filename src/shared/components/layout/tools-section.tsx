@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 
 import { Badge } from "@/shared/components/ui/badge";
 import { Card } from "@/shared/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 import { ALL_TOOLS } from "@/config/tools";
 
 const FILTERS = ["All", "PDF", "Image", "Popular", "New"];

@@ -1,5 +1,5 @@
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 
 interface ActionCardSkeletonProps {
   variant?: "default" | "card";

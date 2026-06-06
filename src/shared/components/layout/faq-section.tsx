@@ -1,6 +1,6 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/shared/components/ui/accordion";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 
 export interface FAQItem {
   question: string;

@@ -4,7 +4,7 @@ import { Button } from "@/shared/components/ui/button";
 import { Slider } from "@/shared/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/shared/components/ui/card";
 import { Label } from "@/shared/components/ui/label";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 import { generatePassword, getPasswordStrength, STRENGTH_COLORS } from "../services/password-generator";
 import type { PasswordOptions } from "../types";
 import { PASSWORD_CHAR_OPTIONS, DEFAULT_PASSWORD_OPTIONS } from "../constants";

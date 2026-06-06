@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils";
 import { FileItemBase, FileItemBaseProps } from "./file-item-base";
 
 export interface FileListBaseProps<T> {
