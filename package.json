@@ -20,7 +20,7 @@
     "@hugeicons/react": "^1.1.4",
     "@mantine/hooks": "^8.3.10",
     "@radix-ui/react-switch": "^1.2.6",
-    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-tabs": "^1.1.14",
     "@tanstack/react-router": "^1.162.2",
     "@tanstack/react-start": "^1.168.17",
     "browser-image-compression": "^2.0.2",
