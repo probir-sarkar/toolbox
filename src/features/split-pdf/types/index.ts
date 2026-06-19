@@ -2,7 +2,6 @@ export type SplitMode = "extract" | "split-all";
 
 export interface SplitPdfSettings {
   splitMode: SplitMode;
-  pageRange: string;
   outputFileName: string;
 }
 

@@ -10,15 +10,13 @@ split-pdf/
 ├── components/           # React components
 │   ├── drop-zone.tsx    # File upload with PDF validation
 │   ├── file-details.tsx # File info + page viewer
-│   ├── settings.tsx     # Split mode + page range input
+│   ├── settings.tsx     # Split mode + selection count display
 │   ├── action-card.tsx  # Process button with split logic
 │   ├── error-display.tsx
 │   └── pdf-page-viewer.tsx
 ├── context.tsx          # React context for state management
 ├── services/
 │   └── split-pdf.ts     # PDF loading, extract, split operations
-├── utils/
-│   └── page-range.ts    # Parse "1-3,5" format to page indices
 ├── types/
 │   └── index.ts         # TypeScript types
 └── constants/
@@ -36,7 +34,7 @@ split-pdf/
 
 Uses React Context with:
 - `fileData` - Current file info (null when no file)
-- `settings` - Split mode (extract/split-all), page range, output name
+- `settings` - Split mode (extract/split-all), output name
 - `selectedPages` - Array of selected page numbers (1-indexed)
 - `isProcessing` - Loading state during split
 - `error` - Error message string
@@ -44,10 +42,9 @@ Uses React Context with:
 ## Page Selection Flow
 
 1. User selects pages in `PdfPageViewer` (click thumbnails)
-2. `togglePageSelection` updates `selectedPages`
-3. `pagesToRange` converts to string format (e.g., "1-3,5,7")
-4. User sees auto-generated range in read-only input
-5. `parsePageRange` converts back to indices for processing
+2. `togglePageSelection` updates `selectedPages` array
+3. Selection count displayed in settings panel
+4. On download, `selectedPages` converted to 0-indexed array for pdf-lib
 
 ## Split Modes
 
@@ -63,7 +60,6 @@ Uses React Context with:
 ## Dependencies
 - `pdf-lib` - PDF manipulation (load, copy pages, save)
 - `react-pdf` - Page thumbnail rendering
-- `es-toolkit` - Utility functions (uniq, isEmpty)
 - Shared: `createZip`, `downloadBlob`, `useProcessingState`
 
 ## Notes

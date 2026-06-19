@@ -4,8 +4,7 @@ import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
 import { SplitPdfDropZone } from "@/features/split-pdf/components/drop-zone"
 import { SplitFileDetails } from "@/features/split-pdf/components/file-details"
-import { SplitSettings } from "@/features/split-pdf/components/settings"
-import { SplitActionCard } from "@/features/split-pdf/components/action-card"
+import { SplitControls } from "@/features/split-pdf/components/split-controls"
 import { SplitError } from "@/features/split-pdf/components/error-display"
 import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/context"
 import { BASE_URL } from "@/lib/seo"
@@ -87,8 +86,7 @@ function SplitPdfPage() {
 
             <div className="space-y-6">
               <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-                <SplitSettings />
-                <SplitActionCard />
+                <SplitControls />
               </ClientOnly>
             </div>
           </div>

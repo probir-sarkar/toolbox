@@ -51,7 +51,7 @@ function PageThumbnail({ file, pageNumber, selected, onClick }: PageThumbnailPro
       </div>
 
       <div className="flex h-full w-full items-center justify-center p-3">
-        <Document file={file}>
+        <Document  file={file}>
           <Page
             pageNumber={pageNumber}
             width={180}
@@ -67,7 +67,7 @@ function PageThumbnail({ file, pageNumber, selected, onClick }: PageThumbnailPro
   );
 }
 
-function PdfPageViewerContent() {
+export function PdfPageViewer() {
   const { fileData, selectedPages, togglePageSelection, selectAllPages, deselectAllPages } = useSplitPdfContext();
 
   if (!fileData) return null;
@@ -104,10 +104,10 @@ function PdfPageViewerContent() {
   );
 }
 
-export function PdfPageViewer() {
-  return (
-    <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-      <PdfPageViewerContent />
-    </ClientOnly>
-  );
-}
+// export function PdfPageViewer() {
+//   return (
+//     <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
+//       <PdfPageViewerContent />
+//     </ClientOnly>
+//   );
+// }
