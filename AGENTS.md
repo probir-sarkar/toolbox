@@ -77,12 +77,18 @@ Example:
 - Implementation details stay in the main file
 - Workers are co-located with their service
 
+### Utilities
+- Use `es-toolkit/compat` for utility functions - it provides the same API as Lodash
+- Use `immer` for immutable state updates, especially with complex nested objects
+- Immer's `produce` function allows writing "mutable-style" code that produces immutable updates
+
 ## Tech Stack
 
 - **Frontend**: React 19, Vite, TypeScript
 - **Routing**: TanStack Router
 - **Styling**: Tailwind CSS v4
 - **State**: Immer for immutable updates
+- **Utilities**: es-toolkit/compat (Lodash-compatible API)
 - **Deployment**: Cloudflare Workers
 
 ## Common Anti-Patterns to Avoid
@@ -90,3 +96,5 @@ Example:
 1. **Don't wrap already-async operations in workers** - Check if the library handles its own threading
 2. **Don't add unnecessary abstractions** - Prefer simple functions over complex class hierarchies
 3. **Don't inline large libraries** - Use dynamic imports for heavy dependencies like PDF.js
+4. **Don't manually spread nested objects for immutability** - Use Immer's `produce` instead
+5. **Don't import from `lodash`** - Use `es-toolkit/compat` for the same API with better performance

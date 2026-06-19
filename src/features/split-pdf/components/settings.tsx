@@ -1,12 +1,14 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Label } from "@/shared/components/ui/label";
 import { Input } from "@/shared/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/shared/components/ui/radio-group";
 import { useSplitPdfContext } from "../context";
 import type { SplitMode } from "../types";
+import { Info } from "lucide-react";
 
 export function SplitSettings() {
-  const { fileData, settings, updateSettings } = useSplitPdfContext();
+  const { fileData, settings, updateSettings, selectedPages } = useSplitPdfContext();
 
   if (!fileData) return null;
 
@@ -49,14 +51,17 @@ export function SplitSettings() {
             <Input
               id="range"
               value={settings.pageRange}
-              onChange={(e) => updateSettings({ pageRange: e.target.value })}
+              readOnly
               placeholder={`e.g. 1-3, 5, 8-${Math.min(10, fileData.pageCount)}`}
+              className="bg-muted/50"
             />
-            <p className="text-xs text-muted-foreground">
-              Enter page numbers and/or ranges separated by commas.
-              <br />
-              Total pages: <strong>{fileData.pageCount}</strong>
-            </p>
+            <div className="flex items-start gap-2 text-xs text-muted-foreground">
+              <Info className="h-3 w-3 mt-0.5 shrink-0" />
+              <p>
+                Auto-generated from selected pages.
+                Total pages: <strong>{fileData.pageCount}</strong> • Selected: <strong>{selectedPages.length}</strong>
+              </p>
+            </div>
           </div>
         )}
       </CardContent>
