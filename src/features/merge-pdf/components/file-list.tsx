@@ -8,10 +8,10 @@ import { GripVertical, X, FileText } from "lucide-react";
 import prettyBytes from "pretty-bytes";
 import { useMergePdfContext } from "../context";
 
-function SortableItem({ file }: { file: PdfFile }) {
+function SortableItem({ file, index }: { file: PdfFile; index: number }) {
   const { removeFile } = useMergePdfContext();
 
-  const sortable = useSortable({ id: file.id });
+  const sortable = useSortable({ id: file.id, index });
 
   return (
     <div ref={sortable.ref} className={sortable.isDragging ? "opacity-50" : ""}>
@@ -78,8 +78,8 @@ export function MergeFileList() {
 
       <DragDropProvider onDragEnd={handleDragEnd}>
         <div className="py-2">
-          {files.map((file) => (
-            <SortableItem key={file.id} file={file} />
+          {files.map((file, index) => (
+            <SortableItem key={file.id} file={file} index={index} />
           ))}
         </div>
       </DragDropProvider>
