@@ -1,6 +1,5 @@
 
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { useSortable } from "@dnd-kit/react/sortable";
 import { X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
@@ -14,26 +13,17 @@ interface SortableImageItemProps {
 }
 
 export function SortableImageItem({ image, index, onRemove }: SortableImageItemProps) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: image.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    zIndex: isDragging ? 50 : "auto"
-  };
+  const sortable = useSortable({ id: image.id });
 
   return (
     <Card
-      ref={setNodeRef}
-      style={style}
+      ref={sortable.ref}
       className={cn(
-        "group relative flex flex-col overflow-hidden transition-all hover:ring-2 hover:ring-primary/50",
-        isDragging && "shadow-xl border-primary/50 rotate-1 bg-background opacity-90 z-50",
+        "group relative flex flex-col overflow-hidden transition-all hover:ring-2 hover:ring-primary/50 cursor-grab active:cursor-grabbing",
+        sortable.isDragging && "shadow-xl border-primary/50 rotate-1 bg-background opacity-90 z-50",
         "touch-none"
       )}
     >
-      {/* Drag Handle - Full Overlay */}
-      <div {...attributes} {...listeners} className="absolute inset-0 z-10 cursor-grab active:cursor-grabbing" />
 
       {/* Remove Button - Top Right (Above Drag Handle) */}
       <Button

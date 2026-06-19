@@ -15,7 +15,8 @@
       "Bash(npm run build:*)",
       "Bash(git push:*)",
       "Bash(npx depcheck:*)",
-      "Bash(pnpm run *)"
+      "Bash(pnpm run *)",
+      "Bash(npx tsc *)"
     ]
   }
 }

@@ -4,8 +4,7 @@ import { HowItWorks } from "@/shared/components/layout/how-it-works"
 import { FAQSection } from "@/shared/components/layout/faq-section"
 import { SplitPdfDropZone } from "@/features/split-pdf/components/drop-zone"
 import { SplitFileDetails } from "@/features/split-pdf/components/file-details"
-import { SplitSettings } from "@/features/split-pdf/components/settings"
-import { SplitActionCard } from "@/features/split-pdf/components/action-card"
+import { SplitControls } from "@/features/split-pdf/components/split-controls"
 import { SplitError } from "@/features/split-pdf/components/error-display"
 import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/context"
 import { BASE_URL } from "@/lib/seo"
@@ -35,7 +34,7 @@ const splitPdfFaqItems = [
   },
   {
     question: "Does it support encrypted PDFs?",
-    answer: "If the PDF is password protected, you will need to interpret/decrypt it first. We currently support standard unencrypted PDFs for automatic processing."
+    answer: "If the PDF is password protected, you will need to decrypt it first. We currently support standard unencrypted PDFs for automatic processing."
   }
 ];
 
@@ -79,18 +78,15 @@ function SplitPdfPage() {
 
         <SplitPdfProvider>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-            {/* Left Column - Upload & Details */}
             <div className="lg:col-span-2 space-y-6">
               <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
                 <SplitPdfContent />
               </ClientOnly>
             </div>
 
-            {/* Right Column - Settings & Actions */}
             <div className="space-y-6">
               <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-                <SplitSettings />
-                <SplitActionCard />
+                <SplitControls />
               </ClientOnly>
             </div>
           </div>

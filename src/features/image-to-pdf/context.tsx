@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState, useCallback, useEffect } from "react";
-import { arrayMove } from "@dnd-kit/sortable";
+import { move } from "@dnd-kit/helpers";
 import type { ImageItem, ImageToPdfSettings } from "./types";
 import { DEFAULT_IMAGE_TO_PDF_SETTINGS } from "./constants";
 import { createImageItem } from "./services/image-to-pdf";
@@ -63,7 +63,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     setImages((prev) => {
       const oldIndex = prev.findIndex((i) => i.id === activeId);
       const newIndex = prev.findIndex((i) => i.id === overId);
-      return arrayMove(prev, oldIndex, newIndex);
+      return move(prev, oldIndex, newIndex);
     });
   }, []);
 

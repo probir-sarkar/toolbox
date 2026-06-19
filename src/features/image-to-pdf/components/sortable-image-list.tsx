@@ -1,32 +1,20 @@
 
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent
-} from "@dnd-kit/core";
-import { SortableContext, sortableKeyboardCoordinates, rectSortingStrategy } from "@dnd-kit/sortable";
+import { DragDropProvider } from "@dnd-kit/react";
 import { useImageToPdfContext } from "../context";
 import { SortableImageItem } from "./sortable-image-item";
 
 export function SortableImageList() {
   const { images, removeImage, reorderImages } = useImageToPdfContext();
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
-  );
+  const handleDragEnd = (event: unknown) => {
+    const { operation, canceled } = event as { operation: { source: { id: string }; target?: { id: string } }; canceled: boolean };
 
-  const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    if (canceled) return;
 
-    if (over && active.id !== over.id) {
-      reorderImages(active.id as string, over.id as string);
+    const { source, target } = operation;
+
+    if (target && source.id !== target.id) {
+      reorderImages(source.id, target.id);
     }
   };
 
@@ -37,15 +25,13 @@ export function SortableImageList() {
       <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
         Files to Convert ({images.length})
       </h2>
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={images.map((img) => img.id)} strategy={rectSortingStrategy}>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {images.map((image, index) => (
-              <SortableImageItem key={image.id} image={image} index={index} onRemove={removeImage} />
-            ))}
-          </div>
-        </SortableContext>
-      </DndContext>
+      <DragDropProvider onDragEnd={handleDragEnd}>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {images.map((image, index) => (
+            <SortableImageItem key={image.id} image={image} index={index} onRemove={removeImage} />
+          ))}
+        </div>
+      </DragDropProvider>
     </div>
   );
 }
