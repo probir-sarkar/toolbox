@@ -1,21 +1,6 @@
 import type { PdfFile } from "../types";
-import {
-  DndContext,
-  closestCenter,
-  KeyboardSensor,
-  PointerSensor,
-  useSensor,
-  useSensors,
-  DragEndEvent
-} from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-  useSortable
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { DragDropProvider } from "@dnd-kit/react";
+import { useSortable } from "@dnd-kit/react/sortable";
 import { Card } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
 import { GripVertical, X, FileText } from "lucide-react";
@@ -25,47 +10,38 @@ import { useMergePdfContext } from "../context";
 function SortableItem({ file }: { file: PdfFile }) {
   const { removeFile } = useMergePdfContext();
 
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: file.id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    zIndex: isDragging ? 1 : 0,
-    opacity: isDragging ? 0.5 : 1
-  };
+  const sortable = useSortable({ id: file.id });
 
   return (
-    <div ref={setNodeRef} style={style} className="touch-none select-none mb-3">
-      <Card className="flex-row items-center p-3 gap-3">
-        <div
-          {...attributes}
-          {...listeners}
-          className="cursor-grab hover:text-foreground text-muted-foreground/50 active:cursor-grabbing"
-        >
-          <GripVertical className="h-5 w-5" />
-        </div>
+    <div ref={sortable.ref} className={sortable.isDragging ? "opacity-50" : ""}>
+      <div className="touch-none select-none mb-3 cursor-grab active:cursor-grabbing">
+        <Card className="flex-row items-center p-3 gap-3">
+          <div className="hover:text-foreground text-muted-foreground/50">
+            <GripVertical className="h-5 w-5" />
+          </div>
 
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 text-orange-600">
-          <FileText className="h-4 w-4" />
-        </div>
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-orange-500/10 text-orange-600">
+            <FileText className="h-4 w-4" />
+          </div>
 
-        <div className="min-w-0 flex-1 flex items-center gap-2">
-          <span className="truncate text-sm font-medium">{file.name}</span>
-          <span className="text-xs text-muted-foreground shrink-0 hidden sm:inline-block">
-            ({prettyBytes(file.size)})
-          </span>
-        </div>
+          <div className="min-w-0 flex-1 flex items-center gap-2">
+            <span className="truncate text-sm font-medium">{file.name}</span>
+            <span className="text-xs text-muted-foreground shrink-0 hidden sm:inline-block">
+              ({prettyBytes(file.size)})
+            </span>
+          </div>
 
-        <Button
-          variant="ghost"
-          size="icon"
-          className="shrink-0 h-8 w-8 text-muted-foreground hover:text-destructive"
-          onClick={() => removeFile(file.id)}
-        >
-          <X className="h-4 w-4" />
-          <span className="sr-only">Remove file</span>
-        </Button>
-      </Card>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="shrink-0 h-8 w-8 text-muted-foreground hover:text-destructive"
+            onClick={() => removeFile(file.id)}
+          >
+            <X className="h-4 w-4" />
+            <span className="sr-only">Remove file</span>
+          </Button>
+        </Card>
+      </div>
     </div>
   );
 }
@@ -73,21 +49,23 @@ function SortableItem({ file }: { file: PdfFile }) {
 export function MergeFileList() {
   const { files, setFiles } = useMergePdfContext();
 
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
-    })
-  );
+  function handleDragEnd(event: unknown) {
+    const { operation, canceled } = event as { operation: { source: { id: string }; target?: { id: string } }; canceled: boolean };
 
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
+    if (canceled) return;
 
-    if (over && active.id !== over.id) {
-      const oldIndex = files.findIndex((f) => f.id === active.id);
-      const newIndex = files.findIndex((f) => f.id === over.id);
+    const { source, target } = operation;
 
-      setFiles(arrayMove(files, oldIndex, newIndex));
+    if (target && source.id !== target.id) {
+      const oldIndex = files.findIndex((f) => f.id === source.id);
+      const newIndex = files.findIndex((f) => f.id === target.id);
+
+      // Create a new array with the moved item
+      const newFiles = [...files];
+      const [movedItem] = newFiles.splice(oldIndex, 1);
+      newFiles.splice(newIndex, 0, movedItem);
+
+      setFiles(newFiles);
     }
   }
 
@@ -99,15 +77,13 @@ export function MergeFileList() {
         <h3 className="text-lg font-semibold">Files to Merge ({files.length})</h3>
       </div>
 
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={files.map((f) => f.id)} strategy={verticalListSortingStrategy}>
-          <div className="py-2">
-            {files.map((file) => (
-              <SortableItem key={file.id} file={file} />
-            ))}
-          </div>
-        </SortableContext>
-      </DndContext>
+      <DragDropProvider onDragEnd={handleDragEnd}>
+        <div className="py-2">
+          {files.map((file) => (
+            <SortableItem key={file.id} file={file} />
+          ))}
+        </div>
+      </DragDropProvider>
     </div>
   );
 }
