@@ -1,4 +1,3 @@
-
 import { useSplitPdfContext } from "../context";
 import { AlertCircle, X } from "lucide-react";
 

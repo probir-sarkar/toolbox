@@ -35,7 +35,7 @@ const splitPdfFaqItems = [
   },
   {
     question: "Does it support encrypted PDFs?",
-    answer: "If the PDF is password protected, you will need to interpret/decrypt it first. We currently support standard unencrypted PDFs for automatic processing."
+    answer: "If the PDF is password protected, you will need to decrypt it first. We currently support standard unencrypted PDFs for automatic processing."
   }
 ];
 
@@ -79,14 +79,12 @@ function SplitPdfPage() {
 
         <SplitPdfProvider>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
-            {/* Left Column - Upload & Details */}
             <div className="lg:col-span-2 space-y-6">
               <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
                 <SplitPdfContent />
               </ClientOnly>
             </div>
 
-            {/* Right Column - Settings & Actions */}
             <div className="space-y-6">
               <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
                 <SplitSettings />

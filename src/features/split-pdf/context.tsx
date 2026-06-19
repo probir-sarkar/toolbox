@@ -1,6 +1,5 @@
-import { createContext, useContext, ReactNode, useCallback } from "react";
-import { useImmer } from "use-immer";
-import { isEmpty, uniq } from "es-toolkit/compat";
+import { createContext, useContext, ReactNode, useState, useCallback } from "react";
+import { uniq } from "es-toolkit/compat";
 import type { SplitPdfSettings, SplitPdfFile } from "./types";
 import { DEFAULT_SPLIT_PDF_SETTINGS } from "./constants";
 import { useProcessingState } from "@/shared/hooks";
@@ -23,59 +22,32 @@ interface SplitPdfContextValue {
 
 const SplitPdfContext = createContext<SplitPdfContextValue | null>(null);
 
-export function SplitPdfProvider({ children }: { children: ReactNode }) {
-  const [fileData, setFileData] = useImmer<SplitPdfFile | null>(null);
-  const [settings, setSettings] = useImmer<SplitPdfSettings>(DEFAULT_SPLIT_PDF_SETTINGS);
-  const [selectedPages, setSelectedPages] = useImmer<number[]>([]);
-  const processingState = useProcessingState();
+function pagesToRange(pages: number[]): string {
+  if (pages.length === 0) return "";
 
-  const updatePageRangeFromSelection = useCallback((pages: number[]) => {
-    setSettings((draft) => {
-      if (isEmpty(pages)) {
-        draft.pageRange = "";
-        return;
-      }
+  const sorted = uniq(pages).sort((a, b) => a - b);
+  const ranges: string[] = [];
+  let start = sorted[0];
+  let end = sorted[0];
 
-      const sortedPages = uniq(pages).sort((a, b) => a - b);
-      const ranges: string[] = [];
-      let start = sortedPages[0];
-      let end = sortedPages[0];
-
-      for (let i = 1; i < sortedPages.length; i++) {
-        if (sortedPages[i] === end + 1) {
-          end = sortedPages[i];
-        } else {
-          ranges.push(start === end ? `${start}` : `${start}-${end}`);
-          start = sortedPages[i];
-          end = sortedPages[i];
-        }
-      }
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i] === end + 1) {
+      end = sorted[i];
+    } else {
       ranges.push(start === end ? `${start}` : `${start}-${end}`);
-      draft.pageRange = ranges.join(", ");
-    });
-  }, [setSettings]);
+      start = sorted[i];
+      end = sorted[i];
+    }
+  }
+  ranges.push(start === end ? `${start}` : `${start}-${end}`);
+  return ranges.join(", ");
+}
 
-  const togglePageSelection = useCallback((page: number) => {
-    const isSelected = selectedPages.includes(page);
-    const newPages = isSelected
-      ? selectedPages.filter((p) => p !== page)
-      : uniq([...selectedPages, page]);
-    setSelectedPages(newPages);
-    updatePageRangeFromSelection(newPages);
-  }, [selectedPages, updatePageRangeFromSelection]);
-
-  const selectAllPages = useCallback(() => {
-    if (!fileData) return;
-
-    const allPages = Array.from({ length: fileData.pageCount }, (_, i) => i + 1);
-    setSelectedPages(allPages);
-    updatePageRangeFromSelection(allPages);
-  }, [fileData, updatePageRangeFromSelection]);
-
-  const deselectAllPages = useCallback(() => {
-    setSelectedPages([]);
-    updatePageRangeFromSelection([]);
-  }, [updatePageRangeFromSelection]);
+export function SplitPdfProvider({ children }: { children: ReactNode }) {
+  const [fileData, setFileData] = useState<SplitPdfFile | null>(null);
+  const [settings, setSettings] = useState<SplitPdfSettings>(DEFAULT_SPLIT_PDF_SETTINGS);
+  const [selectedPages, setSelectedPages] = useState<number[]>([]);
+  const processingState = useProcessingState();
 
   const setFile = useCallback((file: File | null, pageCount: number) => {
     if (file) {
@@ -88,32 +60,53 @@ export function SplitPdfProvider({ children }: { children: ReactNode }) {
 
       const allPages = Array.from({ length: pageCount }, (_, i) => i + 1);
       setSelectedPages(allPages);
-
-      setSettings((draft) => {
-        draft.pageRange = pageCount > 0 ? `1-${pageCount}` : "";
-        draft.outputFileName = file.name.replace(/\.pdf$/i, "");
+      setSettings({
+        splitMode: "extract",
+        pageRange: pageCount > 0 ? `1-${pageCount}` : "",
+        outputFileName: file.name.replace(/\.pdf$/i, ""),
       });
     } else {
       setFileData(null);
       setSelectedPages([]);
+      setSettings(DEFAULT_SPLIT_PDF_SETTINGS);
     }
-
     processingState.setError(null);
-  }, [setFileData, setSelectedPages, setSettings, processingState]);
+  }, [processingState]);
+
+  const togglePageSelection = useCallback((page: number) => {
+    setSelectedPages((prev) => {
+      const newPages = prev.includes(page)
+        ? prev.filter((p) => p !== page)
+        : uniq([...prev, page]);
+
+      setSettings((prev) => ({ ...prev, pageRange: pagesToRange(newPages) }));
+      return newPages;
+    });
+  }, []);
+
+  const selectAllPages = useCallback(() => {
+    if (!fileData) return;
+    const allPages = Array.from({ length: fileData.pageCount }, (_, i) => i + 1);
+    setSelectedPages(allPages);
+    setSettings((prev) => ({ ...prev, pageRange: pagesToRange(allPages) }));
+  }, [fileData]);
+
+  const deselectAllPages = useCallback(() => {
+    setSelectedPages([]);
+    setSettings((prev) => ({ ...prev, pageRange: "" }));
+  }, []);
 
   const updateSettings = useCallback((newSettings: Partial<SplitPdfSettings>) => {
-    setSettings((draft) => {
-      Object.assign(draft, newSettings);
-    });
-  }, [setSettings]);
+    setSettings((prev) => ({ ...prev, ...newSettings }));
+  }, []);
 
   const reset = useCallback(() => {
     setFileData(null);
-    setSettings(DEFAULT_SPLIT_PDF_SETTINGS);
     setSelectedPages([]);
+    setSettings(DEFAULT_SPLIT_PDF_SETTINGS);
     processingState.setError(null);
     processingState.setIsProcessing(false);
-  }, [setFileData, setSettings, setSelectedPages, processingState]);
+  }, [processingState]);
 
   const setError = useCallback((error: string | null) => {
     processingState.setError(error);

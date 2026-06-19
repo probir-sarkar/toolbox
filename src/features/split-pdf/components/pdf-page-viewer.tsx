@@ -6,7 +6,6 @@ import { Button } from "@/shared/components/ui/button";
 import { CheckSquare, Square } from "lucide-react";
 import { cn } from "@/shared/utils";
 
-// Configure PDF.js worker
 if (typeof window !== "undefined") {
   pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 }
@@ -52,7 +51,7 @@ function PageThumbnail({ file, pageNumber, selected, onClick }: PageThumbnailPro
       </div>
 
       <div className="flex h-full w-full items-center justify-center p-3">
-        <Document file={file} className="">
+        <Document file={file}>
           <Page
             pageNumber={pageNumber}
             width={180}
@@ -77,10 +76,6 @@ function PdfPageViewerContent() {
 
   return (
     <div className="space-y-4">
-      <Document file={fileData.file} className="hidden">
-        <Page pageNumber={1} renderAnnotationLayer={false} renderTextLayer={false} />
-      </Document>
-
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-lg font-semibold">Pages ({selectedPages.length} selected)</h3>
         <Button

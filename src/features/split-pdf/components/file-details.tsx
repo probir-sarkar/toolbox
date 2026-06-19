@@ -1,4 +1,3 @@
-
 import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
@@ -13,7 +12,6 @@ export function SplitFileDetails() {
 
   return (
     <div className="space-y-6">
-      {/* File Info Card */}
       <div className="space-y-4">
         <h3 className="text-lg font-semibold text-foreground">Selected File</h3>
         <Card className="flex flex-row items-center p-4 gap-4">
@@ -37,7 +35,6 @@ export function SplitFileDetails() {
         </Card>
       </div>
 
-      {/* PDF Page Viewer */}
       <PdfPageViewer />
     </div>
   );
