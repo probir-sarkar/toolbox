@@ -1,7 +1,7 @@
 import type { PdfFile } from "../types";
 import { arrayMove } from "@dnd-kit/helpers";
-import { DragDropProvider } from "@dnd-kit/react";
-import { useSortable } from "@dnd-kit/react/sortable";
+import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
+import { isSortable, useSortable } from "@dnd-kit/react/sortable";
 import { Card } from "@/shared/components/ui/card";
 import { Button } from "@/shared/components/ui/button";
 import { GripVertical, X, FileText } from "lucide-react";
@@ -50,21 +50,11 @@ function SortableItem({ file, index }: { file: PdfFile; index: number }) {
 export function MergeFileList() {
   const { files, setFiles } = useMergePdfContext();
 
-  function handleDragEnd(event: unknown) {
-    const { operation, canceled } = event as {
-      operation: { source: { id: string }; target?: { id: string } };
-      canceled: boolean;
-    };
-
-    if (canceled) return;
-
-    const { source, target } = operation;
-
-    if (target && source.id !== target.id) {
-      const oldIndex = files.findIndex((f) => f.id === source.id);
-      const newIndex = files.findIndex((f) => f.id === target.id);
-
-      setFiles(arrayMove(files, oldIndex, newIndex));
+  function handleDragEnd(event: DragEndEvent) {
+    if (event.canceled) return;
+    const { source, target } = event.operation;
+    if (isSortable(source) && isSortable(target)) {
+      setFiles(arrayMove(files, source.index, target.index));
     }
   }
 
