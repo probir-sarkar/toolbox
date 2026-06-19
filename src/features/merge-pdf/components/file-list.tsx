@@ -1,4 +1,5 @@
 import type { PdfFile } from "../types";
+import { arrayMove } from "@dnd-kit/helpers";
 import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { Card } from "@/shared/components/ui/card";
@@ -50,7 +51,10 @@ export function MergeFileList() {
   const { files, setFiles } = useMergePdfContext();
 
   function handleDragEnd(event: unknown) {
-    const { operation, canceled } = event as { operation: { source: { id: string }; target?: { id: string } }; canceled: boolean };
+    const { operation, canceled } = event as {
+      operation: { source: { id: string }; target?: { id: string } };
+      canceled: boolean;
+    };
 
     if (canceled) return;
 
@@ -60,12 +64,7 @@ export function MergeFileList() {
       const oldIndex = files.findIndex((f) => f.id === source.id);
       const newIndex = files.findIndex((f) => f.id === target.id);
 
-      // Create a new array with the moved item
-      const newFiles = [...files];
-      const [movedItem] = newFiles.splice(oldIndex, 1);
-      newFiles.splice(newIndex, 0, movedItem);
-
-      setFiles(newFiles);
+      setFiles(arrayMove(files, oldIndex, newIndex));
     }
   }
 

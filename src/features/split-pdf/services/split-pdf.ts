@@ -4,11 +4,12 @@ export async function loadPdfFile(file: File): Promise<SplitPdfFile> {
   const { PDFDocument } = await import("pdf-lib");
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFDocument.load(arrayBuffer);
-  const pageCount = pdfDoc.getPageCount();
 
   if (pdfDoc.isEncrypted) {
     throw new Error("This PDF is password protected and cannot be processed.");
   }
+
+  const pageCount = pdfDoc.getPageCount();
 
   if (pageCount === 0) {
     throw new Error("This PDF has no pages.");
