@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/shared/components/ui/card";
 import { Label } from "@/shared/components/ui/label";
@@ -12,14 +11,12 @@ import { downloadBlob } from "@/shared/services/download";
 
 export function SplitControls() {
   const { fileData, settings, selectedPages, isProcessing, setIsProcessing, setError, updateSettings } = useSplitPdfContext();
-  const [success, setSuccess] = useState(false);
 
   const handleSplit = async () => {
     if (!fileData) return;
 
     setIsProcessing(true);
     setError(null);
-    setSuccess(false);
 
     try {
       if (settings.splitMode === "extract") {
@@ -38,7 +35,6 @@ export function SplitControls() {
         downloadBlob(zipBlob, `${fileData.fileName}-split.zip`);
       }
 
-      setSuccess(true);
     } catch {
       setError("An error occurred while splitting the PDF.");
     } finally {

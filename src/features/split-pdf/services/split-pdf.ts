@@ -1,13 +1,6 @@
-import { PDFDocument } from "pdf-lib";
+import type { SplitPdfFile } from "../types";
 
-export interface PdfFileInfo {
-  file: File;
-  pageCount: number;
-  fileName: string;
-  fileSize: number;
-}
-
-export async function loadPdfFile(file: File): Promise<PdfFileInfo> {
+export async function loadPdfFile(file: File): Promise<SplitPdfFile> {
   const arrayBuffer = await file.arrayBuffer();
   const pdfDoc = await PDFDocument.load(arrayBuffer);
   const pageCount = pdfDoc.getPageCount();
@@ -25,7 +18,7 @@ export async function loadPdfFile(file: File): Promise<PdfFileInfo> {
     pageCount,
     fileName: file.name.replace(/\.pdf$/i, ""),
     fileSize: file.size,
-  };
+  } as SplitPdfFile;
 }
 
 export async function extractPages(

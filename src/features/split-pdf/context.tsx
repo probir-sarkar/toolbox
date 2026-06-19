@@ -40,7 +40,6 @@ export function SplitPdfProvider({ children }: { children: ReactNode }) {
       setSelectedPages(allPages);
       setSettings({
         splitMode: "extract",
-        outputFileName: file.name.replace(/\.pdf$/i, ""),
       });
     } else {
       setFileData(null);

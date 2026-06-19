@@ -1,4 +1,3 @@
-import { ClientOnly } from "@tanstack/react-router";
 import { Document, Page, pdfjs } from "react-pdf";
 import { FileText } from "lucide-react";
 import { useSplitPdfContext } from "../context";
@@ -103,11 +102,3 @@ export function PdfPageViewer() {
     </div>
   );
 }
-
-// export function PdfPageViewer() {
-//   return (
-//     <ClientOnly fallback={<div className="h-64 bg-muted animate-pulse rounded-lg" />}>
-//       <PdfPageViewerContent />
-//     </ClientOnly>
-//   );
-// }

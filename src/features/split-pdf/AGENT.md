@@ -9,11 +9,10 @@ Client-side PDF splitting and page extraction feature. All processing happens in
 split-pdf/
 ├── components/           # React components
 │   ├── drop-zone.tsx    # File upload with PDF validation
-│   ├── file-details.tsx # File info + page viewer
-│   ├── settings.tsx     # Split mode + selection count display
-│   ├── action-card.tsx  # Process button with split logic
-│   ├── error-display.tsx
-│   └── pdf-page-viewer.tsx
+│   ├── file-details.tsx # File info + page viewer integration
+│   ├── split-controls.tsx # Split mode selection + download button
+│   ├── error-display.tsx # Error message display
+│   └── pdf-page-viewer.tsx # Page thumbnails with selection
 ├── context.tsx          # React context for state management
 ├── services/
 │   └── split-pdf.ts     # PDF loading, extract, split operations

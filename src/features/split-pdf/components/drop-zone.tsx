@@ -2,6 +2,7 @@ import { FileText } from "lucide-react";
 import { useSplitPdfContext } from "../context";
 import { DropZone } from "@/shared/components/common/drop-zone";
 import { loadPdfFile } from "../services/split-pdf";
+import { ACCEPTED_FILE_TYPES } from "../constants";
 
 export function SplitPdfDropZone() {
   const { setFile, setError } = useSplitPdfContext();
@@ -16,7 +17,7 @@ export function SplitPdfDropZone() {
   };
 
   return (
-    <DropZone onDrop={handleFile} accept="application/pdf">
+    <DropZone onDrop={handleFile} accept={ACCEPTED_FILE_TYPES[0]}>
       <DropZone.Icon icon={FileText} className="text-orange-600" />
       <DropZone.Title>Drop PDF here or click to select</DropZone.Title>
       <DropZone.Description>Select a PDF file to split or extract pages from</DropZone.Description>
