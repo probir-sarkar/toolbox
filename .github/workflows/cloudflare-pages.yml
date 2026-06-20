@@ -12,16 +12,21 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v6
-      - uses: voidzero-dev/setup-vp@v1
-        with:
-          node-version: lts
+
       - uses: pnpm/action-setup@v4
         with:
           version: latest
+
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version: lts
+
       - name: Install dependencies
         run: vp install
+
       - name: Build
         run: vp build
+
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
