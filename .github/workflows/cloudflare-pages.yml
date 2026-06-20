@@ -1,29 +1,35 @@
+name: Deploy
+
 on:
   push:
     branches:
       - dev
+      - master
+
+permissions:
+  contents: read
+  deployments: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy
-    permissions:
-      contents: read
-      deployments: write
+
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
     steps:
       - uses: actions/checkout@v6
+
       - uses: voidzero-dev/setup-vp@v1
         with:
           node-version: lts
 
-      - name: Install dependencies
-        run: vp install
-
-      - name: Build
-        run: vp build
+      - run: vp install --frozen-lockfile
+      - run: vp build
 
       - name: Deploy
-        run: vp exec wrangler pages deploy dist/client --project-name=toolbox --branch=dev
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          vp exec wrangler pages deploy dist/client \
+            --project-name toolbox \
+            --branch ${{ github.ref_name }}
