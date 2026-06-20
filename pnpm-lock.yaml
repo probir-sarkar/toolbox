@@ -121,9 +121,6 @@ importers:
       '@vitest/browser-playwright':
         specifier: ^4.1.9
         version: 4.1.9(@voidzero-dev/vite-plus-core@0.2.1(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(typescript@6.0.3))(playwright@1.61.0)(vitest@4.1.9)
-      '@voidzero-dev/vite-plus-linux-x64-gnu':
-        specifier: ^0.2.1
-        version: 0.2.1
       playwright:
         specifier: '*'
         version: 1.61.0
@@ -1639,6 +1636,7 @@ packages:
     engines: {node: ^20.19.0 || ^22.18.0 || >=24.11.0}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@voidzero-dev/vite-plus-linux-x64-musl@0.2.1':
     resolution: {integrity: sha512-2scSS7wEbLO2758fqr1/bAULg7nLCFa5V8LO2b5w3g1CrTYdMTDt2WX1ghPesIi+70pYGydRbXo6iaaN43zfMg==}
@@ -4759,7 +4757,8 @@ snapshots:
   '@voidzero-dev/vite-plus-linux-arm64-musl@0.2.1':
     optional: true
 
-  '@voidzero-dev/vite-plus-linux-x64-gnu@0.2.1': {}
+  '@voidzero-dev/vite-plus-linux-x64-gnu@0.2.1':
+    optional: true
 
   '@voidzero-dev/vite-plus-linux-x64-musl@0.2.1':
     optional: true
