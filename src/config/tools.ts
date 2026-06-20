@@ -1,4 +1,14 @@
-import { Hammer, Palette, Lock, FileText, Image as ImageIcon, Scissors, Sparkles, QrCode, LucideIcon } from "lucide-react";
+import {
+  Hammer,
+  Palette,
+  Lock,
+  FileText,
+  Image as ImageIcon,
+  Scissors,
+  Sparkles,
+  QrCode,
+  LucideIcon,
+} from "lucide-react";
 
 interface ToolItem {
   title: string;
@@ -31,7 +41,7 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Convert PDF pages to high-quality images.",
         icon: FileText,
         color: "bg-orange-500/10 text-orange-600",
-        tags: ["PDF", "Image", "Popular"]
+        tags: ["PDF", "Image", "Popular"],
       },
       {
         title: "Image to PDF",
@@ -39,7 +49,7 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Convert images to a single PDF document.",
         icon: FileText,
         color: "bg-red-500/10 text-red-600",
-        tags: ["Image", "PDF", "Top"]
+        tags: ["Image", "PDF", "Top"],
       },
       {
         title: "Merge PDF",
@@ -47,7 +57,7 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Combine multiple PDFs into one.",
         icon: Hammer,
         color: "bg-orange-500/10 text-orange-600",
-        tags: ["PDF", "Utils"]
+        tags: ["PDF", "Utils"],
       },
       {
         title: "Split PDF",
@@ -55,9 +65,9 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Extract pages or split into multiple files.",
         icon: Scissors,
         color: "bg-orange-500/10 text-orange-600",
-        tags: ["PDF", "Editor"]
-      }
-    ]
+        tags: ["PDF", "Editor"],
+      },
+    ],
   },
   {
     title: "Image Tools",
@@ -71,7 +81,7 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Batch convert image formats freely.",
         icon: ImageIcon,
         color: "bg-blue-500/10 text-blue-600",
-        tags: ["Image", "Optimization", "Popular"]
+        tags: ["Image", "Optimization", "Popular"],
       },
       {
         title: "Image Resizer",
@@ -79,7 +89,7 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Resize images to any dimension.",
         icon: ImageIcon,
         color: "bg-purple-500/10 text-purple-600",
-        tags: ["Image", "Editor", "New"]
+        tags: ["Image", "Editor", "New"],
       },
       {
         title: "Image Compressor",
@@ -87,9 +97,9 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Compress images while maintaining quality.",
         icon: ImageIcon,
         color: "bg-blue-500/10 text-blue-600",
-        tags: ["Image", "Optimization", "New"]
-      }
-    ]
+        tags: ["Image", "Optimization", "New"],
+      },
+    ],
   },
   {
     title: "Security Tools",
@@ -103,9 +113,9 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Create strong, secure passwords.",
         icon: Lock,
         color: "bg-green-500/10 text-green-600",
-        tags: ["Security", "Privacy", "Popular"]
-      }
-    ]
+        tags: ["Security", "Privacy", "Popular"],
+      },
+    ],
   },
   {
     title: "Developer Tools",
@@ -119,10 +129,10 @@ export const TOOLS_CONFIG: ToolCategory[] = [
         description: "Create custom QR codes for any purpose.",
         icon: QrCode,
         color: "bg-pink-500/10 text-pink-600",
-        tags: ["Generator", "New", "Popular"]
-      }
-    ]
-  }
+        tags: ["Generator", "New", "Popular"],
+      },
+    ],
+  },
 ];
 
 export const ALL_TOOLS = TOOLS_CONFIG.flatMap((category) => category.items);

@@ -19,7 +19,7 @@ export async function loadPdfFile(file: File): Promise<SplitPdfFile> {
     file,
     pageCount,
     fileName: file.name.replace(/\.pdf$/i, ""),
-    fileSize: file.size
+    fileSize: file.size,
   } as SplitPdfFile;
 }
 
@@ -33,7 +33,7 @@ export async function extractPages(file: File, pageIndices: number[], outputFile
   copiedPages.forEach((page) => newPdf.addPage(page));
 
   const pdfBytes = await newPdf.save({
-    useObjectStreams: true
+    useObjectStreams: true,
   });
   return new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" });
 }
@@ -50,10 +50,12 @@ export async function splitAllPages(file: File, pageCount: number, baseName: str
     const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
     newPdf.addPage(copiedPage);
     const pdfBytes = await newPdf.save({
-      useObjectStreams: true
+      useObjectStreams: true,
     });
 
-    files[`${baseName}-page-${i + 1}.pdf`] = new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" });
+    files[`${baseName}-page-${i + 1}.pdf`] = new Blob([pdfBytes.buffer as ArrayBuffer], {
+      type: "application/pdf",
+    });
   }
 
   return files;

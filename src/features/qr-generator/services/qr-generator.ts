@@ -16,15 +16,15 @@ export async function generateQRCode(options: GenerateQROptions): Promise<string
 
   // Generate content based on type
   switch (contentType) {
-    case 'wifi': {
+    case "wifi": {
       if (!wifiConfig.ssid) {
-        throw new Error('SSID is required for WiFi QR codes');
+        throw new Error("SSID is required for WiFi QR codes");
       }
       qrContent = `WIFI:T:${wifiConfig.encryption};S:${wifiConfig.ssid};P:${wifiConfig.password};H:${wifiConfig.hidden};;`;
       break;
     }
 
-    case 'vcard': {
+    case "vcard": {
       const vcard = `BEGIN:VCARD
 VERSION:3.0
 N:${vcardConfig.lastName};${vcardConfig.firstName}
@@ -38,33 +38,33 @@ END:VCARD`;
       break;
     }
 
-    case 'text': {
+    case "text": {
       if (!content.trim()) {
-        throw new Error('Text content is required');
+        throw new Error("Text content is required");
       }
       qrContent = content;
       break;
     }
 
-    case 'url': {
+    case "url": {
       if (!content.trim()) {
-        throw new Error('URL is required');
+        throw new Error("URL is required");
       }
-      qrContent = content.startsWith('http') ? content : `https://${content}`;
+      qrContent = content.startsWith("http") ? content : `https://${content}`;
       break;
     }
   }
 
   // Dynamic import for QR code generation
-  const QRCode = await import('qrcode');
-  const canvas = document.createElement('canvas');
+  const QRCode = await import("qrcode");
+  const canvas = document.createElement("canvas");
 
   // Determine color
   let color: string;
-  if (settings.color === 'custom') {
-    color = settings.customColor || '#000000';
+  if (settings.color === "custom") {
+    color = settings.customColor || "#000000";
   } else {
-    color = COLOR_MAP[settings.color] || '#000000';
+    color = COLOR_MAP[settings.color] || "#000000";
   }
 
   await QRCode.toCanvas(canvas, qrContent, {
@@ -77,5 +77,5 @@ END:VCARD`;
     errorCorrectionLevel: settings.errorCorrectionLevel,
   });
 
-  return canvas.toDataURL('image/png');
+  return canvas.toDataURL("image/png");
 }

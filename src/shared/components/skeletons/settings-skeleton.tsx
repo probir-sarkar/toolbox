@@ -1,4 +1,3 @@
-
 import { cn } from "@/shared/utils";
 
 interface SettingsSkeletonProps {

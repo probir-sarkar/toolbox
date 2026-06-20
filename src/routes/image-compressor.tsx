@@ -1,31 +1,35 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { FAQSection } from "@/shared/components/layout/faq-section"
-import { ImageCompressor } from "@/features/image-compressor/image-compressor"
-import { ImageCompressorProvider } from "@/features/image-compressor/context"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { FAQSection } from "@/shared/components/layout/faq-section";
+import { ImageCompressor } from "@/features/image-compressor/image-compressor";
+import { ImageCompressorProvider } from "@/features/image-compressor/context";
+import { BASE_URL } from "@/lib/seo";
 
 const imageCompressorFaqItems = [
   {
     question: "How much can I reduce the file size?",
-    answer: "The compression ratio depends on the image content and quality settings. Typically, you can reduce file sizes by 50-80% with minimal visible quality loss. Photos with lots of detail compress better than simple graphics."
+    answer:
+      "The compression ratio depends on the image content and quality settings. Typically, you can reduce file sizes by 50-80% with minimal visible quality loss. Photos with lots of detail compress better than simple graphics.",
   },
   {
     question: "Will compression affect image quality?",
-    answer: "There's always a trade-off between file size and quality. Our tool uses high-quality compression algorithms to minimize quality loss. You can preview the compression ratio and adjust quality settings to find the right balance."
+    answer:
+      "There's always a trade-off between file size and quality. Our tool uses high-quality compression algorithms to minimize quality loss. You can preview the compression ratio and adjust quality settings to find the right balance.",
   },
   {
     question: "What format should I choose?",
-    answer: "JPEG offers the best compression for photos. WebP provides even better compression with good quality but may not be supported by older browsers. PNG is lossless but results in larger files. Choose based on your use case."
+    answer:
+      "JPEG offers the best compression for photos. WebP provides even better compression with good quality but may not be supported by older browsers. PNG is lossless but results in larger files. Choose based on your use case.",
   },
   {
     question: "Can I batch compress multiple images?",
-    answer: "Yes! Upload multiple images and they'll all be compressed using the same settings. Each image will be downloaded individually after compression."
-  }
+    answer:
+      "Yes! Upload multiple images and they'll all be compressed using the same settings. Each image will be downloaded individually after compression.",
+  },
 ];
 
-export const Route = createFileRoute('/image-compressor')({
+export const Route = createFileRoute("/image-compressor")({
   component: ImageCompressorPage,
   head: () => ({
     meta: [
@@ -34,7 +38,8 @@ export const Route = createFileRoute('/image-compressor')({
       },
       {
         name: "description",
-        content: "Compress images to reduce file size while maintaining quality. Smart compression, batch processing, multiple formats. 100% free, private, and works offline.",
+        content:
+          "Compress images to reduce file size while maintaining quality. Smart compression, batch processing, multiple formats. 100% free, private, and works offline.",
       },
       {
         property: "og:title",
@@ -48,11 +53,11 @@ export const Route = createFileRoute('/image-compressor')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/image-compressor`
-      }
-    ]
+        href: `${BASE_URL}/image-compressor`,
+      },
+    ],
   }),
-})
+});
 
 function ImageCompressorPage() {
   return (
@@ -74,16 +79,16 @@ function ImageCompressorPage() {
             steps={[
               {
                 title: "Upload Images",
-                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more."
+                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more.",
               },
               {
                 title: "Adjust Quality",
-                description: "Set compression quality, max dimensions, and target file size."
+                description: "Set compression quality, max dimensions, and target file size.",
               },
               {
                 title: "Compress & Download",
-                description: "Images are optimized locally. See compression ratios and download instantly."
-              }
+                description: "Images are optimized locally. See compression ratios and download instantly.",
+              },
             ]}
             description="Optimize your images in three simple steps. Fast, secure, and purely client-side."
           />
@@ -94,5 +99,5 @@ function ImageCompressorPage() {
         </section>
       </div>
     </main>
-  )
+  );
 }

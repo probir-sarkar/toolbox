@@ -20,19 +20,22 @@ export function ImageCompressorSettings() {
             <Slider
               id="quality"
               defaultValue={[settings.quality * 100]}
-              onValueChange={(value) => updateSettings({ quality: ((Array.isArray(value) ? value[0] : value) ?? 0) / 100 })}
+              onValueChange={(value) =>
+                updateSettings({ quality: ((Array.isArray(value) ? value[0] : value) ?? 0) / 100 })
+              }
               min={1}
               max={100}
               step={1}
             />
-            <p className="text-xs text-muted-foreground">
-              Lower quality = smaller file size but reduced image quality
-            </p>
+            <p className="text-xs text-muted-foreground">Lower quality = smaller file size but reduced image quality</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="format">Output Format</Label>
-            <Select value={settings.outputFormat} onValueChange={(value: any) => updateSettings({ outputFormat: value })}>
+            <Select
+              value={settings.outputFormat}
+              onValueChange={(value: any) => updateSettings({ outputFormat: value })}
+            >
               <SelectTrigger id="format">
                 <SelectValue />
               </SelectTrigger>
@@ -50,14 +53,12 @@ export function ImageCompressorSettings() {
             <Input
               id="maxWidth"
               type="number"
-              value={settings.maxWidth || ''}
+              value={settings.maxWidth || ""}
               onChange={(e) => updateSettings({ maxWidth: parseInt(e.target.value) || undefined })}
               min={1}
               placeholder="No limit"
             />
-            <p className="text-xs text-muted-foreground">
-              Resize larger images to reduce file size further
-            </p>
+            <p className="text-xs text-muted-foreground">Resize larger images to reduce file size further</p>
           </div>
 
           <div className="space-y-2">
@@ -65,7 +66,7 @@ export function ImageCompressorSettings() {
             <Input
               id="maxHeight"
               type="number"
-              value={settings.maxHeight || ''}
+              value={settings.maxHeight || ""}
               onChange={(e) => updateSettings({ maxHeight: parseInt(e.target.value) || undefined })}
               min={1}
               placeholder="No limit"
@@ -77,14 +78,12 @@ export function ImageCompressorSettings() {
             <Input
               id="targetSize"
               type="number"
-              value={settings.targetSize || ''}
+              value={settings.targetSize || ""}
               onChange={(e) => updateSettings({ targetSize: parseInt(e.target.value) || undefined })}
               min={1}
               placeholder="Auto compression"
             />
-            <p className="text-xs text-muted-foreground">
-              Automatically adjust quality to meet target file size
-            </p>
+            <p className="text-xs text-muted-foreground">Automatically adjust quality to meet target file size</p>
           </div>
         </div>
       </CardContent>

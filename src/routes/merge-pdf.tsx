@@ -13,20 +13,23 @@ import { BASE_URL } from "@/lib/seo";
 const mergePdfFaqItems = [
   {
     question: "Is there a file size limit?",
-    answer: "No, you can merge PDFs of any size. The processing happens locally on your device, so the only limit is your available memory."
+    answer:
+      "No, you can merge PDFs of any size. The processing happens locally on your device, so the only limit is your available memory.",
   },
   {
     question: "Can I merge password-protected PDFs?",
-    answer: "You can merge password-protected PDFs if you know the password. However, the merged PDF will not retain the password protection."
+    answer:
+      "You can merge password-protected PDFs if you know the password. However, the merged PDF will not retain the password protection.",
   },
   {
     question: "What happens to the original PDFs?",
-    answer: "Your original PDF files are never modified or uploaded. The merging process creates a new PDF file, leaving your originals intact."
+    answer:
+      "Your original PDF files are never modified or uploaded. The merging process creates a new PDF file, leaving your originals intact.",
   },
   {
     question: "Can I reorder the PDFs before merging?",
-    answer: "Yes, you can drag and drop the files in the list to set the order they will appear in the merged PDF."
-  }
+    answer: "Yes, you can drag and drop the files in the list to set the order they will appear in the merged PDF.",
+  },
 ];
 
 export const Route = createFileRoute("/merge-pdf")({
@@ -34,29 +37,29 @@ export const Route = createFileRoute("/merge-pdf")({
   head: () => ({
     meta: [
       {
-        title: "Merge PDF Files - Free Online PDF Combiner | Toolbox"
+        title: "Merge PDF Files - Free Online PDF Combiner | Toolbox",
       },
       {
         name: "description",
         content:
-          "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds."
+          "Combine multiple PDF files into one document for free. Fast, secure, and works offline. No uploads, no registration. Merge PDFs in seconds.",
       },
       {
         property: "og:title",
-        content: "Merge PDF Files - Free Online"
+        content: "Merge PDF Files - Free Online",
       },
       {
         property: "og:description",
-        content: "Combine multiple PDFs into one. Fast, secure, and works offline."
-      }
+        content: "Combine multiple PDFs into one. Fast, secure, and works offline.",
+      },
     ],
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/merge-pdf`
-      }
-    ]
-  })
+        href: `${BASE_URL}/merge-pdf`,
+      },
+    ],
+  }),
 });
 
 function MergePdfPage() {
@@ -94,16 +97,16 @@ function MergePdfPage() {
             steps={[
               {
                 title: "Select PDFs",
-                description: "Drop your PDF files here. You can select multiple files at once."
+                description: "Drop your PDF files here. You can select multiple files at once.",
               },
               {
                 title: "Arrange & Sort",
-                description: "Drag and drop the files in the list to set the order of the merged document."
+                description: "Drag and drop the files in the list to set the order of the merged document.",
               },
               {
                 title: "Merge & Download",
-                description: "Click Merge to combine them instantly. Your new PDF is ready to download."
-              }
+                description: "Click Merge to combine them instantly. Your new PDF is ready to download.",
+              },
             ]}
             description="Our merge tool is designed for speed and privacy. No uploads, just instant merging."
           />

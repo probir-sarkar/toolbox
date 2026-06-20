@@ -1,11 +1,11 @@
-export type QRContentType = 'url' | 'text' | 'wifi' | 'vcard';
-export type QRCodeColor = 'black' | 'blue' | 'red' | 'green' | 'custom';
-export type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
+export type QRContentType = "url" | "text" | "wifi" | "vcard";
+export type QRCodeColor = "black" | "blue" | "red" | "green" | "custom";
+export type ErrorCorrectionLevel = "L" | "M" | "Q" | "H";
 
 export interface WiFiConfig {
   ssid: string;
   password: string;
-  encryption: 'WPA' | 'WEP' | 'nopass';
+  encryption: "WPA" | "WEP" | "nopass";
   hidden: boolean;
 }
 

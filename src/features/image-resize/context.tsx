@@ -24,22 +24,25 @@ export function ImageResizeProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<ResizeSettings>(DEFAULT_RESIZE_SETTINGS);
   const processingState = useProcessingState();
 
-  const addFiles = useCallback(async (newFiles: File[]) => {
-    const processedFiles: ImageFile[] = [];
+  const addFiles = useCallback(
+    async (newFiles: File[]) => {
+      const processedFiles: ImageFile[] = [];
 
-    for (const file of newFiles) {
-      if (!file.type.startsWith('image/')) continue;
-      try {
-        const imageFile = await createImageFile(file);
-        processedFiles.push(imageFile);
-      } catch (error) {
-        console.error(`Failed to process ${file.name}:`, error);
+      for (const file of newFiles) {
+        if (!file.type.startsWith("image/")) continue;
+        try {
+          const imageFile = await createImageFile(file);
+          processedFiles.push(imageFile);
+        } catch (error) {
+          console.error(`Failed to process ${file.name}:`, error);
+        }
       }
-    }
 
-    setFiles((prev) => [...prev, ...processedFiles]);
-    processingState.setError(null);
-  }, [processingState]);
+      setFiles((prev) => [...prev, ...processedFiles]);
+      processingState.setError(null);
+    },
+    [processingState]
+  );
 
   const removeFile = useCallback((id: string) => {
     setFiles((prev) => {
@@ -60,9 +63,12 @@ export function ImageResizeProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, ...newSettings }));
   }, []);
 
-  const setError = useCallback((error: string | null) => {
-    processingState.setError(error);
-  }, [processingState]);
+  const setError = useCallback(
+    (error: string | null) => {
+      processingState.setError(error);
+    },
+    [processingState]
+  );
 
   const value: ImageResizeContextValue = {
     files,
@@ -77,11 +83,7 @@ export function ImageResizeProvider({ children }: { children: ReactNode }) {
     setError,
   };
 
-  return (
-    <ImageResizeContext.Provider value={value}>
-      {children}
-    </ImageResizeContext.Provider>
-  );
+  return <ImageResizeContext.Provider value={value}>{children}</ImageResizeContext.Provider>;
 }
 
 export function useImageResizeContext(): ImageResizeContextValue {

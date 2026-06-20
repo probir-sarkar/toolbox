@@ -48,14 +48,7 @@ export function FileListBase<T>({
         }
 
         const props = toFileItemProps(file);
-        return (
-          <FileItemBase
-            key={props.id}
-            {...props}
-            onRemove={onRemove}
-            className={itemClassName}
-          />
-        );
+        return <FileItemBase key={props.id} {...props} onRemove={onRemove} className={itemClassName} />;
       })}
     </div>
   );

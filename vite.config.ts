@@ -9,8 +9,13 @@ export default defineConfig({
   staged: {
     "*": "vp check --fix",
   },
-  fmt: {},
+  fmt: {
+    trailingComma: "es5",
+    printWidth: 120,
+    tabWidth: 2,
+  },
   lint: {
+    ignorePatterns: ["dist/**", "node_modules/**"],
     jsPlugins: [{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" }],
     rules: { "vite-plus/prefer-vite-plus-imports": "error" },
     options: { typeAware: true, typeCheck: true },

@@ -67,7 +67,9 @@ export function ImageResizeSettings() {
             <Slider
               id="quality"
               defaultValue={[settings.quality * 100]}
-              onValueChange={(value) => updateSettings({ quality: ((Array.isArray(value) ? value[0] : value) ?? 0) / 100 })}
+              onValueChange={(value) =>
+                updateSettings({ quality: ((Array.isArray(value) ? value[0] : value) ?? 0) / 100 })
+              }
               min={1}
               max={100}
               step={1}
@@ -76,7 +78,10 @@ export function ImageResizeSettings() {
 
           <div className="space-y-2">
             <Label htmlFor="format">Output Format</Label>
-            <Select value={settings.outputFormat} onValueChange={(value: any) => updateSettings({ outputFormat: value })}>
+            <Select
+              value={settings.outputFormat}
+              onValueChange={(value: any) => updateSettings({ outputFormat: value })}
+            >
               <SelectTrigger id="format">
                 <SelectValue />
               </SelectTrigger>

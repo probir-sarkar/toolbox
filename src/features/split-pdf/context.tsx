@@ -27,33 +27,34 @@ export function SplitPdfProvider({ children }: { children: ReactNode }) {
   const [selectedPages, setSelectedPages] = useState<number[]>([]);
   const processingState = useProcessingState();
 
-  const setFile = useCallback((file: File | null, pageCount: number) => {
-    if (file) {
-      setFileData({
-        file,
-        pageCount,
-        fileName: file.name.replace(/\.pdf$/i, ""),
-        fileSize: file.size,
-      });
+  const setFile = useCallback(
+    (file: File | null, pageCount: number) => {
+      if (file) {
+        setFileData({
+          file,
+          pageCount,
+          fileName: file.name.replace(/\.pdf$/i, ""),
+          fileSize: file.size,
+        });
 
-      const allPages = Array.from({ length: pageCount }, (_, i) => i + 1);
-      setSelectedPages(allPages);
-      setSettings({
-        splitMode: "extract",
-      });
-    } else {
-      setFileData(null);
-      setSelectedPages([]);
-      setSettings(DEFAULT_SPLIT_PDF_SETTINGS);
-    }
-    processingState.setError(null);
-  }, [processingState]);
+        const allPages = Array.from({ length: pageCount }, (_, i) => i + 1);
+        setSelectedPages(allPages);
+        setSettings({
+          splitMode: "extract",
+        });
+      } else {
+        setFileData(null);
+        setSelectedPages([]);
+        setSettings(DEFAULT_SPLIT_PDF_SETTINGS);
+      }
+      processingState.setError(null);
+    },
+    [processingState]
+  );
 
   const togglePageSelection = useCallback((page: number) => {
     setSelectedPages((prev) => {
-      return prev.includes(page)
-        ? prev.filter((p) => p !== page)
-        : [...prev, page].sort((a, b) => a - b);
+      return prev.includes(page) ? prev.filter((p) => p !== page) : [...prev, page].sort((a, b) => a - b);
     });
   }, []);
 
@@ -79,9 +80,12 @@ export function SplitPdfProvider({ children }: { children: ReactNode }) {
     processingState.setIsProcessing(false);
   }, [processingState]);
 
-  const setError = useCallback((error: string | null) => {
-    processingState.setError(error);
-  }, [processingState]);
+  const setError = useCallback(
+    (error: string | null) => {
+      processingState.setError(error);
+    },
+    [processingState]
+  );
 
   const value: SplitPdfContextValue = {
     fileData,
@@ -99,11 +103,7 @@ export function SplitPdfProvider({ children }: { children: ReactNode }) {
     reset,
   };
 
-  return (
-    <SplitPdfContext.Provider value={value}>
-      {children}
-    </SplitPdfContext.Provider>
-  );
+  return <SplitPdfContext.Provider value={value}>{children}</SplitPdfContext.Provider>;
 }
 
 export function useSplitPdfContext(): SplitPdfContextValue {

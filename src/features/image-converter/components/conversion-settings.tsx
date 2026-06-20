@@ -12,7 +12,10 @@ export function ImageConversionSettings() {
       {/* Format Selection */}
       <div>
         <Label className="text-foreground font-semibold mb-4 block">Output Format</Label>
-        <RadioGroup value={settings.selectedFormat} onValueChange={(format) => updateSettings({ selectedFormat: format as ImageFormat })}>
+        <RadioGroup
+          value={settings.selectedFormat}
+          onValueChange={(format) => updateSettings({ selectedFormat: format as ImageFormat })}
+        >
           <div className="space-y-3">
             {FORMATS.map((format) => (
               <div
@@ -34,7 +37,9 @@ export function ImageConversionSettings() {
       <div>
         <div className="flex items-center justify-between mb-4">
           <Label className="text-foreground font-semibold">Quality</Label>
-          <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">{settings.quality}%</span>
+          <span className="text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full">
+            {settings.quality}%
+          </span>
         </div>
         <Slider
           value={[settings.quality]}

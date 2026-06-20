@@ -1,15 +1,15 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { ImageConversionSettings } from "@/features/image-converter/components/conversion-settings"
-import { ImageDropZone } from "@/features/image-converter/components/image-drop-zone"
-import { FileList } from "@/features/image-converter/components/file-list"
-import { ActionCard } from "@/features/image-converter/components/action-card"
-import { FAQ } from "@/features/image-converter/components/faq"
-import { ImageConverterProvider } from "@/features/image-converter/context"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { ImageConversionSettings } from "@/features/image-converter/components/conversion-settings";
+import { ImageDropZone } from "@/features/image-converter/components/image-drop-zone";
+import { FileList } from "@/features/image-converter/components/file-list";
+import { ActionCard } from "@/features/image-converter/components/action-card";
+import { FAQ } from "@/features/image-converter/components/faq";
+import { ImageConverterProvider } from "@/features/image-converter/context";
+import { BASE_URL } from "@/lib/seo";
 
-export const Route = createFileRoute('/image-converter')({
+export const Route = createFileRoute("/image-converter")({
   component: ImageConverterPage,
   head: () => ({
     meta: [
@@ -18,7 +18,8 @@ export const Route = createFileRoute('/image-converter')({
       },
       {
         name: "description",
-        content: "Convert, resize, and compress images in bulk. Support for JPG, PNG, WebP, and more. 100% free, private, and works offline.",
+        content:
+          "Convert, resize, and compress images in bulk. Support for JPG, PNG, WebP, and more. 100% free, private, and works offline.",
       },
       {
         property: "og:title",
@@ -32,11 +33,11 @@ export const Route = createFileRoute('/image-converter')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/image-converter`
-      }
-    ]
+        href: `${BASE_URL}/image-converter`,
+      },
+    ],
   }),
-})
+});
 
 function ImageConverterPage() {
   return (
@@ -72,16 +73,16 @@ function ImageConverterPage() {
             steps={[
               {
                 title: "Add your Images",
-                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more."
+                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more.",
               },
               {
                 title: "Choose Settings",
-                description: "Select your target format, quality, and optimization preferences."
+                description: "Select your target format, quality, and optimization preferences.",
               },
               {
                 title: "Convert & Save",
-                description: "Images are processed locally. Download them individually or as a ZIP."
-              }
+                description: "Images are processed locally. Download them individually or as a ZIP.",
+              },
             ]}
             description="Optimize and transform your images in three simple steps. Fast, secure, and purely client-side."
           />
@@ -92,5 +93,5 @@ function ImageConverterPage() {
         </section>
       </div>
     </main>
-  )
+  );
 }

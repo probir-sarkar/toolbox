@@ -11,7 +11,7 @@ export interface CompressionSettings {
   quality: number;
   maxWidth?: number;
   maxHeight?: number;
-  outputFormat: 'original' | 'jpeg' | 'png' | 'webp';
+  outputFormat: "original" | "jpeg" | "png" | "webp";
   targetSize?: number; // in KB
 }
 

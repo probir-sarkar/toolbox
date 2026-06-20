@@ -12,9 +12,7 @@ export interface FileHandlerOptions<T extends BaseFile> {
   onRemove?: (id: string) => void;
 }
 
-export function useFileHandler<T extends BaseFile = BaseFile>(
-  options: FileHandlerOptions<T> = {}
-) {
+export function useFileHandler<T extends BaseFile = BaseFile>(options: FileHandlerOptions<T> = {}) {
   const [files, setFiles] = useState<T[]>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -53,7 +51,7 @@ export function useFileHandler<T extends BaseFile = BaseFile>(
     (id: string) => {
       setFiles((prev) => {
         const file = prev.find((f) => f.id === id);
-        if (file && 'preview' in file && typeof file.preview === 'string') {
+        if (file && "preview" in file && typeof file.preview === "string") {
           URL.revokeObjectURL(file.preview as string);
         }
         const filtered = prev.filter((f) => f.id !== id);
@@ -66,7 +64,7 @@ export function useFileHandler<T extends BaseFile = BaseFile>(
 
   const clearFiles = useCallback(() => {
     files.forEach((f) => {
-      if ('preview' in f && typeof f.preview === 'string') {
+      if ("preview" in f && typeof f.preview === "string") {
         URL.revokeObjectURL(f.preview as string);
       }
     });

@@ -35,10 +35,13 @@ export function MergePdfProvider({ children }: { children: ReactNode }) {
     setSettings((prev) => ({ ...prev, ...newSettings }));
   }, []);
 
-  const setError = useCallback((error: string | null) => {
-    fileHandler.setError(error);
-    processingState.setError(error);
-  }, [fileHandler, processingState]);
+  const setError = useCallback(
+    (error: string | null) => {
+      fileHandler.setError(error);
+      processingState.setError(error);
+    },
+    [fileHandler, processingState]
+  );
 
   const value: MergePdfContextValue = {
     files: fileHandler.files,
@@ -54,11 +57,7 @@ export function MergePdfProvider({ children }: { children: ReactNode }) {
     setError,
   };
 
-  return (
-    <MergePdfContext.Provider value={value}>
-      {children}
-    </MergePdfContext.Provider>
-  );
+  return <MergePdfContext.Provider value={value}>{children}</MergePdfContext.Provider>;
 }
 
 export function useMergePdfContext(): MergePdfContextValue {

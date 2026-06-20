@@ -9,7 +9,8 @@ import { Link, Wifi, User, Type } from "lucide-react";
 import { useQRGeneratorContext } from "../context";
 
 export function QRGeneratorInput() {
-  const { contentType, content, wifiConfig, vcardConfig, setContentType, setContent, setWifiConfig, setVcardConfig } = useQRGeneratorContext();
+  const { contentType, content, wifiConfig, vcardConfig, setContentType, setContent, setWifiConfig, setVcardConfig } =
+    useQRGeneratorContext();
 
   return (
     <Card>
@@ -54,9 +55,7 @@ export function QRGeneratorInput() {
               onChange={(e) => setContent(e.target.value)}
               rows={4}
             />
-            <p className="text-sm text-muted-foreground">
-              Any text you want to encode in the QR code.
-            </p>
+            <p className="text-sm text-muted-foreground">Any text you want to encode in the QR code.</p>
           </TabsContent>
 
           <TabsContent value="wifi" className="space-y-4">

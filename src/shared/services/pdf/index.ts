@@ -30,7 +30,7 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
     scale = 2,
     startPage = 1,
     endPage,
-    quality = 0.92 // default JPEG quality
+    quality = 0.92, // default JPEG quality
   } = options;
   const baseName = getBaseName(file);
 
@@ -69,7 +69,7 @@ export async function pdfToImagesBrowser(file: File, options: PdfToImageOptions 
       baseName,
       width: canvas.width,
       height: canvas.height,
-      url
+      url,
     });
   }
 
@@ -91,9 +91,7 @@ export async function downloadAll(images: ImageResult[]) {
   if (!images.length) return;
 
   const baseName = images[0].baseName || "document";
-  const files = Object.fromEntries(
-    images.map((img) => [`${baseName}/${img.filename}`, img.blob])
-  );
+  const files = Object.fromEntries(images.map((img) => [`${baseName}/${img.filename}`, img.blob]));
   const blob = await createZip(files);
   triggerDownload(blob, `${baseName}-images.zip`);
 }
@@ -121,6 +119,6 @@ export async function getFileInfo(file: File): Promise<FileInfo> {
     name,
     size,
     pages,
-    file
+    file,
   };
 }

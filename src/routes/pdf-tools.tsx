@@ -1,12 +1,12 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Badge } from "@/shared/components/ui/badge"
-import { Button } from "@/shared/components/ui/button"
-import { Card } from "@/shared/components/ui/card"
-import { Hammer, ArrowLeft, Mail } from "lucide-react"
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import { Card } from "@/shared/components/ui/card";
+import { Hammer, ArrowLeft, Mail } from "lucide-react";
 
-export const Route = createFileRoute('/pdf-tools')({
+export const Route = createFileRoute("/pdf-tools")({
   component: PdfToolsComingSoon,
-})
+});
 
 function PdfToolsComingSoon() {
   return (
@@ -19,7 +19,10 @@ function PdfToolsComingSoon() {
 
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center p-6">
         <div className="max-w-md w-full space-y-8 text-center">
-          <Link to="/" className="inline-flex items-center text-sm text-slate-500 hover:text-slate-900 transition-colors mb-8">
+          <Link
+            to="/"
+            className="inline-flex items-center text-sm text-slate-500 hover:text-slate-900 transition-colors mb-8"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
@@ -29,9 +32,7 @@ function PdfToolsComingSoon() {
             <div className="bg-white p-4 rounded-2xl shadow-xl relative">
               <Hammer className="w-12 h-12 text-red-600" />
             </div>
-            <Badge className="absolute -top-3 -right-3 bg-slate-900 text-white border-0">
-              Coming Soon
-            </Badge>
+            <Badge className="absolute -top-3 -right-3 bg-slate-900 text-white border-0">Coming Soon</Badge>
           </div>
 
           <div className="space-y-4">
@@ -52,13 +53,11 @@ function PdfToolsComingSoon() {
                   Join Waitlist
                 </Button>
               </div>
-              <p className="text-xs text-slate-400">
-                We'll only email you when it's ready.
-              </p>
+              <p className="text-xs text-slate-400">We'll only email you when it's ready.</p>
             </div>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

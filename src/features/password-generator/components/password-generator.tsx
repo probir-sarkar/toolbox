@@ -18,7 +18,7 @@ export function PasswordGenerator() {
   const [strength, setStrength] = useState(getPasswordStrength(0));
 
   const [options, setOptions] = useImmer<PasswordOptions>({
-    ...DEFAULT_PASSWORD_OPTIONS
+    ...DEFAULT_PASSWORD_OPTIONS,
   });
 
   const handleGenerate = useCallback(() => {

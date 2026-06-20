@@ -1,31 +1,35 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { FAQSection } from "@/shared/components/layout/faq-section"
-import { ImageResize } from "@/features/image-resize/image-resize"
-import { ImageResizeProvider } from "@/features/image-resize/context"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { FAQSection } from "@/shared/components/layout/faq-section";
+import { ImageResize } from "@/features/image-resize/image-resize";
+import { ImageResizeProvider } from "@/features/image-resize/context";
+import { BASE_URL } from "@/lib/seo";
 
 const imageResizeFaqItems = [
   {
     question: "Will I lose image quality when resizing?",
-    answer: "Resizing to larger dimensions may reduce quality, but our tool uses high-quality algorithms to minimize degradation. When resizing to smaller dimensions, quality loss is minimal. You can control the output quality using the quality slider."
+    answer:
+      "Resizing to larger dimensions may reduce quality, but our tool uses high-quality algorithms to minimize degradation. When resizing to smaller dimensions, quality loss is minimal. You can control the output quality using the quality slider.",
   },
   {
     question: "What formats are supported?",
-    answer: "We support all major image formats including JPG, PNG, WebP, GIF, BMP, and more. You can also convert between formats during the resize process."
+    answer:
+      "We support all major image formats including JPG, PNG, WebP, GIF, BMP, and more. You can also convert between formats during the resize process.",
   },
   {
     question: "Can I batch resize multiple images?",
-    answer: "Yes! You can upload multiple images and they will all be resized to the same dimensions. Each image will be downloaded individually after processing."
+    answer:
+      "Yes! You can upload multiple images and they will all be resized to the same dimensions. Each image will be downloaded individually after processing.",
   },
   {
     question: "What does 'maintain aspect ratio' mean?",
-    answer: "When enabled, the tool will automatically calculate the height or width to preserve the original proportions of your image. This prevents distortion and stretching. For example, a 1920×1080 image resized to 1280px wide will automatically become 1280×720."
-  }
+    answer:
+      "When enabled, the tool will automatically calculate the height or width to preserve the original proportions of your image. This prevents distortion and stretching. For example, a 1920×1080 image resized to 1280px wide will automatically become 1280×720.",
+  },
 ];
 
-export const Route = createFileRoute('/image-resize')({
+export const Route = createFileRoute("/image-resize")({
   component: ImageResizePage,
   head: () => ({
     meta: [
@@ -34,7 +38,8 @@ export const Route = createFileRoute('/image-resize')({
       },
       {
         name: "description",
-        content: "Resize images to any dimension online for free. Maintain aspect ratio, batch processing, multiple formats. 100% free, private, and works offline.",
+        content:
+          "Resize images to any dimension online for free. Maintain aspect ratio, batch processing, multiple formats. 100% free, private, and works offline.",
       },
       {
         property: "og:title",
@@ -48,11 +53,11 @@ export const Route = createFileRoute('/image-resize')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/image-resize`
-      }
-    ]
+        href: `${BASE_URL}/image-resize`,
+      },
+    ],
   }),
-})
+});
 
 function ImageResizePage() {
   return (
@@ -74,16 +79,16 @@ function ImageResizePage() {
             steps={[
               {
                 title: "Upload Images",
-                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more."
+                description: "Drag & drop your photos. We support JPG, PNG, WebP, and more.",
               },
               {
                 title: "Set Dimensions",
-                description: "Choose your target width, height, and quality. Maintain aspect ratio if needed."
+                description: "Choose your target width, height, and quality. Maintain aspect ratio if needed.",
               },
               {
                 title: "Resize & Download",
-                description: "Images are processed locally. Download them instantly in your preferred format."
-              }
+                description: "Images are processed locally. Download them instantly in your preferred format.",
+              },
             ]}
             description="Resize your images in three simple steps. Fast, secure, and purely client-side."
           />
@@ -94,5 +99,5 @@ function ImageResizePage() {
         </section>
       </div>
     </main>
-  )
+  );
 }

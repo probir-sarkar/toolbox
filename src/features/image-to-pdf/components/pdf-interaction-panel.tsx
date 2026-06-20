@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import jsPDF from "jspdf";
 import { FileText, Loader2, Settings2 } from "lucide-react";
@@ -29,7 +28,7 @@ export function PdfInteractionPanel() {
       const doc = new jsPDF({
         orientation: settings.orientation === "auto" ? "portrait" : settings.orientation,
         unit: "mm",
-        format: settings.pageSize === "original" ? "a4" : settings.pageSize // Default to A4 if original for now
+        format: settings.pageSize === "original" ? "a4" : settings.pageSize, // Default to A4 if original for now
       });
 
       for (let i = 0; i < images.length; i++) {

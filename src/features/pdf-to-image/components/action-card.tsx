@@ -1,10 +1,10 @@
-
 import { ActionCard as ReusableActionCard } from "@/shared/components/layout/action-card";
 import { usePdfToImageContext } from "../context";
 import { pdfToImagesBrowser, downloadAll } from "@/shared/services/pdf";
 
 export function ActionCard() {
-  const { file, settings, isProcessing, setIsProcessing, setImages, setProgress, progress, images } = usePdfToImageContext();
+  const { file, settings, isProcessing, setIsProcessing, setImages, setProgress, progress, images } =
+    usePdfToImageContext();
 
   const handleConvert = async () => {
     if (!file) return;
@@ -52,16 +52,16 @@ export function ActionCard() {
       convertLabel="Convert to Images"
       downloadLabel="Download ZIP"
       statusMessage={
-        images.length > 0
-          ? (
-            <>
-              <span className="block mb-1 opacity-90">Converted {images.length} pages successfully.</span>
-              Ready to download
-            </>
-          )
-          : file
-            ? "Ready to convert PDF"
-            : "Add a PDF to start"
+        images.length > 0 ? (
+          <>
+            <span className="block mb-1 opacity-90">Converted {images.length} pages successfully.</span>
+            Ready to download
+          </>
+        ) : file ? (
+          "Ready to convert PDF"
+        ) : (
+          "Add a PDF to start"
+        )
       }
       className="bg-linear-to-br from-red-600 to-rose-700"
       buttonClassName="text-red-600 hover:bg-rose-50"

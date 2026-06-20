@@ -37,7 +37,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     filename: "document",
     pageSize: "a4" as PdfPageSize,
     orientation: "auto" as PdfOrientation,
-    margin: 0
+    margin: 0,
   });
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -65,7 +65,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
         file,
         previewUrl,
         width: dimensions.width,
-        height: dimensions.height
+        height: dimensions.height,
       });
     }
 
@@ -102,7 +102,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
       filename: "document",
       pageSize: "a4",
       orientation: "auto",
-      margin: 0
+      margin: 0,
     });
   }, [images]);
 
@@ -115,14 +115,10 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     reorderImages,
     updateSettings,
     setGenerating: setIsGenerating,
-    reset
+    reset,
   };
 
-  return (
-    <ImageToPdfContext.Provider value={value}>
-      {children}
-    </ImageToPdfContext.Provider>
-  );
+  return <ImageToPdfContext.Provider value={value}>{children}</ImageToPdfContext.Provider>;
 }
 
 export function useImageToPdfContext(): ImageToPdfContextValue {

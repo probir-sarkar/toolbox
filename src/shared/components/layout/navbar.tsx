@@ -6,7 +6,7 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger
+  NavigationMenuTrigger,
 } from "@/shared/components/ui/navigation-menu";
 import { Layers, Menu } from "lucide-react";
 import { Button, buttonVariants } from "@/shared/components/ui/button";
@@ -179,7 +179,11 @@ export function Navbar() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    render={<Link to={SITE_CONFIG.links.github} target="_blank" aria-label="GitHub Repository"><GithubIcon className="h-5 w-5" /></Link>}
+                    render={
+                      <Link to={SITE_CONFIG.links.github} target="_blank" aria-label="GitHub Repository">
+                        <GithubIcon className="h-5 w-5" />
+                      </Link>
+                    }
                   />
                 </div>
 

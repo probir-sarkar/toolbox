@@ -55,11 +55,7 @@ export function PdfToImageProvider({ children }: { children: ReactNode }) {
     reset,
   };
 
-  return (
-    <PdfToImageContext.Provider value={value}>
-      {children}
-    </PdfToImageContext.Provider>
-  );
+  return <PdfToImageContext.Provider value={value}>{children}</PdfToImageContext.Provider>;
 }
 
 export function usePdfToImageContext(): PdfToImageContextValue {

@@ -1,17 +1,8 @@
 import { createContext, useContext, ReactNode, useState, useCallback } from "react";
 import { useProcessingState } from "@/shared/hooks";
 import { generateQRCode } from "./services/qr-generator";
-import {
-  DEFAULT_QR_SETTINGS,
-  DEFAULT_WIFI_CONFIG,
-  DEFAULT_VCARD_CONFIG,
-} from "./constants";
-import type {
-  QRContentType,
-  WiFiConfig,
-  VCardConfig,
-  QRSettings,
-} from "./types";
+import { DEFAULT_QR_SETTINGS, DEFAULT_WIFI_CONFIG, DEFAULT_VCARD_CONFIG } from "./constants";
+import type { QRContentType, WiFiConfig, VCardConfig, QRSettings } from "./types";
 
 interface QRGeneratorContextValue {
   contentType: QRContentType;
@@ -33,8 +24,8 @@ interface QRGeneratorContextValue {
 const QRGeneratorContext = createContext<QRGeneratorContextValue | null>(null);
 
 export function QRGeneratorProvider({ children }: { children: ReactNode }) {
-  const [contentType, internalSetContentType] = useState<QRContentType>('url');
-  const [content, setContent] = useState('');
+  const [contentType, internalSetContentType] = useState<QRContentType>("url");
+  const [content, setContent] = useState("");
   const [wifiConfig, setWifiConfig] = useState<WiFiConfig>(DEFAULT_WIFI_CONFIG);
   const [vcardConfig, setVcardConfig] = useState<VCardConfig>(DEFAULT_VCARD_CONFIG);
   const [settings, setSettings] = useState<QRSettings>(DEFAULT_QR_SETTINGS);
@@ -73,13 +64,13 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
       setQrCodeUrl(url);
       processingState.setSuccessWithStop();
     } catch (err) {
-      processingState.setErrorWithStop(err instanceof Error ? err.message : 'Failed to generate QR code');
+      processingState.setErrorWithStop(err instanceof Error ? err.message : "Failed to generate QR code");
       setQrCodeUrl(null);
     }
   }, [content, contentType, wifiConfig, vcardConfig, settings, processingState]);
 
   const reset = useCallback(() => {
-    setContent('');
+    setContent("");
     setQrCodeUrl(null);
     processingState.setError(null);
     setWifiConfig(DEFAULT_WIFI_CONFIG);
@@ -103,11 +94,7 @@ export function QRGeneratorProvider({ children }: { children: ReactNode }) {
     reset,
   };
 
-  return (
-    <QRGeneratorContext.Provider value={value}>
-      {children}
-    </QRGeneratorContext.Provider>
-  );
+  return <QRGeneratorContext.Provider value={value}>{children}</QRGeneratorContext.Provider>;
 }
 
 export function useQRGeneratorContext(): QRGeneratorContextValue {

@@ -6,7 +6,8 @@ import { useImageCompressorContext } from "../context";
 import { compressImage, getCompressionOptions } from "../services/image-compressor";
 
 export function ImageCompressorActionCard() {
-  const { files, settings, isCompressing, setIsCompressing, setError, updateCompressedSize } = useImageCompressorContext();
+  const { files, settings, isCompressing, setIsCompressing, setError, updateCompressedSize } =
+    useImageCompressorContext();
   const [success, setSuccess] = useState(false);
 
   const handleCompress = async () => {
@@ -29,10 +30,10 @@ export function ImageCompressorActionCard() {
 
         // Download the compressed image
         const url = URL.createObjectURL(result.compressedFile);
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        const ext = result.compressedFile.type.split('/')[1];
-        link.download = `${imageFile.file.name.split('.')[0]}_compressed.${ext}`;
+        const ext = result.compressedFile.type.split("/")[1];
+        link.download = `${imageFile.file.name.split(".")[0]}_compressed.${ext}`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -55,21 +56,14 @@ export function ImageCompressorActionCard() {
       </CardHeader>
       <CardContent className="flex-1">
         <p className="text-sm text-muted-foreground mb-4">
-          Compress {files.length} image{files.length !== 1 ? 's' : ''} to reduce file size while maintaining quality.
+          Compress {files.length} image{files.length !== 1 ? "s" : ""} to reduce file size while maintaining quality.
         </p>
         {files.length > 0 && (
-          <div className="text-xs text-muted-foreground">
-            Target quality: {Math.round(settings.quality * 100)}%
-          </div>
+          <div className="text-xs text-muted-foreground">Target quality: {Math.round(settings.quality * 100)}%</div>
         )}
       </CardContent>
       <CardFooter>
-        <Button
-          className="w-full"
-          size="lg"
-          onClick={handleCompress}
-          disabled={files.length === 0 || isCompressing}
-        >
+        <Button className="w-full" size="lg" onClick={handleCompress} disabled={files.length === 0 || isCompressing}>
           {isCompressing ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

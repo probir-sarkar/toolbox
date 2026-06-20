@@ -11,10 +11,7 @@ export function createPdfFile(file: File): PdfFile {
 }
 
 export function isPdfFile(file: File): boolean {
-  return (
-    file.type === "application/pdf" ||
-    file.name.toLowerCase().endsWith(".pdf")
-  );
+  return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 }
 
 export function filterPdfFiles(files: File[]): File[] {

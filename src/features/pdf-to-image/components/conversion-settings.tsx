@@ -1,12 +1,5 @@
-
 import { Label } from "@/shared/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/components/ui/select";
 import { Input } from "@/shared/components/ui/input";
 import { Slider } from "@/shared/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui/card";
@@ -24,10 +17,7 @@ export function ConversionSettings() {
         {/* Format */}
         <div className="space-y-2">
           <Label>Output Format</Label>
-          <Select
-            value={settings.format}
-            onValueChange={(v) => updateSettings({ format: v as "png" | "jpeg" })}
-          >
+          <Select value={settings.format} onValueChange={(v) => updateSettings({ format: v as "png" | "jpeg" })}>
             <SelectTrigger>
               <SelectValue />
             </SelectTrigger>
@@ -62,7 +52,7 @@ export function ConversionSettings() {
         {/* Scale */}
         <div className="space-y-2">
           <Label>Resolution / Scale</Label>
-            <Select
+          <Select
             value={String(settings.scale)}
             onValueChange={(v) => v && updateSettings({ scale: Number.parseFloat(v) })}
           >
@@ -76,9 +66,7 @@ export function ConversionSettings() {
               <SelectItem value="3">Ultra (3x)</SelectItem>
             </SelectContent>
           </Select>
-          <p className="text-xs text-muted-foreground">
-            Higher scale means sharper text but larger files.
-          </p>
+          <p className="text-xs text-muted-foreground">Higher scale means sharper text but larger files.</p>
         </div>
 
         {/* Pages */}
@@ -99,9 +87,7 @@ export function ConversionSettings() {
               min={1}
               placeholder="All"
               value={settings.endPage ?? ""}
-              onChange={(e) =>
-                updateSettings({ endPage: e.target.value ? Number.parseInt(e.target.value) : null })
-              }
+              onChange={(e) => updateSettings({ endPage: e.target.value ? Number.parseInt(e.target.value) : null })}
             />
           </div>
         </div>

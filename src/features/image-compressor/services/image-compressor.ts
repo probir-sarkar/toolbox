@@ -7,12 +7,9 @@ export interface CompressResult {
   compressionRatio: number;
 }
 
-export async function compressImage(
-  file: File,
-  options: CompressionOptions
-): Promise<CompressResult> {
+export async function compressImage(file: File, options: CompressionOptions): Promise<CompressResult> {
   // Dynamic import for browser-image-compression
-  const imageCompression = await import('browser-image-compression');
+  const imageCompression = await import("browser-image-compression");
 
   const compressedFile = await imageCompression.default(file, options);
 
@@ -39,14 +36,20 @@ export function revokeImageFilePreview(file: ImageFile): void {
 }
 
 export function getCompressionOptions(
-  settings: { quality: number; maxWidth?: number; maxHeight?: number; outputFormat: string; targetSize?: number },
+  settings: {
+    quality: number;
+    maxWidth?: number;
+    maxHeight?: number;
+    outputFormat: string;
+    targetSize?: number;
+  },
   file: File
 ): CompressionOptions {
   return {
     maxSizeMB: settings.targetSize ? settings.targetSize / 1024 : 10,
     maxWidthOrHeight: settings.maxWidth || settings.maxHeight || undefined,
     useWebWorker: true,
-    fileType: settings.outputFormat === 'original' ? file.type : `image/${settings.outputFormat}`,
+    fileType: settings.outputFormat === "original" ? file.type : `image/${settings.outputFormat}`,
     initialQuality: settings.quality,
   };
 }

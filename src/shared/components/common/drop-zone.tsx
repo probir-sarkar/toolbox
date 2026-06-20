@@ -7,7 +7,7 @@ import type {
   DropzoneContextValue,
   DropzoneRootProps,
   DropzoneIconProps,
-  DropzoneButtonProps
+  DropzoneButtonProps,
 } from "./drop-zone.types";
 
 const DropzoneContext = createContext<DropzoneContextValue | null>(null);
@@ -58,7 +58,7 @@ export function DropZone({
   accept,
   disabled = false,
   multiple = false,
-  className
+  className,
 }: DropzoneRootProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -118,7 +118,7 @@ export function DropZone({
         disabled,
         accept,
         trigger,
-        inputRef
+        inputRef,
       }}
     >
       <div
@@ -176,7 +176,7 @@ DropZone.Title = function DropZoneTitle({ className, children }: { className?: s
 // Description component
 DropZone.Description = function DropZoneDescription({
   className,
-  children
+  children,
 }: {
   className?: string;
   children: React.ReactNode;
@@ -190,7 +190,7 @@ DropZone.Button = function DropZoneButton({
   variant = "outline",
   size = "default",
   className,
-  onClick
+  onClick,
 }: DropzoneButtonProps) {
   const { trigger, disabled } = useDropzoneContext();
 

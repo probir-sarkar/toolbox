@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export interface UseClipboardInput {
   /** Time in ms after which the copied state will reset, `2000` by default */
@@ -45,7 +45,7 @@ export function useClipboard(options: UseClipboardInput = {}): UseClipboardRetur
   };
 
   const copy = (value: any) => {
-    if ('clipboard' in navigator) {
+    if ("clipboard" in navigator) {
       navigator.clipboard
         .writeText(value)
         .then(() => {
@@ -54,7 +54,7 @@ export function useClipboard(options: UseClipboardInput = {}): UseClipboardRetur
         })
         .catch((err) => setError(err));
     } else {
-      setError(new Error('useClipboard: navigator.clipboard is not supported'));
+      setError(new Error("useClipboard: navigator.clipboard is not supported"));
     }
   };
 

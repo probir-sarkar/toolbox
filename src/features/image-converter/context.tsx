@@ -36,7 +36,7 @@ export function ImageConverterProvider({ children }: { children: ReactNode }) {
       file,
       preview: undefined,
       status: "pending" as const,
-      progress: 0
+      progress: 0,
     }));
     setFiles((prev) => [...prev, ...filesToAdd]);
   }, []);
@@ -50,11 +50,7 @@ export function ImageConverterProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const updateFileStatus = useCallback((id: string, status: ConverterFile["status"], progress?: number) => {
-    setFiles((prev) =>
-      prev.map((f) =>
-        f.id === id ? { ...f, status, progress: progress ?? f.progress } : f
-      )
-    );
+    setFiles((prev) => prev.map((f) => (f.id === id ? { ...f, status, progress: progress ?? f.progress } : f)));
   }, []);
 
   const updateFileResult = useCallback((id: string, result: ConversionResult) => {
@@ -84,11 +80,7 @@ export function ImageConverterProvider({ children }: { children: ReactNode }) {
     reset,
   };
 
-  return (
-    <ImageConverterContext.Provider value={value}>
-      {children}
-    </ImageConverterContext.Provider>
-  );
+  return <ImageConverterContext.Provider value={value}>{children}</ImageConverterContext.Provider>;
 }
 
 export function useImageConverterContext(): ImageConverterContextValue {

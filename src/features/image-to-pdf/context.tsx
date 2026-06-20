@@ -93,11 +93,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     reset,
   };
 
-  return (
-    <ImageToPdfContext.Provider value={value}>
-      {children}
-    </ImageToPdfContext.Provider>
-  );
+  return <ImageToPdfContext.Provider value={value}>{children}</ImageToPdfContext.Provider>;
 }
 
 export function useImageToPdfContext(): ImageToPdfContextValue {

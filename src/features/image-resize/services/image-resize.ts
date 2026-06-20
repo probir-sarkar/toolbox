@@ -28,7 +28,7 @@ export async function loadImageDimensions(file: File): Promise<{ width: number; 
 
     img.onerror = () => {
       URL.revokeObjectURL(url);
-      reject(new Error('Failed to load image'));
+      reject(new Error("Failed to load image"));
     };
 
     img.src = url;
@@ -63,51 +63,52 @@ export function calculateTargetDimensions(
   return { width: targetWidth, height: targetHeight };
 }
 
-export async function resizeImage(
-  imageFile: ImageFile,
-  options: ResizeOptions
-): Promise<ResizeResult> {
+export async function resizeImage(imageFile: ImageFile, options: ResizeOptions): Promise<ResizeResult> {
   const img = new Image();
 
   await new Promise<void>((resolve, reject) => {
     img.onload = () => resolve();
-    img.onerror = () => reject(new Error('Failed to load image'));
+    img.onerror = () => reject(new Error("Failed to load image"));
     img.src = imageFile.preview;
   });
 
-  const canvas = document.createElement('canvas');
+  const canvas = document.createElement("canvas");
   canvas.width = options.targetWidth;
   canvas.height = options.targetHeight;
 
-  const ctx = canvas.getContext('2d');
-  if (!ctx) throw new Error('Failed to get canvas context');
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Failed to get canvas context");
 
   ctx.drawImage(img, 0, 0, options.targetWidth, options.targetHeight);
 
   return new Promise((resolve, reject) => {
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        reject(new Error('Failed to create blob'));
-        return;
-      }
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) {
+          reject(new Error("Failed to create blob"));
+          return;
+        }
 
-      const url = URL.createObjectURL(blob);
-      const ext = options.outputFormat.split('/')[1];
-      const filename = `${imageFile.file.name.split('.')[0]}_resized.${ext}`;
+        const url = URL.createObjectURL(blob);
+        const ext = options.outputFormat.split("/")[1];
+        const filename = `${imageFile.file.name.split(".")[0]}_resized.${ext}`;
 
-      resolve({
-        blob,
-        url,
-        filename,
-        width: options.targetWidth,
-        height: options.targetHeight,
-      });
-    }, options.outputFormat, options.quality);
+        resolve({
+          blob,
+          url,
+          filename,
+          width: options.targetWidth,
+          height: options.targetHeight,
+        });
+      },
+      options.outputFormat,
+      options.quality
+    );
   });
 }
 
 export function downloadResult(result: ResizeResult): void {
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = result.url;
   link.download = result.filename;
   document.body.appendChild(link);
