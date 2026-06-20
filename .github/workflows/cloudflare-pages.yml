@@ -12,8 +12,9 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v6
-      - name: Install vite-plus
-        run: curl -fsSL https://vite.plus | bash
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version: lts
       - name: Install dependencies
         run: vp install
       - name: Build
