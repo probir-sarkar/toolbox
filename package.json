@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "vite build && tsc --noEmit",
+    "build": "vp build && tsc --noEmit",
     "preview": "vp preview",
     "deploy": "npm run build && wrangler deploy",
-    "test": "vp test"
+    "test": "vp test",
+    "prepare": "vp config"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -47,6 +48,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/browser-playwright": "^4.1.9",
+    "@voidzero-dev/vite-plus-linux-x64-gnu": "^0.2.1",
     "eslint": "^10",
     "playwright": "*",
     "tailwindcss": "^4.2.0",
