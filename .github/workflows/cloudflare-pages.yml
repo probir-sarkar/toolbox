@@ -30,6 +30,6 @@ jobs:
 
       - name: Deploy
         run: |
-          vpx wrangler pages deploy dist/client \
+          vpx wrangler pages deploy .output/public \
             --project-name toolbox \
             --branch ${{ github.ref_name }}
