@@ -3,5 +3,4 @@
   "name": "toolbox",
   "compatibility_date": "2026-06-02",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
 }
