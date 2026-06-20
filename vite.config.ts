@@ -3,8 +3,8 @@ import { defineConfig } from "vite-plus";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { cloudflare } from "@cloudflare/vite-plugin";
 import { playwright } from "vite-plus/test/browser-playwright";
+import { nitro } from "nitro/vite";
 
 export default defineConfig({
   staged: {
@@ -36,7 +36,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    cloudflare({ viteEnvironment: { name: "ssr" } }),
+    nitro(),
     tailwindcss(),
     tanstackStart({
       srcDirectory: "./src",
