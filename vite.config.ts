@@ -4,6 +4,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { cloudflare } from "@cloudflare/vite-plugin";
+import { playwright } from "vite-plus/test/browser-playwright";
 
 export default defineConfig({
   staged: {
@@ -25,6 +26,14 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+  },
+  test: {
+    browser: {
+      provider: playwright(),
+      enabled: true,
+      headless: true,
+      instances: [{ browser: "chromium" }],
+    },
   },
   plugins: [
     cloudflare({ viteEnvironment: { name: "ssr" } }),
