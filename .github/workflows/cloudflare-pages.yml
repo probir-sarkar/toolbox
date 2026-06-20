@@ -12,11 +12,6 @@ jobs:
       deployments: write
     steps:
       - uses: actions/checkout@v6
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: latest
-
       - uses: voidzero-dev/setup-vp@v1
         with:
           node-version: lts
@@ -28,8 +23,7 @@ jobs:
         run: vp build
 
       - name: Deploy
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/client --project-name=toolbox --branch=dev
+        run: vp exec wrangler pages deploy dist/client --project-name=toolbox --branch=dev
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
