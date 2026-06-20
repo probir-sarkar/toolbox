@@ -35,8 +35,7 @@ export const Route = createRootRoute({
       },
       {
         property: "og:description",
-        content:
-          "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
+        content: "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
       },
       {
         property: "og:image",
@@ -53,8 +52,7 @@ export const Route = createRootRoute({
       },
       {
         name: "twitter:description",
-        content:
-          "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
+        content: "Free, privacy-focused online tools. Process files locally in your browser with zero uploads.",
       },
       {
         name: "twitter:image",
@@ -83,12 +81,7 @@ function RootLayout() {
         <HeadContent />
       </head>
       <body className="antialiased min-h-screen flex flex-col">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SkipLink />
           <Navbar />
           <div className="flex-1" id="main-content" tabIndex={-1}>
