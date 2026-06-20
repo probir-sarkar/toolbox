@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vp dev",
-    "build": "vp build && tsc --noEmit",
+    "build": "vite build && tsc --noEmit",
     "preview": "vp preview",
-    "deploy": "npm run build && wrangler deploy",
+    "deploy": "vp run build && wrangler deploy",
     "test": "vp test"
   },
   "dependencies": {
