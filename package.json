@@ -49,7 +49,6 @@
     "@vitejs/plugin-react": "^6.0.2",
     "@vitest/browser-playwright": "^4.1.9",
     "@voidzero-dev/vite-plus-linux-x64-gnu": "^0.2.1",
-    "eslint": "^10",
     "playwright": "*",
     "tailwindcss": "^4.2.0",
     "typescript": "^6",
