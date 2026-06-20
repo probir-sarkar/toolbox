@@ -139,9 +139,7 @@ export function DropZoneBase({
       </div>
 
       <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
-      {description && (
-        <p className="text-sm text-muted-foreground mb-6">{description}</p>
-      )}
+      {description && <p className="text-sm text-muted-foreground mb-6">{description}</p>}
       <Button variant="outline" disabled={disabled}>
         {buttonText}
       </Button>

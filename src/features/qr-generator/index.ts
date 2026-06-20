@@ -5,14 +5,7 @@ export { QRGenerator, QRGeneratorFaq } from "./qr-generator";
 export { QRGeneratorProvider, useQRGeneratorContext, useQRGeneratorState } from "./context";
 
 // Types
-export type {
-  QRContentType,
-  QRCodeColor,
-  ErrorCorrectionLevel,
-  WiFiConfig,
-  VCardConfig,
-  QRSettings,
-} from "./types";
+export type { QRContentType, QRCodeColor, ErrorCorrectionLevel, WiFiConfig, VCardConfig, QRSettings } from "./types";
 
 // Constants
 export { DEFAULT_QR_SETTINGS, DEFAULT_WIFI_CONFIG, DEFAULT_VCARD_CONFIG, COLOR_MAP } from "./constants";

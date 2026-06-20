@@ -1,16 +1,16 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
 
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { ConversionSettings } from "@/features/pdf-to-image/components/conversion-settings"
-import { FAQ } from "@/features/pdf-to-image/components/faq"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { PdfDropZone } from "@/features/pdf-to-image/components/pdf-drop-zone"
-import { PdfFileList } from "@/features/pdf-to-image/components/pdf-file-list"
-import { ActionCard } from "@/features/pdf-to-image/components/action-card"
-import { PdfToImageProvider } from "@/features/pdf-to-image/context"
-import { BASE_URL } from "@/lib/seo"
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { ConversionSettings } from "@/features/pdf-to-image/components/conversion-settings";
+import { FAQ } from "@/features/pdf-to-image/components/faq";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { PdfDropZone } from "@/features/pdf-to-image/components/pdf-drop-zone";
+import { PdfFileList } from "@/features/pdf-to-image/components/pdf-file-list";
+import { ActionCard } from "@/features/pdf-to-image/components/action-card";
+import { PdfToImageProvider } from "@/features/pdf-to-image/context";
+import { BASE_URL } from "@/lib/seo";
 
-export const Route = createFileRoute('/pdf-to-image')({
+export const Route = createFileRoute("/pdf-to-image")({
   component: PdfToImagePage,
   head: () => ({
     meta: [
@@ -19,7 +19,8 @@ export const Route = createFileRoute('/pdf-to-image')({
       },
       {
         name: "description",
-        content: "Convert PDF pages to high-quality images (JPG, PNG) for free. Works offline, no uploads. Fast, secure, and completely private PDF to image conversion.",
+        content:
+          "Convert PDF pages to high-quality images (JPG, PNG) for free. Works offline, no uploads. Fast, secure, and completely private PDF to image conversion.",
       },
       {
         property: "og:title",
@@ -33,11 +34,11 @@ export const Route = createFileRoute('/pdf-to-image')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/pdf-to-image`
-      }
-    ]
+        href: `${BASE_URL}/pdf-to-image`,
+      },
+    ],
   }),
-})
+});
 
 function PdfToImagePage() {
   return (
@@ -73,16 +74,16 @@ function PdfToImagePage() {
             steps={[
               {
                 title: "Add your PDF",
-                description: "Choose any PDF from your device. Files never leave your browser."
+                description: "Choose any PDF from your device. Files never leave your browser.",
               },
               {
                 title: "Render pages",
-                description: "We process each page locally using safe, standards-based rendering."
+                description: "We process each page locally using safe, standards-based rendering.",
               },
               {
                 title: "Save images",
-                description: "Export pages individually or all at once. Great for sharing or archives."
-              }
+                description: "Export pages individually or all at once. Great for sharing or archives.",
+              },
             ]}
             description="Simple, predictable steps anyone can follow. No accounts, no uploads, no learning curve."
           />
@@ -93,5 +94,5 @@ function PdfToImagePage() {
         </section>
       </div>
     </main>
-  )
+  );
 }

@@ -1,4 +1,3 @@
-
 import { DropZone } from "./components/drop-zone";
 import { SortableImageList } from "./components/sortable-image-list";
 import { PdfInteractionPanel } from "./components/pdf-interaction-panel";

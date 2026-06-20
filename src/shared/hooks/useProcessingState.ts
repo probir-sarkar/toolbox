@@ -21,14 +21,11 @@ export function useProcessingState() {
     setIsProcessing(false);
   }, []);
 
-  const setErrorWithStop = useCallback(
-    (errorMessage: string) => {
-      setError(errorMessage);
-      setIsProcessing(false);
-      setSuccess(false);
-    },
-    []
-  );
+  const setErrorWithStop = useCallback((errorMessage: string) => {
+    setError(errorMessage);
+    setIsProcessing(false);
+    setSuccess(false);
+  }, []);
 
   const setSuccessWithStop = useCallback(() => {
     setSuccess(true);

@@ -1,11 +1,6 @@
 import { ReactNode } from "react";
 import { cn } from "@/shared/utils";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/shared/components/ui/accordion";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/shared/components/ui/accordion";
 
 export interface BaseFaqItem {
   id: string;
@@ -19,11 +14,7 @@ export interface FaqSectionBaseProps {
   className?: string;
 }
 
-export function FaqSectionBase({
-  title = "Frequently Asked Questions",
-  items,
-  className,
-}: FaqSectionBaseProps) {
+export function FaqSectionBase({ title = "Frequently Asked Questions", items, className }: FaqSectionBaseProps) {
   return (
     <section className={cn("py-12", className)}>
       <div className="container mx-auto px-4">
@@ -31,12 +22,8 @@ export function FaqSectionBase({
         <Accordion className="max-w-3xl mx-auto">
           {items.map((item) => (
             <AccordionItem key={item.id}>
-              <AccordionTrigger className="text-left">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {item.answer}
-              </AccordionContent>
+              <AccordionTrigger className="text-left">{item.question}</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">{item.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

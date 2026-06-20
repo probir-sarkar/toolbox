@@ -4,6 +4,6 @@ export const SITE_CONFIG = {
   links: {
     github: "https://github.com/probir-sarkar/toolbox",
     issues: "https://github.com/probir-sarkar/toolbox/issues",
-    sponsor: "https://buymeacoffee.com/probirsarkar"
-  }
+    sponsor: "https://buymeacoffee.com/probirsarkar",
+  },
 };

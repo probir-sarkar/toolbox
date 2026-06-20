@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState, useCallback, useEffect } from "react";
-import { move } from "@dnd-kit/helpers";
+import { arrayMove, move } from "@dnd-kit/helpers";
 
 export type PdfPageSize = "a4" | "letter" | "original";
 export type PdfOrientation = "portrait" | "landscape" | "auto";
@@ -37,7 +37,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     filename: "document",
     pageSize: "a4" as PdfPageSize,
     orientation: "auto" as PdfOrientation,
-    margin: 0
+    margin: 0,
   });
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -65,7 +65,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
         file,
         previewUrl,
         width: dimensions.width,
-        height: dimensions.height
+        height: dimensions.height,
       });
     }
 
@@ -86,7 +86,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     setImages((prev) => {
       const oldIndex = prev.findIndex((i) => i.id === activeId);
       const newIndex = prev.findIndex((i) => i.id === overId);
-      return move(prev, oldIndex, newIndex);
+      return arrayMove(prev, oldIndex, newIndex);
     });
   }, []);
 
@@ -102,7 +102,7 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
       filename: "document",
       pageSize: "a4",
       orientation: "auto",
-      margin: 0
+      margin: 0,
     });
   }, [images]);
 
@@ -115,14 +115,10 @@ export function ImageToPdfProvider({ children }: { children: ReactNode }) {
     reorderImages,
     updateSettings,
     setGenerating: setIsGenerating,
-    reset
+    reset,
   };
 
-  return (
-    <ImageToPdfContext.Provider value={value}>
-      {children}
-    </ImageToPdfContext.Provider>
-  );
+  return <ImageToPdfContext.Provider value={value}>{children}</ImageToPdfContext.Provider>;
 }
 
 export function useImageToPdfContext(): ImageToPdfContextValue {

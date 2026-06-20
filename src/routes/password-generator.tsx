@@ -1,11 +1,11 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { FAQSection } from "@/shared/components/layout/faq-section"
-import { PasswordGenerator } from "@/features/password-generator/components/password-generator"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { FAQSection } from "@/shared/components/layout/faq-section";
+import { PasswordGenerator } from "@/features/password-generator/components/password-generator";
+import { BASE_URL } from "@/lib/seo";
 
-export const Route = createFileRoute('/password-generator')({
+export const Route = createFileRoute("/password-generator")({
   component: PasswordGeneratorPage,
   head: () => ({
     meta: [
@@ -14,7 +14,8 @@ export const Route = createFileRoute('/password-generator')({
       },
       {
         name: "description",
-        content: "Generate strong, secure passwords instantly in your browser. Customizable length, character types, and options. 100% offline, no data stored.",
+        content:
+          "Generate strong, secure passwords instantly in your browser. Customizable length, character types, and options. 100% offline, no data stored.",
       },
       {
         property: "og:title",
@@ -28,11 +29,11 @@ export const Route = createFileRoute('/password-generator')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/password-generator`
-      }
-    ]
+        href: `${BASE_URL}/password-generator`,
+      },
+    ],
   }),
-})
+});
 
 function PasswordGeneratorPage() {
   return (
@@ -56,17 +57,17 @@ function PasswordGeneratorPage() {
               {
                 title: "Customize",
                 description:
-                  "Select the length and types of characters (uppercase, lowercase, numbers, symbols) you want."
+                  "Select the length and types of characters (uppercase, lowercase, numbers, symbols) you want.",
               },
               {
                 title: "Generate",
                 description:
-                  "We use your browser's secure random number generator to create a unique password instantly."
+                  "We use your browser's secure random number generator to create a unique password instantly.",
               },
               {
                 title: "Copy & Use",
-                description: "Click to copy your new secure password. It's never stored or sent anywhere."
-              }
+                description: "Click to copy your new secure password. It's never stored or sent anywhere.",
+              },
             ]}
             description="Generating a strong password takes less than a second."
           />
@@ -80,27 +81,27 @@ function PasswordGeneratorPage() {
               {
                 question: "Is my password really secure?",
                 answer:
-                  "Yes. Passwords are generated entirely within your browser using the Web Crypto API, which provides cryptographically strong random values. Your password is never sent to any server."
+                  "Yes. Passwords are generated entirely within your browser using the Web Crypto API, which provides cryptographically strong random values. Your password is never sent to any server.",
               },
               {
                 question: "Do you store the passwords?",
                 answer:
-                  "No. The entire process happens locally on your device. Once you close this tab or refresh the page, the generated password is gone forever."
+                  "No. The entire process happens locally on your device. Once you close this tab or refresh the page, the generated password is gone forever.",
               },
               {
                 question: "Why should I use a generated password?",
                 answer:
-                  "Humans are predictable and often choose patterns that are easy for computers to guess (like 'Password123'). A randomly generated password with a mix of characters is mathematically much harder to crack."
+                  "Humans are predictable and often choose patterns that are easy for computers to guess (like 'Password123'). A randomly generated password with a mix of characters is mathematically much harder to crack.",
               },
               {
                 question: "What makes a password strong?",
                 answer:
-                  "A strong password is long (12+ characters) and includes a mix of uppercase letters, lowercase letters, numbers, and symbols. This maximizes the number of possible combinations, increasing security."
-              }
+                  "A strong password is long (12+ characters) and includes a mix of uppercase letters, lowercase letters, numbers, and symbols. This maximizes the number of possible combinations, increasing security.",
+              },
             ]}
           />
         </section>
       </div>
     </main>
-  )
+  );
 }

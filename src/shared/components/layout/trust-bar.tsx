@@ -1,4 +1,3 @@
-
 import { ShieldCheck, Lock, Zap } from "lucide-react";
 import { cn } from "@/shared/utils";
 import { GithubIcon } from "@/shared/components/common";
@@ -9,7 +8,7 @@ const items = [
   { icon: ShieldCheck, label: "100% offline" },
   { icon: Lock, label: "No uploads, no tracking" },
   { icon: Zap, label: "In-browser rendering" },
-  { icon: GithubIcon, label: "Open source" }
+  { icon: GithubIcon, label: "Open source" },
 ];
 
 export function TrustBar({ className }: Props) {

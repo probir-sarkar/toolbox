@@ -1,4 +1,3 @@
-
 import { DragDropProvider } from "@dnd-kit/react";
 import { useImageToPdfContext } from "../context";
 import { SortableImageItem } from "./sortable-image-item";
@@ -7,7 +6,10 @@ export function SortableImageList() {
   const { images, removeImage, reorderImages } = useImageToPdfContext();
 
   const handleDragEnd = (event: unknown) => {
-    const { operation, canceled } = event as { operation: { source: { id: string }; target?: { id: string } }; canceled: boolean };
+    const { operation, canceled } = event as {
+      operation: { source: { id: string }; target?: { id: string } };
+      canceled: boolean;
+    };
 
     if (canceled) return;
 

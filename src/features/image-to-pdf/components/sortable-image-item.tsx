@@ -1,4 +1,3 @@
-
 import { useSortable } from "@dnd-kit/react/sortable";
 import { X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
@@ -13,7 +12,7 @@ interface SortableImageItemProps {
 }
 
 export function SortableImageItem({ image, index, onRemove }: SortableImageItemProps) {
-  const sortable = useSortable({ id: image.id });
+  const sortable = useSortable({ id: image.id, index });
 
   return (
     <Card
@@ -24,7 +23,6 @@ export function SortableImageItem({ image, index, onRemove }: SortableImageItemP
         "touch-none"
       )}
     >
-
       {/* Remove Button - Top Right (Above Drag Handle) */}
       <Button
         variant="destructive"

@@ -23,14 +23,14 @@ export async function convertPdf(
     quality: options.quality / 100,
     scale: options.scale,
     startPage: options.startPage,
-    endPage: options.endPage ?? undefined
+    endPage: options.endPage ?? undefined,
   });
 
   options.onProgress?.(results.length, results.length);
 
-  return results.map(r => ({
+  return results.map((r) => ({
     blob: r.blob,
     url: r.url,
-    pageNumber: r.page
+    pageNumber: r.page,
   }));
 }

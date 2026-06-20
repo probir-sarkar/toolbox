@@ -20,17 +20,7 @@ export interface FileItemBaseProps {
   className?: string;
 }
 
-export function FileItemBase({
-  id,
-  name,
-  size,
-  preview,
-  onRemove,
-  icon,
-  info,
-  actions,
-  className,
-}: FileItemBaseProps) {
+export function FileItemBase({ id, name, size, preview, onRemove, icon, info, actions, className }: FileItemBaseProps) {
   const formatSize = (bytes: number) => {
     if (bytes < 1024) return bytes + " B";
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
@@ -40,29 +30,17 @@ export function FileItemBase({
   return (
     <Card className={cn("p-4", className)}>
       <div className="flex items-center gap-4">
-        {preview && (
-          <img
-            src={preview}
-            alt={name}
-            className="w-16 h-16 object-cover rounded-md shrink-0"
-          />
-        )}
+        {preview && <img src={preview} alt={name} className="w-16 h-16 object-cover rounded-md shrink-0" />}
         {!preview && icon && <div className="shrink-0">{icon}</div>}
 
         <div className="flex-1 min-w-0">
           <p className="font-medium text-foreground truncate">{name}</p>
-          {size !== undefined && (
-            <p className="text-sm text-muted-foreground">{formatSize(size)}</p>
-          )}
+          {size !== undefined && <p className="text-sm text-muted-foreground">{formatSize(size)}</p>}
           {info}
         </div>
 
         {actions || (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => onRemove(id)}
-          >
+          <Button variant="ghost" size="icon" onClick={() => onRemove(id)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

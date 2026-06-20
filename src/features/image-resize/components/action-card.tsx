@@ -21,14 +21,10 @@ export function ImageResizeActionCard() {
 
     try {
       for (const imageFile of files) {
-        const dimensions = calculateTargetDimensions(
-          imageFile.originalWidth,
-          imageFile.originalHeight,
-          settings
-        );
+        const dimensions = calculateTargetDimensions(imageFile.originalWidth, imageFile.originalHeight, settings);
 
         let outputType = imageFile.file.type;
-        if (settings.outputFormat !== 'original') {
+        if (settings.outputFormat !== "original") {
           outputType = `image/${settings.outputFormat}`;
         }
 
@@ -59,21 +55,17 @@ export function ImageResizeActionCard() {
       </CardHeader>
       <CardContent className="flex-1">
         <p className="text-sm text-muted-foreground mb-4">
-          Resize {files.length} image{files.length !== 1 ? 's' : ''} to {settings.width}×{settings.height}{settings.unit}.
+          Resize {files.length} image{files.length !== 1 ? "s" : ""} to {settings.width}×{settings.height}
+          {settings.unit}.
         </p>
         {files.length > 0 && (
           <div className="text-xs text-muted-foreground">
-            {settings.maintainAspectRatio ? 'Aspect ratio will be maintained' : 'Custom dimensions'}
+            {settings.maintainAspectRatio ? "Aspect ratio will be maintained" : "Custom dimensions"}
           </div>
         )}
       </CardContent>
       <CardFooter>
-        <Button
-          className="w-full"
-          size="lg"
-          onClick={handleResize}
-          disabled={files.length === 0 || isResizing}
-        >
+        <Button className="w-full" size="lg" onClick={handleResize} disabled={files.length === 0 || isResizing}>
           {isResizing ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />

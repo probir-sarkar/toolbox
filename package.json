@@ -4,11 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build && tsc --noEmit",
-    "preview": "vite preview",
+    "dev": "vp dev",
+    "build": "vp build && tsc --noEmit",
+    "preview": "vp preview",
     "deploy": "npm run build && wrangler deploy",
-    "test": "vitest"
+    "test": "vp test",
+    "prepare": "vp config"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -46,13 +47,15 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.2",
-    "@vitest/browser-playwright": "^4.1.7",
     "eslint": "^10",
+    "playwright": "*",
     "tailwindcss": "^4.2.0",
     "typescript": "^6",
-    "vite": "^8.0.10",
-    "vitest": "^4.1.7",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vitest": "catalog:",
     "vitest-browser-react": "^2.2.0",
     "wrangler": "^4.95.0"
-  }
+  },
+  "packageManager": "pnpm@11.8.0"
 }

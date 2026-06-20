@@ -1,44 +1,48 @@
-import { createFileRoute, ClientOnly } from '@tanstack/react-router'
-import { PageHeader } from "@/shared/components/layout/page-header"
-import { HowItWorks } from "@/shared/components/layout/how-it-works"
-import { FAQSection } from "@/shared/components/layout/faq-section"
-import { SplitPdfDropZone } from "@/features/split-pdf/components/drop-zone"
-import { SplitFileDetails } from "@/features/split-pdf/components/file-details"
-import { SplitControls } from "@/features/split-pdf/components/split-controls"
-import { SplitError } from "@/features/split-pdf/components/error-display"
-import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/context"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute, ClientOnly } from "@tanstack/react-router";
+import { PageHeader } from "@/shared/components/layout/page-header";
+import { HowItWorks } from "@/shared/components/layout/how-it-works";
+import { FAQSection } from "@/shared/components/layout/faq-section";
+import { SplitPdfDropZone } from "@/features/split-pdf/components/drop-zone";
+import { SplitFileDetails } from "@/features/split-pdf/components/file-details";
+import { SplitControls } from "@/features/split-pdf/components/split-controls";
+import { SplitError } from "@/features/split-pdf/components/error-display";
+import { SplitPdfProvider, useSplitPdfContext } from "@/features/split-pdf/context";
+import { BASE_URL } from "@/lib/seo";
 
 function SplitPdfContent() {
-  const { fileData } = useSplitPdfContext()
+  const { fileData } = useSplitPdfContext();
   return (
     <>
       <SplitError />
       {!fileData ? <SplitPdfDropZone /> : <SplitFileDetails />}
     </>
-  )
+  );
 }
 
 const splitPdfFaqItems = [
   {
     question: "Is my data safe?",
-    answer: "Yes! All processing happens locally in your browser. Your files are never uploaded to any server, ensuring 100% privacy and security."
+    answer:
+      "Yes! All processing happens locally in your browser. Your files are never uploaded to any server, ensuring 100% privacy and security.",
   },
   {
     question: "Can I extract specific pages?",
-    answer: "Yes, simply select 'Extract pages' and enter the page numbers or ranges (e.g., '1-5, 8, 10-12') to create a new PDF with just those pages."
+    answer:
+      "Yes, simply select 'Extract pages' and enter the page numbers or ranges (e.g., '1-5, 8, 10-12') to create a new PDF with just those pages.",
   },
   {
     question: "How do I get all pages as separate files?",
-    answer: "Select the 'Split all pages' option. This will save every page of your PDF as a separate file and download them together in a ZIP archive."
+    answer:
+      "Select the 'Split all pages' option. This will save every page of your PDF as a separate file and download them together in a ZIP archive.",
   },
   {
     question: "Does it support encrypted PDFs?",
-    answer: "If the PDF is password protected, you will need to decrypt it first. We currently support standard unencrypted PDFs for automatic processing."
-  }
+    answer:
+      "If the PDF is password protected, you will need to decrypt it first. We currently support standard unencrypted PDFs for automatic processing.",
+  },
 ];
 
-export const Route = createFileRoute('/split-pdf')({
+export const Route = createFileRoute("/split-pdf")({
   component: SplitPdfPage,
   head: () => ({
     meta: [
@@ -47,7 +51,8 @@ export const Route = createFileRoute('/split-pdf')({
       },
       {
         name: "description",
-        content: "Split PDF files and extract pages for free. Works offline, no uploads. Separate PDF into individual pages or extract specific pages.",
+        content:
+          "Split PDF files and extract pages for free. Works offline, no uploads. Separate PDF into individual pages or extract specific pages.",
       },
       {
         property: "og:title",
@@ -61,11 +66,11 @@ export const Route = createFileRoute('/split-pdf')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/split-pdf`
-      }
-    ]
+        href: `${BASE_URL}/split-pdf`,
+      },
+    ],
   }),
-})
+});
 
 function SplitPdfPage() {
   return (
@@ -97,16 +102,16 @@ function SplitPdfPage() {
             steps={[
               {
                 title: "Upload PDF",
-                description: "Select the PDF file you want to split or extract pages from."
+                description: "Select the PDF file you want to split or extract pages from.",
               },
               {
                 title: "Choose Mode",
-                description: "Select 'Extract pages' to create a new PDF or 'Split all pages' to separate them."
+                description: "Select 'Extract pages' to create a new PDF or 'Split all pages' to separate them.",
               },
               {
                 title: "Process & Save",
-                description: "Click the button to process your file and download the result instantly."
-              }
+                description: "Click the button to process your file and download the result instantly.",
+              },
             ]}
             description="Splitting PDFs shouldn't be complicated. We make it simple and secure."
           />
@@ -117,5 +122,5 @@ function SplitPdfPage() {
         </section>
       </div>
     </main>
-  )
+  );
 }

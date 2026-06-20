@@ -29,10 +29,7 @@ export function QRGeneratorSettings() {
 
           <div className="space-y-2">
             <Label htmlFor="color">QR Code Color</Label>
-            <Select
-              value={settings.color}
-              onValueChange={(value: any) => updateSettings({ color: value })}
-            >
+            <Select value={settings.color} onValueChange={(value: any) => updateSettings({ color: value })}>
               <SelectTrigger id="color">
                 <SelectValue />
               </SelectTrigger>
@@ -46,20 +43,20 @@ export function QRGeneratorSettings() {
             </Select>
           </div>
 
-          {settings.color === 'custom' && (
+          {settings.color === "custom" && (
             <div className="space-y-2">
               <Label htmlFor="customColor">Custom Color</Label>
               <div className="flex gap-2">
                 <Input
                   id="customColor"
                   type="color"
-                  value={settings.customColor || '#000000'}
+                  value={settings.customColor || "#000000"}
                   onChange={(e) => updateSettings({ customColor: e.target.value })}
                   className="w-16 h-10"
                 />
                 <Input
                   type="text"
-                  value={settings.customColor || '#000000'}
+                  value={settings.customColor || "#000000"}
                   onChange={(e) => updateSettings({ customColor: e.target.value })}
                   placeholder="#000000"
                   className="flex-1"

@@ -1,4 +1,3 @@
-
 import { Loader2, LucideIcon, Package, Sparkles } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { Card } from "@/shared/components/ui/card";
@@ -55,7 +54,7 @@ export function ActionCard({
   DownloadIcon = Package,
 
   ariaLive = "polite",
-  roleStatus = "status"
+  roleStatus = "status",
 }: ActionCardProps) {
   return (
     <Card className={cn("p-6 border-0 sticky top-8 text-white shadow-lg", className)}>
@@ -100,11 +99,7 @@ export function ActionCard({
         </Button>
       )}
 
-      <div
-        className={cn("text-xs text-center opacity-80", statusTextClassName)}
-        role={roleStatus}
-        aria-live={ariaLive}
-      >
+      <div className={cn("text-xs text-center opacity-80", statusTextClassName)} role={roleStatus} aria-live={ariaLive}>
         {statusMessage}
       </div>
     </Card>

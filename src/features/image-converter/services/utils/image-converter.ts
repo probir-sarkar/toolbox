@@ -33,7 +33,7 @@ export async function convertImage(
     webp: "image/webp",
     jpg: "image/jpeg",
     png: "image/png",
-    avif: "image/avif"
+    avif: "image/avif",
   };
 
   // Check if AVIF is supported
@@ -68,7 +68,7 @@ export async function convertImage(
     fileType: outputType,
     initialQuality: options.quality / 100,
     alwaysKeepResolution: true,
-    preserveExif: !options.removeMetadata
+    preserveExif: !options.removeMetadata,
   };
 
   try {
@@ -91,7 +91,7 @@ export async function convertImage(
       originalSize,
       compressedSize,
       savings,
-      savingsPercent: savings > 0 ? `-${savingsPercent}%` : `+${Math.abs(parseFloat(savingsPercent)).toFixed(1)}%`
+      savingsPercent: savings > 0 ? `-${savingsPercent}%` : `+${Math.abs(parseFloat(savingsPercent)).toFixed(1)}%`,
     };
   } catch (error) {
     console.error("Error compressing image:", error);

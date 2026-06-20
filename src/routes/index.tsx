@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Sparkles, ExternalLink } from "lucide-react"
-import { ToolsSection } from "@/shared/components/layout/tools-section"
-import { BASE_URL } from "@/lib/seo"
+import { createFileRoute } from "@tanstack/react-router";
+import { Sparkles, ExternalLink } from "lucide-react";
+import { ToolsSection } from "@/shared/components/layout/tools-section";
+import { BASE_URL } from "@/lib/seo";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: HomePage,
   head: () => ({
     meta: [
@@ -12,7 +12,8 @@ export const Route = createFileRoute('/')({
       },
       {
         name: "description",
-        content: "Free, privacy-focused online tools. Merge, split, and convert PDFs. Convert, resize, and optimize images. Generate secure passwords. 100% offline, no uploads.",
+        content:
+          "Free, privacy-focused online tools. Merge, split, and convert PDFs. Convert, resize, and optimize images. Generate secure passwords. 100% offline, no uploads.",
       },
       {
         property: "og:title",
@@ -26,11 +27,11 @@ export const Route = createFileRoute('/')({
     links: [
       {
         rel: "canonical",
-        href: `${BASE_URL}/`
-      }
-    ]
+        href: `${BASE_URL}/`,
+      },
+    ],
   }),
-})
+});
 
 function HomePage() {
   return (
@@ -77,7 +78,9 @@ function HomePage() {
                 Quiz Zone - Master Your Knowledge
               </h2>
               <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                Explore thousands of curated quizzes across diverse topics. Challenge yourself with <span className="font-semibold text-foreground">new quizzes added daily</span> across <span className="font-semibold text-foreground">all categories</span>. Track your journey to mastery.
+                Explore thousands of curated quizzes across diverse topics. Challenge yourself with{" "}
+                <span className="font-semibold text-foreground">new quizzes added daily</span> across{" "}
+                <span className="font-semibold text-foreground">all categories</span>. Track your journey to mastery.
               </p>
               <div className="flex flex-wrap items-center gap-2 md:gap-3 text-xs md:text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
@@ -109,5 +112,5 @@ function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

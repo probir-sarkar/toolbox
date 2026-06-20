@@ -2,7 +2,7 @@ export const FORMATS = [
   { value: "webp", label: "WebP", desc: "Best compression & quality" },
   { value: "jpg", label: "JPEG", desc: "Universal format" },
   { value: "png", label: "PNG", desc: "Lossless format" },
-  { value: "avif", label: "AVIF", desc: "Next-gen format" }
+  { value: "avif", label: "AVIF", desc: "Next-gen format" },
 ] as const;
 
 export type ImageFormat = (typeof FORMATS)[number]["value"];

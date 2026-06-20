@@ -48,12 +48,8 @@ export function ImageResizeDropZone() {
             <Upload className="w-8 h-8 text-primary" />
           </div>
           <div>
-            <p className="text-lg font-medium text-foreground mb-2">
-              Drop your images here
-            </p>
-            <p className="text-sm text-muted-foreground">
-              or click to browse • JPG, PNG, WebP supported
-            </p>
+            <p className="text-lg font-medium text-foreground mb-2">Drop your images here</p>
+            <p className="text-sm text-muted-foreground">or click to browse • JPG, PNG, WebP supported</p>
           </div>
         </div>
       </label>

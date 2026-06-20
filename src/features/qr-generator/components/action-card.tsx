@@ -18,7 +18,7 @@ export function QRGeneratorActionCard() {
 
     setIsDownloading(true);
     try {
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = qrCodeUrl;
       link.download = `qrcode-${Date.now()}.png`;
       document.body.appendChild(link);
@@ -47,7 +47,10 @@ export function QRGeneratorActionCard() {
               <img
                 src={qrCodeUrl}
                 alt="Generated QR Code"
-                style={{ width: `${Math.min(settings.size, 300)}px`, height: `${Math.min(settings.size, 300)}px` }}
+                style={{
+                  width: `${Math.min(settings.size, 300)}px`,
+                  height: `${Math.min(settings.size, 300)}px`,
+                }}
                 className="block"
               />
             </div>
@@ -74,12 +77,7 @@ export function QRGeneratorActionCard() {
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <div className="flex gap-2 w-full">
-          <Button
-            className="flex-1"
-            size="lg"
-            onClick={handleGenerate}
-            disabled={isGenerating}
-          >
+          <Button className="flex-1" size="lg" onClick={handleGenerate} disabled={isGenerating}>
             {isGenerating ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -88,34 +86,20 @@ export function QRGeneratorActionCard() {
             ) : (
               <>
                 <RefreshCw className="mr-2 h-4 w-4" />
-                {qrCodeUrl ? 'Regenerate' : 'Generate'}
+                {qrCodeUrl ? "Regenerate" : "Generate"}
               </>
             )}
           </Button>
 
           {qrCodeUrl && (
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleDownload}
-              disabled={isDownloading}
-            >
-              {isDownloading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Download className="h-4 w-4" />
-              )}
+            <Button variant="outline" size="lg" onClick={handleDownload} disabled={isDownloading}>
+              {isDownloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
             </Button>
           )}
         </div>
 
         {qrCodeUrl && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={reset}
-            className="w-full"
-          >
+          <Button variant="ghost" size="sm" onClick={reset} className="w-full">
             Start Over
           </Button>
         )}

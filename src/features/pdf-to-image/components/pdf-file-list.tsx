@@ -1,4 +1,3 @@
-
 import prettyBytes from "pretty-bytes";
 import { FileText, X } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
@@ -23,12 +22,7 @@ export function PdfFileList() {
             {prettyBytes(file.size)} • {file.pages} pages
           </p>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-muted-foreground hover:text-destructive"
-          onClick={reset}
-        >
+        <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-destructive" onClick={reset}>
           <X className="h-5 w-5" />
         </Button>
       </Card>

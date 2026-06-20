@@ -14,11 +14,7 @@ export function ImageCompressorFileList() {
       {files.map((file) => (
         <Card key={file.id} className="p-4">
           <div className="flex items-center gap-4">
-            <img
-              src={file.preview}
-              alt={file.file.name}
-              className="w-16 h-16 object-cover rounded-md"
-            />
+            <img src={file.preview} alt={file.file.name} className="w-16 h-16 object-cover rounded-md" />
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <p className="font-medium text-foreground truncate">{file.file.name}</p>
@@ -33,18 +29,12 @@ export function ImageCompressorFileList() {
                 {file.compressedSize !== undefined && (
                   <>
                     <span>→</span>
-                    <span className="text-primary font-medium">
-                      {(file.compressedSize / 1024).toFixed(1)} KB
-                    </span>
+                    <span className="text-primary font-medium">{(file.compressedSize / 1024).toFixed(1)} KB</span>
                   </>
                 )}
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => removeFile(file.id)}
-            >
+            <Button variant="ghost" size="icon" onClick={() => removeFile(file.id)}>
               <Trash2 className="w-4 h-4" />
             </Button>
           </div>

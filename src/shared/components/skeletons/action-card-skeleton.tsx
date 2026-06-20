@@ -1,4 +1,3 @@
-
 import { cn } from "@/shared/utils";
 
 interface ActionCardSkeletonProps {
@@ -26,12 +25,7 @@ export function ActionCardSkeleton({ variant = "default", className }: ActionCar
 
   // Default gradient variant
   return (
-    <div
-      className={cn(
-        "p-6 rounded-lg shadow-lg animate-pulse bg-gradient-to-br from-muted to-muted/50",
-        className
-      )}
-    >
+    <div className={cn("p-6 rounded-lg shadow-lg animate-pulse bg-gradient-to-br from-muted to-muted/50", className)}>
       <div className="space-y-4">
         <div className="h-12 w-full bg-background/50 rounded"></div>
         <div className="space-y-2">
