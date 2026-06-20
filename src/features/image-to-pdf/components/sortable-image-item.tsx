@@ -13,7 +13,7 @@ interface SortableImageItemProps {
 }
 
 export function SortableImageItem({ image, index, onRemove }: SortableImageItemProps) {
-  const sortable = useSortable({ id: image.id });
+  const sortable = useSortable({ id: image.id, index });
 
   return (
     <Card
